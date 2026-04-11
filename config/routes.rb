@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+  get "pesquisa-satisfacao", to: "pages#satisfaction_survey", as: :satisfaction_survey
+  get "pesquisa-satisfacao/obrigado", to: "pages#satisfaction_thanks", as: :satisfaction_thanks
+  get "sobre-o-cafe", to: "pages#about_coffee", as: :about_coffee
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

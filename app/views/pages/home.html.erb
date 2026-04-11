@@ -1,4 +1,123 @@
-<div>
-  <h1 class="font-bold text-4xl">Pages#home</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+<div class="landing-container">
+
+  <!-- Seção 1: Hero / Destaque -->
+  <header class="hero-section">
+    <div class="hero-text">
+      <h1>Contèm Cafés Especiais</h1>
+      <p>Café de verdade, torrado sob demanda. Experimente o frescor máximo em cada xícara.</p>
+
+      <% if user_signed_in? %>
+        <%= link_to "Acessar Sistema", "#", class: "btn-primary" %>
+      <% else %>
+        <%= link_to "Eu quero", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
+      <% end %>
+    </div>
+    <div class="hero-image-wrapper">
+      <%= image_tag "andre_coelho_red.png", class: "hero-img", alt: "Arte Contem Café" %>
+    </div>
+  </header>
+
+  <!-- Seção 2: Flyer e Conceito -->
+  <section class="flyer-section">
+    <div class="flyer-content">
+      <h2>Experimente primeiro, pague o quanto achar justo</h2>
+      <p>Acreditamos tanto na qualidade do nosso café recém-torrado que a experiência vem primeiro. Peça, prove e só depois pague o valor que sentir que valeu.</p>
+      <p>Confira os detalhes da nossa sugestão de valor no flyer abaixo.</p>
+    </div>
+    <div class="flyer-image-wrapper">
+      <%= image_tag "flyer.png", class: "flyer-img", alt: "Flyer Contem Café - Pague o quanto achar justo" %>
+    </div>
+    <div class="login-prompt">
+      <%= link_to "Já provei!", satisfaction_survey_path, class: "btn-primary" %>
+    </div>
+     <% unless user_signed_in? %>
+        <div class="login-prompt">
+            <%= link_to "Quero experimentar!", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
+        </div>
+      <% end %>
+  </section>
+
 </div>
+
+<style>
+  /* CSS Básico Inline para a Landing Page */
+  body {
+    background-color: #fdfaf6; /* Um tom de branco café, para aconchego */
+  }
+  .landing-container {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #4a4a4a;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Ocultar a Navbar apenas nesta página */
+  .navbar, nav { display: none !important; }
+
+  /* Hero Section */
+  .hero-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 4px 0 60px;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+  .hero-text { flex: 1; min-width: 300px; }
+  .hero-text h1 { font-size: 3rem; margin-bottom: 20px; color: #2c3e50; line-height: 1.2; }
+  .hero-text p { font-size: 1.2rem; margin-bottom: 30px; }
+
+  .hero-image-wrapper { flex: 1; min-width: 300px; position: relative; }
+  .hero-img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover; }
+
+  /* Flyer Section */
+  .flyer-section {
+    text-align: center;
+    padding: 80px 0;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+  }
+  .flyer-content h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  .flyer-content p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flyer-image-wrapper {
+    margin: 40px 0;
+  }
+
+  .flyer-img {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #8a1720;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+  }
+  .btn-primary:hover {
+    background-color: #d35400;
+  }
+  .login-prompt { margin-top: 30px; }
+</style>

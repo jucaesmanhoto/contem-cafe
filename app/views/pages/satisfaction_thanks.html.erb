@@ -1,0 +1,92 @@
+<section class="thanks-page">
+  <div class="thanks-card">
+    <%= image_tag "logo.jpg", class: "thanks-logo", alt: "Logo Contem Cafe" %>
+    <h1>Obrigado pelo seu feedback!</h1>
+    <p>
+      Sua resposta foi enviada com sucesso e vai nos ajudar a melhorar a experiencia com os cafes da Contem.
+    </p>
+
+    <div class="thanks-payment">
+      <h2>Se quiser, pague o quanto achar justo.</h2>
+      <%= image_tag "flyer.png", class: "thanks-flyer", alt: "Flyer com QR Code de pagamento" %>
+    </div>
+
+    <%= link_to "Voltar para a pagina inicial", root_path, class: "thanks-btn" %>
+  </div>
+</section>
+
+<style>
+  .thanks-page {
+    min-height: calc(100vh - 80px);
+    background: #fdfaf6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .thanks-card {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    padding: 28px 22px;
+    box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
+  }
+
+  .thanks-logo {
+    width: min(240px, 70vw);
+    height: auto;
+    display: block;
+    margin: 0 auto 14px;
+  }
+
+  .thanks-card h1 {
+    margin: 0 0 10px;
+    color: #2c3e50;
+    font-size: 1.85rem;
+  }
+
+  .thanks-card p {
+    margin: 0 auto 22px;
+    max-width: 520px;
+    color: #4a4a4a;
+    line-height: 1.6;
+  }
+
+  .thanks-payment {
+    margin: 8px 0 24px;
+  }
+
+  .thanks-payment h2 {
+    margin: 0 0 12px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .thanks-flyer {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 8px 22px rgba(52, 35, 16, 0.12);
+  }
+
+  .thanks-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #8a1720;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .thanks-btn:hover {
+    background: #74131b;
+  }
+</style>

@@ -1,0 +1,86 @@
+<% content_for :title, "Sobre o cafe" %>
+
+<div class="min-h-screen bg-white"
+     data-controller="scroll-header"
+     data-action="scroll@window->scroll-header#onScroll">
+
+  <div class="fixed top-0 left-0 right-0 z-40 bg-white">
+    <%= render "shared/navbar" %>
+
+    <div data-scroll-header-target="image" class="relative w-full overflow-hidden h-80">
+      <%= image_tag "andre_coelho_red.png", class: "absolute inset-0 w-full h-full object-cover", alt: "Cafe especial Contem" %>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 p-6 text-white w-full">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl leading-tight">O cafe que voce esta bebendo</h1>
+        <p class="mt-1 text-base opacity-90">Contem Cafes Especiais - torra sob demanda</p>
+      </div>
+    </div>
+
+    <div class="w-full bg-white border-b border-stone-100">
+      <div class="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-12">
+        <%= link_to satisfaction_survey_path, class: "inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Voltar para a pesquisa
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-[27rem] w-full"></div>
+
+  <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 bg-white relative">
+    <div class="space-y-12">
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+        <div class="lg:col-span-2 flex flex-col h-full mt-0">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4 self-start">Nossa Historia</h2>
+          <div class="prose prose-lg text-gray-700 max-w-none pb-8 lg:pb-0 mt-auto">
+            <p>
+              Este lote nasceu de um manejo cuidadoso, colheita seletiva e torra fresca para valorizar doçura,
+              acidez equilibrada e finalizacao limpa. A proposta da Contem e simples: cafe de verdade, com
+              rastreabilidade e respeito ao trabalho de quem planta.
+            </p>
+          </div>
+          <div class="hidden lg:block border-b border-gray-200 mt-8"></div>
+        </div>
+
+        <div class="border-black/20 border p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Detalhes da Fazenda</h3>
+          <ul class="space-y-3 text-gray-600">
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Produtor(a):</strong> <span>Familia parceira da regiao Sul de Minas</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Altitude:</strong> <span>1.050 a 1.250 m</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Variedades:</strong> <span>Catucai amarelo e Mundo Novo</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Processo:</strong> <span>Natural e fermentacao controlada</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Torra:</strong> <span>Media, feita sob demanda</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Como aproveitar melhor</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <article class="border border-stone-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Moinho</h3>
+            <p class="text-gray-600">Moagem media-fina para coado e media para prensa. Moa na hora para preservar aroma.</p>
+          </article>
+          <article class="border border-stone-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Receita base</h3>
+            <p class="text-gray-600">Proporcao de 1:15 (20 g de cafe para 300 ml de agua), ajustando ao seu paladar.</p>
+          </article>
+          <article class="border border-stone-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Temperatura</h3>
+            <p class="text-gray-600">Use agua entre 92 e 94 graus para destacar doçura e manter boa clareza na xicara.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">QRCode para pagamento</h2>
+        <div class="border border-stone-200 rounded-xl p-4 sm:p-6 bg-stone-50">
+          <%= image_tag "flyer.png", class: "w-full max-w-3xl mx-auto rounded-lg shadow", alt: "Flyer com QRCode de pagamento" %>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

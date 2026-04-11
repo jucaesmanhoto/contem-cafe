@@ -1,0 +1,197 @@
+<section class="survey-page">
+  <div class="survey-card">
+    <header class="survey-header">
+      <%= image_tag "logo.jpg", class: "survey-logo", alt: "Logo Contem Cafe" %>
+      <p class="survey-intro">
+        Seu feedback ajuda a gente a melhorar cada detalhe da experiencia com os cafés da Contèm.
+      </p>
+      <%= link_to "Saiba mais sobre o cafe", about_coffee_path, class: "survey-about-btn" %>
+    </header>
+
+    <% if @tally_form_url.present? %>
+      <% redirect_param = ERB::Util.url_encode(@survey_thank_you_url) %>
+      <% tally_embed_url = "#{@tally_form_url}#{@tally_form_url.include?("?") ? "&" : "?"}hideTitle=1&hideProgressBar=1&dynamicHeight=1&transparentBackground=1&redirect=#{redirect_param}" %>
+      <% tally_header_crop = 120 %>
+      <div class="survey-embed-viewport" style="--survey-embed-crop: <%= tally_header_crop %>px;">
+        <iframe
+          class="survey-embed"
+          data-tally-src="<%= tally_embed_url %>"
+          title="Pesquisa de satisfacao"
+          loading="lazy"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0">
+        </iframe>
+      </div>
+
+      <noscript>
+        <div class="survey-embed-viewport" style="--survey-embed-crop: <%= tally_header_crop %>px;">
+          <iframe
+            class="survey-embed"
+            src="<%= tally_embed_url %>"
+            title="Pesquisa de satisfacao"
+            loading="lazy"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">
+          </iframe>
+        </div>
+      </noscript>
+
+      <script>
+        (function() {
+          var d = document;
+          var scriptSrc = "https://tally.so/widgets/embed.js";
+
+          function loadTally() {
+            if (typeof Tally !== "undefined") {
+              Tally.loadEmbeds();
+            }
+          }
+
+          if (typeof Tally !== "undefined") {
+            loadTally();
+            return;
+          }
+
+          if (d.querySelector('script[src="' + scriptSrc + '"]')) {
+            return;
+          }
+
+          var script = d.createElement("script");
+          script.src = scriptSrc;
+          script.async = true;
+          script.onload = loadTally;
+          d.body.appendChild(script);
+        })();
+      </script>
+    <% else %>
+      <div class="survey-missing-config">
+        <strong>Falta configurar o formulario.</strong>
+        <p>
+          Defina a variavel de ambiente
+          <code>TALLY_SATISFACTION_FORM_URL</code>
+          com a URL publica do formulario no Tally.
+        </p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+  .survey-page {
+    min-height: calc(100vh - 80px);
+    background: #fdfaf6;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .survey-card {
+    width: 100%;
+    max-width: 980px;
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
+    padding: 24px;
+  }
+
+  .survey-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .survey-logo {
+    width: min(260px, 75vw);
+    height: auto;
+    display: block;
+  }
+
+  .survey-intro {
+    margin: 0;
+    color: #4a4a4a;
+    max-width: 620px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .survey-about-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid #8a1720;
+    color: #8a1720;
+    text-decoration: none;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+  }
+
+  .survey-about-btn:hover {
+    background: #8a1720;
+    color: #ffffff;
+  }
+
+  .survey-embed-viewport {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 2px;
+  }
+
+  .survey-embed {
+    width: 100%;
+    min-height: calc(760px + var(--survey-embed-crop, 0px));
+    border: 0;
+    border-radius: 0;
+    margin-top: calc(-1 * var(--survey-embed-crop, 0px));
+    display: block;
+  }
+
+  .survey-missing-config {
+    border: 1px dashed #c9b8a1;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fffaf2;
+    color: #4a4a4a;
+  }
+
+  .survey-missing-config p {
+    margin: 8px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    .survey-page {
+      padding: 12px;
+    }
+
+    .survey-card {
+      padding: 16px;
+    }
+
+    .survey-header {
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .survey-intro {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .survey-embed {
+      min-height: calc(620px + var(--survey-embed-crop, 0px));
+    }
+  }
+</style>
