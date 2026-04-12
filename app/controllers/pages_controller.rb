@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def satisfaction_survey
+    set_payment_link
     @tally_form_url = ENV.fetch("TALLY_SATISFACTION_FORM_URL", "")
     @survey_thank_you_url = "#{request.base_url}#{satisfaction_thanks_path}"
   end

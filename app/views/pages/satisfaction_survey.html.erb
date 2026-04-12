@@ -3,9 +3,16 @@
     <header class="survey-header">
       <%= image_tag "logo.jpg", class: "survey-logo", alt: "Logo Contem Cafe" %>
       <p class="survey-intro">
-        Seu feedback ajuda a gente a melhorar cada detalhe da experiencia com os cafés da Contèm.
+        Seu feedback ajuda a gente a melhorar cada detalhe da experiência com os cafés da Contèm.
       </p>
-      <%= link_to "Saiba mais sobre o cafe", about_coffee_path, class: "survey-about-btn" %>
+      <div class="survey-actions">
+        <% if @payment_link.present? %>
+          <button type="button" class="btn-primary" data-open-payment-modal>
+            Quero apenas pagar!
+          </button>
+        <% end %>
+        <%= link_to "Saiba mais sobre o café", about_coffee_path, class: "btn-primary" %>
+      </div>
     </header>
 
     <% if @tally_form_url.present? %>
@@ -16,7 +23,7 @@
         <iframe
           class="survey-embed"
           data-tally-src="<%= tally_embed_url %>"
-          title="Pesquisa de satisfacao"
+          title="Pesquisa de satisfação"
           loading="lazy"
           frameborder="0"
           marginheight="0"
@@ -29,7 +36,7 @@
           <iframe
             class="survey-embed"
             src="<%= tally_embed_url %>"
-            title="Pesquisa de satisfacao"
+            title="Pesquisa de satisfação"
             loading="lazy"
             frameborder="0"
             marginheight="0"
@@ -67,15 +74,31 @@
       </script>
     <% else %>
       <div class="survey-missing-config">
-        <strong>Falta configurar o formulario.</strong>
+        <strong>Falta configurar o formulário.</strong>
         <p>
-          Defina a variavel de ambiente
+          Defina a variável de ambiente
           <code>TALLY_SATISFACTION_FORM_URL</code>
-          com a URL publica do formulario no Tally.
+          com a URL pública do formulário no Tally.
         </p>
       </div>
     <% end %>
   </div>
+
+  <% if @payment_link.present? %>
+    <div class="survey-payment-modal" data-payment-modal hidden>
+      <div class="survey-payment-backdrop" data-close-payment-modal></div>
+      <div class="survey-payment-dialog" role="dialog" aria-modal="true" aria-labelledby="payment-modal-title">
+        <button type="button" class="survey-payment-close" aria-label="Fechar" data-close-payment-modal>&times;</button>
+        <h2 id="payment-modal-title">Pagamento rápido</h2>
+        <p>Escaneie o QR code do flyer ou copie o código para pagar no app do seu banco.</p>
+        <%= image_tag "flyer.png", class: "survey-payment-flyer", alt: "Flyer com QR Code de pagamento" %>
+        <button type="button" class="survey-payment-copy-btn" data-copy-payment-link="<%= @payment_link %>">
+          Copiar código copia e cola
+        </button>
+        <p class="survey-payment-feedback" aria-live="polite"></p>
+      </div>
+    </div>
+  <% end %>
 </section>
 
 <style>
@@ -123,24 +146,128 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
 
-  .survey-about-btn {
+  .survey-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .survey-actions .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: 1px solid #8a1720;
-    color: #8a1720;
+    padding: 13px 18px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #8a1720;
+    color: #ffffff;
     text-decoration: none;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .survey-actions .btn-primary:hover {
+    background: #d35400;
+    color: #ffffff;
+  }
+
+  .survey-payment-modal[hidden] {
+    display: none;
+  }
+
+  .survey-payment-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .survey-payment-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 19, 26, 0.62);
+  }
+
+  .survey-payment-dialog {
+    position: relative;
+    width: min(640px, 100%);
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+  }
+
+  .survey-payment-close {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #5f5f5f;
+    cursor: pointer;
+  }
+
+  .survey-payment-dialog h2 {
+    margin: 0 0 6px;
+    color: #2c3e50;
+    font-size: 1.35rem;
+  }
+
+  .survey-payment-dialog p {
+    margin: 0 0 14px;
+    color: #4a4a4a;
+  }
+
+  .survey-payment-flyer {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 12px;
+    box-shadow: 0 8px 22px rgba(52, 35, 16, 0.12);
+  }
+
+  .survey-payment-copy-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #8a1720;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #8a1720;
+    font-weight: 700;
+    cursor: pointer;
     transition: all 0.2s ease;
   }
 
-  .survey-about-btn:hover {
+  .survey-payment-copy-btn:hover {
     background: #8a1720;
     color: #ffffff;
+  }
+
+  .survey-payment-feedback {
+    display: none;
+    margin: 16px 0 16px;
+    color: #555555;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .survey-payment-feedback.is-visible {
+    display: block;
+    margin-top: 8px;
   }
 
   .survey-embed-viewport {
@@ -190,8 +317,80 @@
       line-height: 1.55;
     }
 
+    .survey-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .survey-actions .btn-primary {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
     .survey-embed {
       min-height: calc(620px + var(--survey-embed-crop, 0px));
     }
   }
 </style>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var modal = document.querySelector("[data-payment-modal]");
+    var openButton = document.querySelector("[data-open-payment-modal]");
+    if (!modal || !openButton) return;
+
+    var closeButtons = modal.querySelectorAll("[data-close-payment-modal]");
+    var copyButton = modal.querySelector(".survey-payment-copy-btn");
+    var feedback = modal.querySelector(".survey-payment-feedback");
+    var paymentLink = copyButton ? copyButton.dataset.copyPaymentLink : "";
+
+    function openModal() {
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    openButton.addEventListener("click", openModal);
+    closeButtons.forEach(function(button) {
+      button.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    if (!copyButton || !feedback) return;
+
+    copyButton.addEventListener("click", async function() {
+      if (!paymentLink) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(paymentLink);
+        } else {
+          var helperInput = document.createElement("textarea");
+          helperInput.value = paymentLink;
+          helperInput.setAttribute("readonly", "");
+          helperInput.style.position = "absolute";
+          helperInput.style.left = "-9999px";
+          document.body.appendChild(helperInput);
+          helperInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(helperInput);
+        }
+
+        feedback.textContent = "Código copiado. Abra o app do seu banco e cole no Pix copia e cola.";
+        feedback.classList.add("is-visible");
+      } catch (error) {
+        feedback.textContent = "Nao foi possível copiar automaticamente. Pressione e segure para copiar manualmente.";
+        feedback.classList.add("is-visible");
+      }
+    });
+  });
+</script>
