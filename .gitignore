@@ -33,6 +33,11 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Ignore SSH keys and secrets
+ssh-key*
+ssh-key*.pub
+.kamal/secrets
+
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
