@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :satisfaction_survey, :satisfaction_thanks, :about_coffee ], raise: false
 
   def home
+    set_payment_link
   end
 
   def satisfaction_survey
@@ -11,8 +12,15 @@ class PagesController < ApplicationController
   end
 
   def satisfaction_thanks
+    set_payment_link
   end
 
   def about_coffee
+  end
+
+  private
+
+  def set_payment_link
+    @payment_link = ENV.fetch("PAYMENT_LINK_URL", "")
   end
 end

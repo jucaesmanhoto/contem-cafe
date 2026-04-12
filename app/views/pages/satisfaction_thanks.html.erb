@@ -3,12 +3,19 @@
     <%= image_tag "logo.jpg", class: "thanks-logo", alt: "Logo Contem Cafe" %>
     <h1>Obrigado pelo seu feedback!</h1>
     <p>
-      Sua resposta foi enviada com sucesso e vai nos ajudar a melhorar a experiencia com os cafes da Contem.
+      Sua resposta foi enviada com sucesso e vai nos ajudar a melhorar a experiência com os cafás da Contèm.
     </p>
 
     <div class="thanks-payment">
       <h2>Se quiser, pague o quanto achar justo.</h2>
       <%= image_tag "flyer.png", class: "thanks-flyer", alt: "Flyer com QR Code de pagamento" %>
+
+      <% if @payment_link.present? %>
+        <div class="thanks-copy-box">
+          <button type="button" class="thanks-copy-btn" data-copy-payment-link="<%= @payment_link %>">Copiar link de pagamento</button>
+          <p class="thanks-copy-feedback" aria-live="polite"></p>
+        </div>
+      <% end %>
     </div>
 
     <%= link_to "Voltar para a pagina inicial", root_path, class: "thanks-btn" %>
@@ -57,7 +64,7 @@
   }
 
   .thanks-payment {
-    margin: 8px 0 24px;
+    margin: 8px 0 10px;
   }
 
   .thanks-payment h2 {
@@ -76,6 +83,42 @@
     box-shadow: 0 8px 22px rgba(52, 35, 16, 0.12);
   }
 
+  .thanks-copy-box {
+    margin-top: 10px;
+  }
+
+  .thanks-copy-btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 520px;
+    padding: 12px 16px;
+    border: 1px solid #8a1720;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #8a1720;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .thanks-copy-btn:hover {
+    background: #8a1720;
+    color: #ffffff;
+  }
+
+  .thanks-copy-feedback {
+    display: none;
+    margin: 8px auto 0;
+    max-width: 520px;
+    color: #5c5c5c;
+    font-size: 0.95rem;
+  }
+
+  .thanks-copy-feedback.is-visible {
+    display: block;
+  }
+
   .thanks-btn {
     display: inline-block;
     padding: 12px 22px;
@@ -89,4 +132,50 @@
   .thanks-btn:hover {
     background: #74131b;
   }
+
+  @media (max-width: 640px) {
+    .thanks-btn {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var button = document.querySelector(".thanks-copy-btn");
+    var feedback = document.querySelector(".thanks-copy-feedback");
+    if (!button || !feedback) return;
+
+    var link = button.dataset.copyPaymentLink;
+
+    button.addEventListener("click", async function() {
+      if (!link) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(link);
+        } else {
+          var helperInput = document.createElement("textarea");
+          helperInput.value = link;
+          helperInput.setAttribute("readonly", "");
+          helperInput.style.position = "absolute";
+          helperInput.style.left = "-9999px";
+          document.body.appendChild(helperInput);
+          helperInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(helperInput);
+        }
+
+        feedback.textContent = "Link copiado. Agora é so colar no navegador ou no app do banco.";
+        feedback.classList.add("is-visible");
+      } catch (error) {
+        feedback.textContent = "Nao foi possivel copiar automaticamente. Pressione e segure para copiar manualmente.";
+        feedback.classList.add("is-visible");
+      }
+    });
+  });
+</script>

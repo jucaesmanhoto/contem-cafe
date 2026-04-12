@@ -27,14 +27,18 @@
     <div class="flyer-image-wrapper">
       <%= image_tag "flyer.png", class: "flyer-img", alt: "Flyer Contem Café - Pague o quanto achar justo" %>
     </div>
-    <div class="login-prompt">
+    <% if @payment_link.present? %>
+      <div class="payment-copy-box">
+        <button type="button" class="btn-copy-payment" data-copy-payment-link="<%= @payment_link %>">Copiar link de pagamento</button>
+        <p class="payment-copy-feedback" aria-live="polite"></p>
+      </div>
+    <% end %>
+    <div class="cta-row">
+      <% unless user_signed_in? %>
+        <%= link_to "Quero experimentar!", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
+      <% end %>
       <%= link_to "Já provei!", satisfaction_survey_path, class: "btn-primary" %>
     </div>
-     <% unless user_signed_in? %>
-        <div class="login-prompt">
-            <%= link_to "Quero experimentar!", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
-        </div>
-      <% end %>
   </section>
 
 </div>
@@ -105,6 +109,67 @@
     margin: 0 auto;
   }
 
+  .payment-copy-box {
+    margin: 0 auto 8px;
+    max-width: 420px;
+  }
+
+  .btn-copy-payment {
+    display: inline-block;
+    width: 100%;
+    padding: 13px 18px;
+    background: #ffffff;
+    color: #8a1720;
+    border: 1px solid #8a1720;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-copy-payment:hover {
+    background: #8a1720;
+    color: #ffffff;
+  }
+
+  .payment-copy-feedback {
+    display: none;
+    margin: 8px 0 0;
+    font-size: 0.95rem;
+    color: #5c5c5c;
+  }
+
+  .payment-copy-feedback.is-visible {
+    display: block;
+  }
+
+  .cta-row {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-row .btn-primary {
+    flex: 0 0 calc((100% - 12px) / 2);
+    box-sizing: border-box;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 13px 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
   .btn-primary {
     display: inline-block;
     padding: 15px 30px;
@@ -119,5 +184,47 @@
   .btn-primary:hover {
     background-color: #d35400;
   }
-  .login-prompt { margin-top: 30px; }
+
+  @media (max-width: 640px) {
+    .cta-row .btn-primary {
+      width: 100%;
+      max-width: 420px;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var button = document.querySelector(".btn-copy-payment");
+    var feedback = document.querySelector(".payment-copy-feedback");
+    if (!button || !feedback) return;
+
+    var link = button.dataset.copyPaymentLink;
+
+    button.addEventListener("click", async function() {
+      if (!link) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(link);
+        } else {
+          var helperInput = document.createElement("textarea");
+          helperInput.value = link;
+          helperInput.setAttribute("readonly", "");
+          helperInput.style.position = "absolute";
+          helperInput.style.left = "-9999px";
+          document.body.appendChild(helperInput);
+          helperInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(helperInput);
+        }
+
+        feedback.textContent = "Link copiado. Agora é so colar no navegador ou no app do banco.";
+        feedback.classList.add("is-visible");
+      } catch (error) {
+        feedback.textContent = "Nao foi possivel copiar automaticamente. Pressione e segure para copiar manualmente.";
+        feedback.classList.add("is-visible");
+      }
+    });
+  });
+</script>

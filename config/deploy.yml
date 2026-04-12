@@ -2,12 +2,12 @@
 service: contem_cafe
 
 # Name of the container image (use your-user/app-name on external registries).
-image: contem_cafe
+image: jucaesmanhoto/contem_cafe
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 164.152.245.248
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -27,14 +27,14 @@ servers:
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  server: localhost:5555
+  server: docker.io
 
   # Needed for authenticated registries.
-  # username: your-user
+  username: jucaesmanhoto
 
   # Always use an access token rather than real password when possible.
-  # password:
-  #   - KAMAL_REGISTRY_PASSWORD
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
@@ -91,8 +91,11 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
+  keys_only: true
+  keys:
+    - ./ssh-key-2026-04-12.key
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
