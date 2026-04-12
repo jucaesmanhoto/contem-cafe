@@ -24,6 +24,10 @@ proxy:
   ssl: true
   host: contemcafes.com.br
 
+# Healthcheck/deploy timing for container boot and traffic draining (seconds)
+deploy_timeout: 120
+drain_timeout: 30
+
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
