@@ -7,7 +7,7 @@ image: jucaesmanhoto/contem_cafe
 # Deploy to these servers.
 servers:
   web:
-    - 164.152.245.248
+    - 164.152.251.195
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -95,7 +95,7 @@ ssh:
   user: ubuntu
   keys_only: true
   keys:
-    - ./ssh-key-2026-04-12.key
+    - ~/.ssh/ssh-key-contem-cafe
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
