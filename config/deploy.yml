@@ -22,7 +22,9 @@ servers:
 #
 proxy:
   ssl: true
-  host: contemcafes.com.br
+  hosts:
+    - contemcafes.com.br
+    - www.contemcafes.com.br
 
 # Healthcheck/deploy timing for container boot and traffic draining (seconds)
 deploy_timeout: 120
