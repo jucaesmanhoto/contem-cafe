@@ -22,7 +22,7 @@ servers:
 #
 proxy:
   ssl: true
-  host: contemcafe.com.br
+  host: contemcafes.com.br
 
 # Where you keep your container images.
 registry:
