@@ -1,7 +1,11 @@
 <section class="survey-page">
   <div class="survey-card">
+    <%= link_to "‹", root_path, class: "survey-home-link", aria: { label: "Ir para a página inicial" } %>
+
     <header class="survey-header">
-      <%= image_tag "logo.jpg", class: "survey-logo", alt: "Logo Contem Cafe" %>
+      <%= link_to root_path, class: "survey-logo-link", aria: { label: "Ir para a página inicial" } do %>
+        <%= image_tag "logo.jpg", class: "survey-logo", alt: "Logo Contem Cafe" %>
+      <% end %>
       <p class="survey-intro">
         Seu feedback ajuda a gente a melhorar cada detalhe da experiência com os cafés da Contèm.
       </p>
@@ -18,7 +22,7 @@
     <% if @tally_form_url.present? %>
       <% redirect_param = ERB::Util.url_encode(@survey_thank_you_url) %>
       <% tally_embed_url = "#{@tally_form_url}#{@tally_form_url.include?("?") ? "&" : "?"}hideTitle=1&hideProgressBar=1&dynamicHeight=1&transparentBackground=1&redirect=#{redirect_param}" %>
-      <% tally_header_crop = 120 %>
+      <% tally_header_crop = 0 %>
       <div class="survey-embed-viewport" style="--survey-embed-crop: <%= tally_header_crop %>px;">
         <iframe
           class="survey-embed"
@@ -113,6 +117,7 @@
   }
 
   .survey-card {
+    position: relative;
     width: 100%;
     max-width: 980px;
     background: #ffffff;
@@ -120,6 +125,39 @@
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
     padding: 24px;
+  }
+
+  .survey-home-link {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #7c7267;
+    text-decoration: none;
+    border: 1px solid #e5dccf;
+    background: #fffdf9;
+    border-radius: 999px;
+    padding: 0;
+    line-height: 1;
+    transition: all 0.2s ease;
+  }
+
+  .survey-home-link:hover {
+    color: #4b433a;
+    border-color: #d7cab9;
+    background: #fbf5ec;
+  }
+
+  .survey-logo-link {
+    display: inline-block;
+    text-decoration: none;
   }
 
   .survey-header {
@@ -272,7 +310,7 @@
 
   .survey-embed-viewport {
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 10px;
     margin-top: 2px;
   }
@@ -282,7 +320,7 @@
     min-height: calc(760px + var(--survey-embed-crop, 0px));
     border: 0;
     border-radius: 0;
-    margin-top: calc(-1 * var(--survey-embed-crop, 0px));
+    margin-top: 0;
     display: block;
   }
 
@@ -307,6 +345,14 @@
       padding: 16px;
     }
 
+    .survey-home-link {
+      top: 10px;
+      left: 10px;
+      width: 28px;
+      height: 28px;
+      font-size: 0.95rem;
+    }
+
     .survey-header {
       gap: 10px;
       margin-bottom: 6px;
@@ -328,7 +374,13 @@
     }
 
     .survey-embed {
-      min-height: calc(620px + var(--survey-embed-crop, 0px));
+      min-height: calc(760px + var(--survey-embed-crop, 0px));
+      margin-top: -36px !important;
+    }
+
+    .survey-embed-viewport {
+      --survey-embed-crop: 0px;
+      margin-top: 16px;
     }
   }
 </style>

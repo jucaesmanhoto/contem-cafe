@@ -1,9 +1,13 @@
 class PagesController < ApplicationController
   # Permite que usuários não logados acessem a home page
-  skip_before_action :authenticate_user!, only: [ :home, :satisfaction_survey, :satisfaction_thanks, :about_coffee ], raise: false
+  skip_before_action :authenticate_user!, only: [ :home, :try_form, :satisfaction_survey, :satisfaction_thanks, :about_coffee ], raise: false
 
   def home
     set_payment_link
+  end
+
+  def try_form
+    @trial_form_url = "https://tally.so/r/MeJPzX"
   end
 
   def satisfaction_survey
@@ -17,6 +21,7 @@ class PagesController < ApplicationController
   end
 
   def about_coffee
+    set_payment_link
   end
 
   private

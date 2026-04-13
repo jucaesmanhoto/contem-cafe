@@ -6,18 +6,6 @@
       Sua resposta foi enviada com sucesso e vai nos ajudar a melhorar a experiência com os cafás da Contèm.
     </p>
 
-    <div class="thanks-payment">
-      <h2>Se quiser, pague o quanto achar justo.</h2>
-      <%= image_tag "flyer.png", class: "thanks-flyer", alt: "Flyer com QR Code de pagamento" %>
-
-      <% if @payment_link.present? %>
-        <div class="thanks-copy-box">
-          <button type="button" class="thanks-copy-btn" data-copy-payment-link="<%= @payment_link %>">Copiar link de pagamento</button>
-          <p class="thanks-copy-feedback" aria-live="polite"></p>
-        </div>
-      <% end %>
-    </div>
-
     <%= link_to "Voltar para a pagina inicial", root_path, class: "thanks-btn" %>
   </div>
 </section>

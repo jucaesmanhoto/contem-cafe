@@ -1,0 +1,188 @@
+<section class="trial-page">
+  <div class="trial-card">
+    <%= link_to "‹", root_path, class: "trial-back-link", aria: { label: "Voltar para a pagina inicial" } %>
+
+    <header class="trial-header">
+      <%= link_to root_path, class: "trial-logo-link", aria: { label: "Ir para a pagina inicial" } do %>
+        <%= image_tag "logo.jpg", class: "trial-logo", alt: "Logo Contem Cafe" %>
+      <% end %>
+      <p class="trial-intro">
+        Deixe seu nome e telefone que nós te avisamos quando tiver café fresquinho!
+      </p>
+    </header>
+
+    <% if @trial_form_url.present? %>
+      <% tally_embed_url = "#{@trial_form_url}#{@trial_form_url.include?("?") ? "&" : "?"}hideTitle=1&hideProgressBar=1&dynamicHeight=1&transparentBackground=1" %>
+      <div class="trial-embed-viewport">
+        <iframe
+          class="trial-embed"
+          data-tally-src="<%= tally_embed_url %>"
+          title="Formulário de interesse"
+          loading="lazy"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0">
+        </iframe>
+      </div>
+
+      <script>
+        (function() {
+          var d = document;
+          var scriptSrc = "https://tally.so/widgets/embed.js";
+
+          function loadTally() {
+            if (typeof Tally !== "undefined") {
+              Tally.loadEmbeds();
+            }
+          }
+
+          if (typeof Tally !== "undefined") {
+            loadTally();
+            return;
+          }
+
+          if (d.querySelector('script[src="' + scriptSrc + '"]')) {
+            return;
+          }
+
+          var script = d.createElement("script");
+          script.src = scriptSrc;
+          script.async = true;
+          script.onload = loadTally;
+          d.body.appendChild(script);
+        })();
+      </script>
+    <% else %>
+      <div class="trial-missing-config">
+        <strong>Formulário indisponível no momento.</strong>
+        <p>Tente novamente em alguns minutos.</p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<style>
+  .trial-page {
+    min-height: calc(100vh - 80px);
+    background: #fdfaf6;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .trial-card {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    background: #ffffff;
+    border: 1px solid #eadfce;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
+    padding: 24px;
+  }
+
+  .trial-back-link {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #7c7267;
+    text-decoration: none;
+    border: 1px solid #e5dccf;
+    background: #fffdf9;
+    border-radius: 999px;
+    line-height: 1;
+    transition: all 0.2s ease;
+  }
+
+  .trial-back-link:hover {
+    color: #4b433a;
+    border-color: #d7cab9;
+    background: #fbf5ec;
+  }
+
+  .trial-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .trial-logo-link {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .trial-logo {
+    width: min(260px, 75vw);
+    height: auto;
+    display: block;
+  }
+
+  .trial-intro {
+    margin: 0;
+    color: #4a4a4a;
+    max-width: 620px;
+    font-size: 1rem;
+    line-height: 1.55;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .trial-embed-viewport {
+    width: 100%;
+    overflow: visible;
+    border-radius: 10px;
+    margin-top: 12px;
+  }
+
+  .trial-embed {
+    width: 100%;
+    min-height: 860px;
+    border: 0;
+    display: block;
+    margin-top: -56px !important;
+  }
+
+  .trial-missing-config {
+    border: 1px dashed #c9b8a1;
+    border-radius: 10px;
+    padding: 16px;
+    background: #fffaf2;
+    color: #4a4a4a;
+  }
+
+  .trial-missing-config p {
+    margin: 8px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    .trial-page {
+      padding: 12px;
+    }
+
+    .trial-card {
+      padding: 16px;
+    }
+
+    .trial-back-link {
+      top: 10px;
+      left: 10px;
+      width: 28px;
+      height: 28px;
+      font-size: 0.95rem;
+    }
+
+    .trial-embed {
+      min-height: 920px;
+    }
+  }
+</style>

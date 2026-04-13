@@ -9,7 +9,7 @@
       <% if user_signed_in? %>
         <%= link_to "Acessar Sistema", "#", class: "btn-primary" %>
       <% else %>
-        <%= link_to "Eu quero", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
+        <%= link_to "Eu quero", try_form_path, class: "btn-primary" %>
       <% end %>
     </div>
     <div class="hero-image-wrapper">
@@ -35,7 +35,7 @@
     <% end %>
     <div class="cta-row">
       <% unless user_signed_in? %>
-        <%= link_to "Quero experimentar!", "https://wa.me/5541999479117", class: "btn-primary", target: "_blank" %>
+        <%= link_to "Quero experimentar!", try_form_path, class: "btn-primary" %>
       <% end %>
       <%= link_to "Já provei!", satisfaction_survey_path, class: "btn-primary" %>
     </div>

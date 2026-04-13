@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+  get "quero-experimentar", to: "pages#try_form", as: :try_form
   get "pesquisa-satisfacao", to: "pages#satisfaction_survey", as: :satisfaction_survey
   get "pesquisa-satisfacao/obrigado", to: "pages#satisfaction_thanks", as: :satisfaction_thanks
   get "sobre-o-cafe", to: "pages#about_coffee", as: :about_coffee

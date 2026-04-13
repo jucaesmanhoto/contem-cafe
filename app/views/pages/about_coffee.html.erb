@@ -80,6 +80,14 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-6">Gostou do café?</h2>
         <div class="border border-stone-200 rounded-xl p-4 sm:p-6 bg-stone-50">
           <%= image_tag "flyer.png", class: "w-full max-w-3xl mx-auto rounded-lg shadow", alt: "Flyer com QRCode de pagamento" %>
+          <% if @payment_link.present? %>
+            <div class="about-payment-copy-box">
+              <button type="button" class="about-payment-copy-btn" data-copy-payment-link="<%= @payment_link %>">
+                Copiar link de pagamento
+              </button>
+              <p class="about-payment-copy-feedback" aria-live="polite"></p>
+            </div>
+          <% end %>
         </div>
       </section>
     </div>
@@ -125,6 +133,41 @@
     transform: translateY(calc((1 - var(--compact-opacity)) * 4px));
     transition: none;
     will-change: opacity, transform;
+  }
+
+  .about-payment-copy-box {
+    margin: 14px auto 0;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .about-payment-copy-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #8a1720;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #8a1720;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .about-payment-copy-btn:hover {
+    background: #8a1720;
+    color: #ffffff;
+  }
+
+  .about-payment-copy-feedback {
+    display: none;
+    margin: 10px 0 0;
+    text-align: center;
+    color: #555555;
+    font-size: 0.95rem;
+  }
+
+  .about-payment-copy-feedback.is-visible {
+    display: block;
   }
 </style>
 
@@ -188,5 +231,37 @@
         rafId = null;
       }
     }, { once: true });
+
+    var copyButton = document.querySelector(".about-payment-copy-btn");
+    var copyFeedback = document.querySelector(".about-payment-copy-feedback");
+    if (!copyButton || !copyFeedback) return;
+
+    var paymentLink = copyButton.dataset.copyPaymentLink;
+
+    copyButton.addEventListener("click", async function() {
+      if (!paymentLink) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(paymentLink);
+        } else {
+          var helperInput = document.createElement("textarea");
+          helperInput.value = paymentLink;
+          helperInput.setAttribute("readonly", "");
+          helperInput.style.position = "absolute";
+          helperInput.style.left = "-9999px";
+          document.body.appendChild(helperInput);
+          helperInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(helperInput);
+        }
+
+        copyFeedback.textContent = "Link copiado. Agora é só colar no navegador ou no app do banco.";
+        copyFeedback.classList.add("is-visible");
+      } catch (error) {
+        copyFeedback.textContent = "Não foi possível copiar automaticamente. Pressione e segure para copiar manualmente.";
+        copyFeedback.classList.add("is-visible");
+      }
+    });
   });
 </script>
