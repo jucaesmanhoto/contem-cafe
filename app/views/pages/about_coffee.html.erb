@@ -1,45 +1,45 @@
-<% content_for :title, "Sobre o cafe" %>
+<% content_for :title, "Sobre o café" %>
 
-<div class="min-h-screen bg-white"
-     data-controller="scroll-header"
-     data-action="scroll@window->scroll-header#onScroll">
+<div class="min-h-screen bg-white about-page" data-about-header>
 
-  <div class="fixed top-0 left-0 right-0 z-40 bg-white">
-    <%= render "shared/navbar" %>
-
-    <div data-scroll-header-target="image" class="relative w-full overflow-hidden h-80">
-      <%= image_tag "andre_coelho_red.png", class: "absolute inset-0 w-full h-full object-cover", alt: "Cafe especial Contem" %>
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+  <div class="fixed top-0 left-0 right-0 z-40 bg-white about-header-shell">
+    <div class="relative w-full overflow-hidden h-80 about-hero">
+      <%= image_tag "ivan-santana.webp", class: "absolute inset-0 w-full h-full object-cover", style: "object-position: center 22%;", alt: "Ivan Santana na Fazenda Jangada" %>
+      <div class="absolute inset-0"></div>
       <div class="absolute bottom-0 left-0 p-6 text-white w-full">
-        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl leading-tight">O cafe que voce esta bebendo</h1>
-        <p class="mt-1 text-base opacity-90">Contem Cafes Especiais - torra sob demanda</p>
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl leading-tight">Fazenda Jangada</h1>
+        <p class="mt-1 text-base opacity-90">Contèm Cafés Especiais - torra sob demanda</p>
       </div>
     </div>
 
     <div class="w-full bg-white border-b border-stone-100">
       <div class="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-12">
-        <%= link_to satisfaction_survey_path, class: "inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium" do %>
+        <%= link_to satisfaction_survey_path, class: "about-back-link inline-flex items-center text-sm font-medium" do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
           Voltar para a pesquisa
         <% end %>
+        <span class="about-compact-title text-sm font-semibold text-gray-800">Fazenda Jangada</span>
       </div>
     </div>
   </div>
 
-  <div class="h-[27rem] w-full"></div>
+  <div class="h-[27rem] w-full about-header-spacer"></div>
 
   <div class="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 bg-white relative">
     <div class="space-y-12">
       <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         <div class="lg:col-span-2 flex flex-col h-full mt-0">
-          <h2 class="text-3xl font-bold text-gray-800 mb-4 self-start">Nossa Historia</h2>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4 self-start">Nossa História</h2>
           <div class="prose prose-lg text-gray-700 max-w-none pb-8 lg:pb-0 mt-auto">
             <p>
+              Na Fazenda Jangada, o gosto por produzir o melhor café vem de família. Lá o Ivan cuida de cada pé para garantir aquele aroma e sabor que quem entende de café gosta, criando o acompanhamento ideal para os bons momentos da vida.
+              Os micro lotes são cultivados e selecionados em Cabo Verde, no região vulcânica de Minas Gerais, a 1.150 metros de altitude. Nessa altura, o grão ganha mais concentração de minerais, o que garante um café com muito mais sabor e aroma na sua xícara.
+              <br><br>
               Este lote nasceu de um manejo cuidadoso, colheita seletiva e torra fresca para valorizar doçura,
-              acidez equilibrada e finalizacao limpa. A proposta da Contem e simples: cafe de verdade, com
-              rastreabilidade e respeito ao trabalho de quem planta.
+              acidez equilibrada e finalização limpa. A proposta da Contèm é simples: café de verdade, com
+              rastreabilidade e respeito ao trabalho de quem cultiva café de qualidade.
             </p>
           </div>
           <div class="hidden lg:block border-b border-gray-200 mt-8"></div>
@@ -48,11 +48,12 @@
         <div class="border-black/20 border p-6">
           <h3 class="text-xl font-semibold text-gray-800 mb-4">Detalhes da Fazenda</h3>
           <ul class="space-y-3 text-gray-600">
-            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Produtor(a):</strong> <span>Familia parceira da regiao Sul de Minas</span></li>
-            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Altitude:</strong> <span>1.050 a 1.250 m</span></li>
-            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Variedades:</strong> <span>Catucai amarelo e Mundo Novo</span></li>
-            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Processo:</strong> <span>Natural e fermentacao controlada</span></li>
-            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Torra:</strong> <span>Media, feita sob demanda</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Produtor(a):</strong> <span>Ivan Santana</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Cidade:</strong> <span>Cabo Verde/MG</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Região:</strong> <span>Região vulcânica</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Altitude:</strong> <span>1.150 m</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Variedades:</strong> <span>Catuaí amarelo</span></li>
+            <li class="flex items-start"><strong class="w-28 shrink-0 font-medium">Processo:</strong> <span>Natural</span></li>
           </ul>
         </div>
       </section>
@@ -62,21 +63,21 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <article class="border border-stone-200 rounded-lg p-4">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Moinho</h3>
-            <p class="text-gray-600">Moagem media-fina para coado e media para prensa. Moa na hora para preservar aroma.</p>
+            <p class="text-gray-600">Moagem média-fina para coado e grossa para prensa. Moa na hora para aproveitar ao máximo o aroma e frescor do seu café.</p>
           </article>
           <article class="border border-stone-200 rounded-lg p-4">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Receita base</h3>
-            <p class="text-gray-600">Proporcao de 1:15 (20 g de cafe para 300 ml de agua), ajustando ao seu paladar.</p>
+            <p class="text-gray-600">Prove com uma proporção de 1:15 (20 g de café para 300 ml de água). Depois vá ajustando as quantidades e moagem ao seu paladar.</p>
           </article>
           <article class="border border-stone-200 rounded-lg p-4">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Temperatura</h3>
-            <p class="text-gray-600">Use agua entre 92 e 94 graus para destacar doçura e manter boa clareza na xicara.</p>
+            <p class="text-gray-600">Use água entre 92 e 94 graus para destacar a doçura da bebida. Se a água ferver, desligue o fogo e aguarde 40 segundos para usar no seu café.</p>
           </article>
         </div>
       </section>
 
       <section>
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">QRCode para pagamento</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Gostou do café?</h2>
         <div class="border border-stone-200 rounded-xl p-4 sm:p-6 bg-stone-50">
           <%= image_tag "flyer.png", class: "w-full max-w-3xl mx-auto rounded-lg shadow", alt: "Flyer com QRCode de pagamento" %>
         </div>
@@ -84,3 +85,108 @@
     </div>
   </div>
 </div>
+
+<style>
+  .about-page {
+    --hero-height: 20rem;
+    --spacer-height: 27rem;
+    --compact-opacity: 0;
+  }
+
+  .about-back-link {
+    color: #4b5563;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .about-back-link:hover {
+    color: #111827;
+    background: #f3f4f6;
+    text-decoration: none;
+  }
+
+  .about-hero {
+    max-height: var(--hero-height);
+    opacity: calc(1 - var(--compact-opacity));
+    transition: none;
+    will-change: max-height, opacity;
+  }
+
+  .about-header-spacer {
+    height: var(--spacer-height);
+    transition: none;
+    will-change: height;
+  }
+
+  .about-compact-title {
+    opacity: var(--compact-opacity);
+    transform: translateY(calc((1 - var(--compact-opacity)) * 4px));
+    transition: none;
+    will-change: opacity, transform;
+  }
+</style>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var page = document.querySelector("[data-about-header]");
+    if (!page) return;
+
+    var minHeroRem = 0;
+    var maxHeroRem = 20;
+    var minSpacerRem = 4.2;
+    var maxSpacerRem = 27;
+    var collapseDistance = 650;
+    var collapseStart = 160;
+
+    var clamp = function(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    };
+
+    var currentProgress = 0;
+    var targetProgress = 0;
+    var rafId = null;
+
+    var render = function(progress) {
+      var heroRem = maxHeroRem - (maxHeroRem - minHeroRem) * progress;
+      var spacerRem = maxSpacerRem - (maxSpacerRem - minSpacerRem) * progress;
+
+      page.style.setProperty("--hero-height", heroRem + "rem");
+      page.style.setProperty("--spacer-height", spacerRem + "rem");
+      page.style.setProperty("--compact-opacity", progress.toFixed(3));
+    };
+
+    var animate = function() {
+      var delta = targetProgress - currentProgress;
+      if (Math.abs(delta) < 0.001) {
+        currentProgress = targetProgress;
+        render(currentProgress);
+        rafId = null;
+        return;
+      }
+
+      currentProgress += delta * 0.14;
+      render(currentProgress);
+      rafId = window.requestAnimationFrame(animate);
+    };
+
+    var onScroll = function() {
+      targetProgress = clamp((window.scrollY - collapseStart) / collapseDistance, 0, 1);
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    document.addEventListener("turbo:before-cache", function() {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }, { once: true });
+  });
+</script>
