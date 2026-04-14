@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Contem Cafe" %></title>
+    <title><%= content_for(:title) || "Contèm Café" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Contem Cafe">
+    <meta name="application-name" content="Contèm Café">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Contèm Café">
+    <meta property="og:title" content="<%= content_for(:title) || 'Contèm Café' %>">
+    <meta property="og:description" content="Cafés especiais, torrados sob demanda.">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:image" content="<%= image_url('andre_coelho_red.png') %>">
+    <meta property="og:image:alt" content="Arte Contèm Café por André Coelho">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= content_for(:title) || 'Contèm Café' %>">
+    <meta name="twitter:description" content="Cafés especiais, torrados sob demanda.">
+    <meta name="twitter:image" content="<%= image_url('andre_coelho_red.png') %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

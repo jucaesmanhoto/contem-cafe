@@ -14,6 +14,7 @@
     </div>
     <div class="hero-image-wrapper">
       <%= image_tag "andre_coelho_red.png", class: "hero-img", alt: "Arte Contem Café" %>
+      <a href="https://www.instagram.com/coelhoazul/" target="_blank" rel="noopener noreferrer" class="btn-about-andre">Sobre André Coelho</a>
     </div>
   </header>
 
@@ -74,6 +75,35 @@
 
   .hero-image-wrapper { flex: 1; min-width: 300px; position: relative; }
   .hero-img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover; }
+
+  .btn-about-andre {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #2c3e50;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    text-decoration: none;
+  }
+
+  .hero-image-wrapper:hover .btn-about-andre {
+    opacity: 1;
+  }
+
+  .btn-about-andre:hover {
+    background-color: #d35400;
+    color: #fff;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
 
   /* Flyer Section */
   .flyer-section {
