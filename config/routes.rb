@@ -17,4 +17,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # Farm and Coffee pages accessible via QR codes on product labels
+  resources :farms, only: [:show] do
+    resources :coffees, only: [:show]
+  end
 end

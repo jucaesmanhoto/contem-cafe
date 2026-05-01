@@ -1,0 +1,15 @@
+<div class="container py-4">
+  <h1><%= @coffee.name %></h1>
+  <% if @coffee.description.present? %>
+    <p><%= simple_format(@coffee.description) %></p>
+  <% end %>
+
+  <ul>
+    <li><strong>Variedade:</strong> <%= @coffee.variety %></li>
+    <li><strong>Processamento:</strong> <%= @coffee.processing %></li>
+    <li><strong>Altitude:</strong> <%= @coffee.altitude %> m</li>
+    <li><strong>Fazenda:</strong> <%= link_to @coffee.farm.name, farm_path(@coffee.farm) %></li>
+  </ul>
+
+  <%= link_to 'Voltar', farm_path(@coffee.farm), class: 'btn btn-secondary' %>
+</div>

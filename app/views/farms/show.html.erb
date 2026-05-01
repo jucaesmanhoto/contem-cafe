@@ -1,0 +1,22 @@
+<%# Farm detail page for QR code labels %>
+<div class="container py-4">
+  <h1><%= @farm.name %></h1>
+  <% if @farm.description.present? %>
+    <p><%= simple_format(@farm.description) %></p>
+  <% end %>
+
+  <h2>Cafés disponíveis</h2>
+  <div class="list-group">
+    <% @farm.coffees.each do |coffee| %>
+      <div class="list-group-item mb-2">
+        <h3 class="h5 mb-1"><%= link_to coffee.name, farm_coffee_path(@farm, coffee), class: 'stretched-link' %></h3>
+        <p class="mb-1"><%= truncate(coffee.description.to_s, length: 180) %></p>
+        <small>
+          Variedade: <%= coffee.variety %> |
+          Processamento: <%= coffee.processing %> |
+          Altitude: <%= coffee.altitude %> m
+        </small>
+      </div>
+    <% end %>
+  </div>
+</div>
