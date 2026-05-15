@@ -1,0 +1,84 @@
+<article class="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-stone-200/60">
+
+  <%# Seção Visual: Imagem com Overlay de Processamento %>
+  <div class="relative h-56 w-full overflow-hidden bg-stone-100">
+    <% if coffee.photo.attached? %>
+      <%= image_tag coffee.photo,
+          class: "h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110",
+          alt: coffee.name %>
+    <% else %>
+      <div class="flex h-full flex-col items-center justify-center text-stone-300">
+        <span class="text-xs font-medium uppercase tracking-tighter">Imagem não disponível</span>
+      </div>
+    <% end %>
+
+    <% if coffee.processing.present? %>
+      <div class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-stone-800 backdrop-blur-sm shadow-sm">
+        <%= coffee.processing %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# Conteúdo Principal %>
+  <div class="flex flex-1 flex-col p-6">
+
+    <%# Cabeçalho: Nome e Preço em destaque %>
+    <div class="mb-4">
+      <div class="flex items-start justify-between gap-4">
+        <h3 class="text-2xl font-serif font-bold leading-tight text-stone-900 transition-colors group-hover:text-amber-900">
+          <%= coffee.name %>
+        </h3>
+          <div class="flex flex-col items-end">
+        <% if coffee.price.present? %>
+            <span class="text-xl font-black text-stone-900">
+              <%= number_to_currency(coffee.price / 100.0, unit: "R$", separator: ",", delimiter: ".") %>
+            </span>
+            <span class="text-[10px] text-stone-400 font-medium">250g</span>
+        <% else %>
+            <span class="text-xl font-black text-stone-900">
+              <i>esgotado</i>
+            </span>
+
+        <% end %>
+          </div>
+      </div>
+
+      <% if coffee.variety.present? %>
+        <p class="mt-1 text-sm font-medium text-amber-700">
+          <%= coffee.variety %>
+        </p>
+      <% end %>
+    </div>
+
+    <%# Corpo: Descrição com maior aproveitamento de espaço %>
+    <div class="mb-6 flex-1">
+      <% if coffee.description.present? %>
+        <p class="line-clamp-4 text-sm leading-relaxed text-stone-600 italic">
+          "<%= coffee.description %>"
+        </p>
+      <% else %>
+        <p class="text-sm text-stone-400 italic">Sem descrição disponível para este lote.</p>
+      <% end %>
+    </div>
+
+    <%# Rodapé: Especificações Técnicas e Ação %>
+    <div class="mt-auto border-t border-stone-100 pt-5">
+      <div class="flex items-center justify-between">
+        <% if coffee.altitude.present? %>
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-stone-400">Altitude</span>
+            <div class="flex items-center gap-1 text-stone-700">
+              <span class="text-base">⛰</span>
+              <span class="text-sm font-semibold"><%= coffee.altitude %>m</span>
+            </div>
+          </div>
+        <% end %>
+
+        <a href="#" class="inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-amber-900">
+          Detalhes
+          <span class="ml-2">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
