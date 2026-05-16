@@ -1,14 +1,13 @@
 <section class="trial-page">
   <div class="trial-card">
-    <%= link_to "‹", root_path, class: "trial-back-link", aria: { label: "Voltar para a pagina inicial" } %>
+    <%= link_to :back, class: "trial-back-link", aria: { label: "Voltar para a pagina inicial" } do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
 
     <header class="trial-header">
       <%= link_to root_path, class: "trial-logo-link", aria: { label: "Ir para a pagina inicial" } do %>
         <%= image_tag "logo.jpg", class: "trial-logo", alt: "Logo Contem Cafe" %>
       <% end %>
-      <p class="trial-intro">
-        Deixe seu nome e telefone que nós te avisamos quando tiver café fresquinho!
-      </p>
     </header>
 
     <% if @trial_form_url.present? %>

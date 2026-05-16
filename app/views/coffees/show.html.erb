@@ -1,15 +1,88 @@
-<div class="container py-4">
-  <h1><%= @coffee.name %></h1>
-  <% if @coffee.description.present? %>
-    <p><%= simple_format(@coffee.description) %></p>
-  <% end %>
+<div class="bg-white shadow-sm border border-stone-100 overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-8">
 
-  <ul>
-    <li><strong>Variedade:</strong> <%= @coffee.variety %></li>
-    <li><strong>Processamento:</strong> <%= @coffee.processing %></li>
-    <li><strong>Altitude:</strong> <%= @coffee.altitude %> m</li>
-    <li><strong>Fazenda:</strong> <%= link_to @coffee.farm.name, farm_path(@coffee.farm) %></li>
-  </ul>
+    <div class="relative h-64 md:h-auto bg-stone-100">
+      <% if @coffee.photo.attached? %>
+        <%= image_tag @coffee.photo, class: "w-full h-full object-cover transition duration-500 hover:scale-105" %>
+      <% else %>
+        <div class="w-full h-full flex flex-col items-center justify-center text-stone-300 p-8">
+          <i class="fa-solid fa-mug-hot text-6xl mb-4"></i>
+          <span class="text-sm font-medium uppercase tracking-wider">Sem foto disponível</span>
+        </div>
+      <% end %>
 
-  <%= link_to 'Voltar', farm_path(@coffee.farm), class: 'btn btn-secondary' %>
+      <!-- Badge de Destaque
+      <div class="absolute top-4 left-4">
+        <span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter text-stone-800 shadow-sm">
+          Edição Limitada
+        </span>
+      </div>-->
+    </div>
+
+    <div class="px-6 md:px-10 lg:px-12 py-4 flex flex-col justify-center">
+      <nav class="mb-6">
+        <%= link_to farm_path(@coffee.farm), class: "group inline-flex items-center transition-colors text-decoration-none" do %>
+          <i class="fa-solid fa-chevron-left text-xs text-amber-700 mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+          <span class="text-xs font-semibold uppercase tracking-widest text-amber-700 hover:text-amber-900">Voltar para a Fazenda</span>
+        <% end %>
+      </nav>
+
+      <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-4 leading-tight">
+        <%= @coffee.name %>
+      </h1>
+
+      <% if @coffee.description.present? %>
+        <div class="text-stone-600 leading-relaxed mb-8 text-sm md:text-base">
+          <%= simple_format(@coffee.description) %>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-2 gap-y-6 gap-x-4 mb-8 pt-8 border-t border-stone-100">
+        <!-- Variedade -->
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Variedade</span>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-leaf text-amber-700 text-sm"></i>
+            <span class="text-stone-800 font-medium text-sm"><%= @coffee.variety %></span>
+          </div>
+        </div>
+
+        <!-- Processamento -->
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Processamento</span>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-flask text-amber-700 text-sm"></i>
+            <span class="text-stone-800 font-medium text-sm"><%= @coffee.processing %></span>
+          </div>
+        </div>
+
+        <!-- Altitude -->
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Altitude</span>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-mountain text-amber-700 text-sm"></i>
+            <span class="text-stone-800 font-medium text-sm"><%= @coffee.altitude %>m</span>
+          </div>
+        </div>
+
+        <!-- Origem -->
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Fazenda</span>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-amber-700 text-sm"></i>
+            <%= link_to @coffee.farm.name, farm_path(@coffee.farm), class: "font-medium text-sm text-amber-700! hover:text-amber-900! text-decoration-none" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+          <% if @coffee.price.present? %>
+            <%= link_to "Peça agora", try_form_path, class: "flex-1 bg-stone-900 text-center text-white py-3.5 px-6 rounded-xl text-sm font-bold hover:bg-stone-800 transition-all active:scale-[0.98] text-decoration-none" %>
+          <% else %>
+            <i>Esgotado</i>
+          <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>

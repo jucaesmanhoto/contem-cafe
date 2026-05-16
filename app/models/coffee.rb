@@ -3,6 +3,7 @@ class Coffee < ApplicationRecord
   has_one_attached :photo
 
   validates :name, :variety, :processing, :altitude, presence: true
+  before_validation :set_slug, on: :create
 
   def to_param
     slug.presence || id.to_s
