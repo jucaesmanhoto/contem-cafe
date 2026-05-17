@@ -23,7 +23,7 @@
       <nav class="mb-6">
         <%= link_to farm_path(@coffee.farm), class: "group inline-flex items-center transition-colors text-decoration-none" do %>
           <i class="fa-solid fa-chevron-left text-xs text-amber-700 mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
-          <span class="text-xs font-semibold uppercase tracking-widest text-amber-700 hover:text-amber-900"><%= @farm.name%></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-amber-700 hover:text-amber-900"><%= @coffee.farm.name %></span>
         <% end %>
       </nav>
 
