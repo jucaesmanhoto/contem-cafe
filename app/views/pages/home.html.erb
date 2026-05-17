@@ -21,9 +21,9 @@
   <%# Seção 2: Fazendas (Grid de Stickers) %>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
+    <% Farm.all.each do |farm| %>
   <%# Card 1 %>
   <div class="group relative aspect-6/3 rounded-4xl border-2 border-white overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:rotate-1 shadow-[0_10px_20px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_30px_rgba(0,0,0,0.15)]">
-    <% Farm.all.each do |farm| %>
       <%= link_to farm_path(farm) do %>
         <%= image_tag farm.photo, class: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %>
         <%# Sombra interna e vinheta %>
@@ -36,35 +36,8 @@
           <span class="text-white font-black text-4xl tracking-wide drop-shadow-lg leading-tight"><%= farm.name %></span>
         </div>
       <% end %>
+  </div>
     <% end %>
-  </div>
-
-  <%# Card 2 %>
-  </div>
-</div>
-
-<%# Botão de Cópia e CTAs %>
-<div class="mt-16 max-w-md mx-auto space-y-4">
-  <p class="text-lg font-semibold text-slate-600 mb-6">Experimente primeiro, pague o quanto achar justo.</p>
-
-  <% if @payment_link.present? %>
-    <div class="w-full" data-controller="clipboard">
-      <button type="button"
-              class="w-full py-3 px-4 bg-white text-[#8a1720] border-2 border-[#8a1720] rounded-lg font-bold hover:bg-[#8a1720] hover:text-white transition-colors"
-              data-action="clipboard#copy"
-              data-clipboard-text="<%= @payment_link %>">
-        Copiar link de pagamento
-      </button>
-      <p class="hidden mt-2 text-sm text-slate-500" data-clipboard-target="feedback">Link copiado!</p>
-    </div>
-  <% end %>
-
-  <div class="flex flex-col sm:flex-row gap-3">
-    <% unless user_signed_in? %>
-      <%= link_to "Quero experimentar!", try_form_path, class: "flex-1 py-4 bg-[#8a1720] text-white rounded-lg font-bold text-center hover:bg-orange-600 transition-colors" %>
-    <% end %>
-    <%= link_to "Já provei!", satisfaction_survey_path, class: "flex-1 py-4 bg-[#8a1720] text-white rounded-lg font-bold text-center hover:bg-orange-600 transition-colors" %>
-  </div>
 </div>
 
 

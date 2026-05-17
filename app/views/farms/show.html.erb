@@ -6,7 +6,7 @@
       <% if @farm.photo.attached?  %>
         <%= image_tag @farm.photo,
           class: "absolute inset-0 w-full h-full object-cover object-center about-hero-image",
-          alt: "Sítio Santa Rita" %>
+          alt: @farm.name %>
       <% else %>
         <%= image_tag "ivan-santana.webp", class: "absolute inset-0 w-full h-full object-cover", style: "object-position: center 22%;", alt: "Ivan Santana na Fazenda Jangada" %>
       <% end %>
@@ -19,11 +19,11 @@
 
     <div class="sticky top-0 left-0 right-0 z-40 bg-white border-b border-stone-100">
       <div class="max-w-5xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-12">
-        <%= link_to satisfaction_survey_path, class: "about-back-link inline-flex items-center text-sm font-medium" do %>
+        <%= link_to root_path, class: "about-back-link inline-flex items-center text-sm font-medium" do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
-          Voltar para a pesquisa
+          Início
         <% end %>
         <span class="about-compact-title text-sm font-semibold text-gray-800"><%= @farm.name %></span>
       </div>
