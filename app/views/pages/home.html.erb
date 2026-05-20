@@ -4,7 +4,9 @@
   <header class="hero-section">
     <div class="hero-text">
       <h1>Contèm Cafés Especiais</h1>
-      <p>Café de verdade, torrado sob demanda. Nada aqui espera numa prateleira. Cada torra é feita exclusivamente para você.</p>
+      <p>Café de verdade, torrado sob demanda.</br>
+      Nada aqui espera numa prateleira.</br>
+      Cada torra é feita exclusivamente para você.</p>
 
       <%= render 'pages/farms', farms: Farm.all %>
     </div>
@@ -36,15 +38,15 @@
   /* Hero Section */
   .hero-section {
     display: flex;
-    align-items: center;
+    align-items: top;
     gap: 40px;
     padding: 4px 0 60px;
     flex-wrap: wrap;
     text-align: left;
   }
   .hero-text { flex: 1; min-width: 300px; }
-  .hero-text h1 { font-size: 3rem; margin-bottom: 20px; color: #2c3e50; line-height: 1.2; }
-  .hero-text p { font-size: 1.2rem; margin-bottom: 30px; }
+  .hero-text h1 { font-size: 3rem; margin-top:20px; margin-bottom: 20px; color: #2c3e50; line-height: 1.2; }
+  .hero-text p { font-size: 1.2rem; margin-left: 12px; margin-bottom: 30px; }
 
   .hero-image-wrapper { flex: 1; min-width: 300px; position: relative; }
   .hero-img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover; }
