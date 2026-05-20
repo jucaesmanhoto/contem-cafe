@@ -6,12 +6,6 @@
       <h1>Contèm Cafés Especiais</h1>
       <p>Café de verdade, torrado sob demanda. Nada aqui espera numa prateleira. Cada torra é feita exclusivamente para você.</p>
 
-      <% if user_signed_in? %>
-        <%= link_to "Acessar Sistema", "#", class: "btn-primary" %>
-      <% else %>
-        <%= link_to "Eu quero", try_form_path, class: "btn-primary" %>
-      <% end %>
-
       <%= render 'pages/farms', farms: Farm.all %>
     </div>
     <div class="hero-image-wrapper">
@@ -198,6 +192,21 @@
     .cta-row .btn-primary {
       width: 100%;
       max-width: 420px;
+    }
+
+    .hero-section {
+      flex-direction: column;
+    }
+
+    .hero-image-wrapper {
+      order: -1;
+      width: 100%;
+      min-width: unset;
+    }
+
+    .hero-text {
+      width: 100%;
+      min-width: unset;
     }
   }
 </style>
