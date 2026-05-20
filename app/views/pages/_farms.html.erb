@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 md:flex md:flex-row-auto py-2 md:py-8 gap-6 max-w-6xl mx-auto justify-items-center">
+<div class="grid grid-cols-1 md:flex md:flex-row-auto md:py-8 gap-6 max-w-6xl mx-auto justify-items-center">
   <% farms.each do |farm| %>
-    <div class="group relative aspect-6/3 h-32 rounded-4xl border-2 border-white overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:rotate-1 shadow-[0_10px_20px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_30px_rgba(0,0,0,0.15)]">
+    <div class="group relative aspect-8/3 md:aspect-6/3 h-32 rounded-4xl border-2 border-white overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:rotate-1 shadow-[0_10px_20px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_30px_rgba(0,0,0,0.15)]">
       <%= link_to farm_path(farm) do %>
         <%= image_tag farm.photo, class: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %>
         <%# Sombra interna e vinheta %>
