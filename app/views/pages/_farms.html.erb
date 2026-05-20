@@ -1,4 +1,4 @@
-<div class="flex flex-row-auto py-8 gap-6 max-w-6xl mx-auto">
+<div class="grid grid-cols-1 md:flex md:flex-row-auto py-2 md:py-8 gap-6 max-w-6xl mx-auto justify-items-center">
   <% farms.each do |farm| %>
     <div class="group relative aspect-6/3 h-32 rounded-4xl border-2 border-white overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:rotate-1 shadow-[0_10px_20px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_30px_rgba(0,0,0,0.15)]">
       <%= link_to farm_path(farm) do %>
@@ -10,7 +10,7 @@
         <%# Gradiente escuro no rodapé para legibilidade %>
         <div class="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none bg-linear-to-t from-black/60 to-transparent"></div>
         <div class="absolute inset-0 flex items-center justify-center px-3 text-center">
-          <span class="text-white font-black text-2xl md:text-4xl tracking-wide drop-shadow-lg leading-tight"><%= farm.name %></span>
+          <span class="text-white font-black text-4xl tracking-wide drop-shadow-lg leading-tight"><%= farm.name %></span>
         </div>
       <% end %>
     </div>
