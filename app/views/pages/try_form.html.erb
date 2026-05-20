@@ -12,12 +12,12 @@
 
     <% if @trial_form_url.present? %>
       <% tally_embed_url = "#{@trial_form_url}#{@trial_form_url.include?("?") ? "&" : "?"}hideTitle=1&hideProgressBar=1&dynamicHeight=1&transparentBackground=1" %>
-      <div class="trial-embed-viewport">
+      <div class="trial-embed-wrapper">
         <iframe
+          id="trial-iframe"
           class="trial-embed"
-          data-tally-src="<%= tally_embed_url %>"
+          src="<%= tally_embed_url %>"
           title="Formulário de interesse"
-          loading="lazy"
           frameborder="0"
           marginheight="0"
           marginwidth="0">
@@ -25,31 +25,14 @@
       </div>
 
       <script>
-        (function() {
-          var d = document;
-          var scriptSrc = "https://tally.so/widgets/embed.js";
-
-          function loadTally() {
-            if (typeof Tally !== "undefined") {
-              Tally.loadEmbeds();
-            }
-          }
-
-          if (typeof Tally !== "undefined") {
-            loadTally();
-            return;
-          }
-
-          if (d.querySelector('script[src="' + scriptSrc + '"]')) {
-            return;
-          }
-
-          var script = d.createElement("script");
-          script.src = scriptSrc;
-          script.async = true;
-          script.onload = loadTally;
-          d.body.appendChild(script);
-        })();
+        window.addEventListener("message", function(e) {
+          if (!e.data || typeof e.data.type !== "string") return;
+          if (e.data.type !== "tally-height") return;
+          var iframe = document.getElementById("trial-iframe");
+          if (!iframe) return;
+          var h = e.data.height || (e.data.payload && e.data.payload.height);
+          if (h && h > 0) iframe.style.height = h + "px";
+        });
       </script>
     <% else %>
       <div class="trial-missing-config">
@@ -62,11 +45,12 @@
 
 <style>
   .trial-page {
-    min-height: calc(100vh - 80px);
+    min-height: 100vh;
     background: #fdfaf6;
     padding: 24px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
 
   .trial-card {
@@ -112,8 +96,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .trial-logo-link {
@@ -127,28 +110,15 @@
     display: block;
   }
 
-  .trial-intro {
-    margin: 0;
-    color: #4a4a4a;
-    max-width: 620px;
-    font-size: 1rem;
-    line-height: 1.55;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-
-  .trial-embed-viewport {
+  .trial-embed-wrapper {
     width: 100%;
-    overflow: visible;
-    border-radius: 10px;
-    margin-top: 12px;
   }
 
   .trial-embed {
     width: 100%;
-    min-height: 860px;
+    height: 500px;
     border: 0;
     display: block;
-    margin-top: -56px !important;
   }
 
   .trial-missing-config {
@@ -178,10 +148,6 @@
       width: 28px;
       height: 28px;
       font-size: 0.95rem;
-    }
-
-    .trial-embed {
-      min-height: 920px;
     }
   }
 </style>

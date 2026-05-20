@@ -79,7 +79,7 @@
           <% if @coffee.price.present? %>
             <%= link_to "Peça agora", try_form_path, class: "flex-1 bg-stone-900 text-center text-white py-3.5 px-6 rounded-xl text-sm font-bold hover:bg-stone-800 transition-all active:scale-[0.98] text-decoration-none" %>
           <% else %>
-            <i>Esgotado</i>
+            <i><%= @coffee.stock_status&.capitalize || "Indisponível"%></i>
           <% end %>
       </div>
     </div>

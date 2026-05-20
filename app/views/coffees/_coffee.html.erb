@@ -38,7 +38,7 @@
             <span class="text-[10px] text-stone-400 font-medium">250g</span>
           <% else %>
             <span class="text-xl font-black text-stone-900">
-              <i>esgotado</i>
+              <i><%= coffee.stock_status&.capitalize || "Indisponível" %></i>
             </span>
           <% end %>
         </div>
