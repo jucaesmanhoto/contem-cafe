@@ -16,6 +16,6 @@ class Coffee < ApplicationRecord
   end
 
   def set_stock_status
-    self.stock_status = "indisponível" if stock_status.blank? && name.present?
+    self.stock_status = "Esgotado" if stock_status.blank? && name.present?
   end
 end
