@@ -1,7 +1,7 @@
 <div class="bg-white overflow-hidden min-h-screen">
   <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
 
-    <div class="relative h-64 md:h-screen bg-stone-100">
+    <div class="relative h-64 md:h-auto md:min-h-screen bg-stone-100">
       <% if @coffee.photo.attached? %>
         <%= image_tag @coffee.photo, class: "w-full h-full object-cover transition duration-500 hover:scale-105" %>
       <% else %>
