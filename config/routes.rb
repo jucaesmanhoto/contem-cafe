@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_avo
   devise_for :users
   root to: "pages#home"
   get "quero-cafe", to: "pages#try_form", as: :try_form
@@ -20,6 +21,6 @@ Rails.application.routes.draw do
 
   # Farm and Coffee pages accessible via QR codes on product labels
   resources :farms, only: [:show] do
-    resources :coffees, only: [:show]
+    resources :coffees, only: [:show, :create]
   end
 end

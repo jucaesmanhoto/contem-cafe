@@ -12,6 +12,11 @@
         <div class="absolute inset-0 flex items-center justify-center px-3 text-center">
           <span class="text-white font-black text-4xl tracking-wide drop-shadow-lg leading-tight"><%= farm.name %></span>
         </div>
+        <% if farm.coffees.reject{ |coffee| coffee.price.nil? }.empty? %>
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-30 select-none p-4">
+            <%= image_tag 'esgotado.png', class: "w-3/4 h-auto max-h-full object-contain transform -rotate-12 drop-shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6" %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
