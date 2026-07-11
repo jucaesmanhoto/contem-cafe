@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   mount_avo
   devise_for :users
   root to: "pages#home"
+
+  namespace :api do
+    namespace :v1 do
+      post "batches/upload", to: "batch_data#create"
+    end
+  end
+
   get "quero-cafe", to: "pages#try_form", as: :try_form
   get "pesquisa-satisfacao", to: "pages#satisfaction_survey", as: :satisfaction_survey
   get "pesquisa-satisfacao/obrigado", to: "pages#satisfaction_thanks", as: :satisfaction_thanks
@@ -23,4 +30,7 @@ Rails.application.routes.draw do
   resources :farms, only: [:show] do
     resources :coffees, only: [:show, :create]
   end
+
+  # Torras: consulta do gráfico de uma torra pelo número do batch
+  get "torras", to: "batches#index", as: :roasts
 end

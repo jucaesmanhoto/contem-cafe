@@ -2,7 +2,13 @@
   <% farms.each do |farm| %>
     <div class="group relative aspect-8/3 md:aspect-6/3 h-32 rounded-4xl border-2 border-white overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:rotate-1 shadow-[0_10px_20px_rgba(0,0,0,0.12),0_4px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_30px_rgba(0,0,0,0.15)]">
       <%= link_to farm_path(farm) do %>
-        <%= image_tag farm.photo, class: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %>
+        <% if farm.photo.attached? %>
+          <%= image_tag farm.photo, class: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %>
+        <% else %>
+          <div class="flex h-full w-full flex-col items-center justify-center bg-stone-100 text-stone-300">
+            <span class="text-xs font-medium uppercase tracking-tighter">Imagem não disponível</span>
+          </div>
+        <% end %>
         <%# Sombra interna e vinheta %>
         <div class="absolute inset-0 pointer-events-none rounded-[28px] shadow-[inset_0_0_15px_rgba(0,0,0,0.2)] bg-linear-to-br from-white/10 via-transparent to-black/10"></div>
         <%# Brilho especular no topo — simula reflexo de luz %>

@@ -5,6 +5,11 @@ class Avo::Resources::Farm < Avo::BaseResource
   #   query: -> { query.ransack(id_eq: q, m: "or").result(distinct: false) }
   # }
 
+  # Farm#to_param usa slug (não o id numérico) nas URLs
+  self.find_record_method = -> {
+    query.find_by(slug: id) || query.find(id)
+  }
+
   def fields
     field :id, as: :id
     field :name, as: :text

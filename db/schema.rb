@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_22_024340) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_11_184837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,40 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_22_024340) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "batch_data", force: :cascade do |t|
+    t.decimal "air_flow"
+    t.bigint "batch_id", null: false
+    t.integer "bean_temperature_in_celsius"
+    t.datetime "created_at", null: false
+    t.decimal "drum_rotation"
+    t.integer "exaust_temperature_in_celsius"
+    t.decimal "power"
+    t.decimal "ror"
+    t.integer "time_in_milliseconds"
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_batch_data_on_batch_id"
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.string "batch_number"
+    t.bigint "coffee_id", null: false
+    t.integer "color_in_agtron"
+    t.datetime "created_at", null: false
+    t.integer "final_quantity_in_grams"
+    t.integer "first_crack_celsius_temperature"
+    t.integer "first_crack_time_in_seconds"
+    t.integer "initial_quantity_in_grams"
+    t.datetime "roast_end_time"
+    t.integer "start_celsius_temperature"
+    t.integer "total_time_in_seconds"
+    t.integer "turn_to_yellow_celsius_temperature"
+    t.integer "turn_to_yellow_time_in_seconds"
+    t.integer "turning_point_celsius_temperature"
+    t.integer "turning_point_time_in_seconds"
+    t.datetime "updated_at", null: false
+    t.index ["coffee_id"], name: "index_batches_on_coffee_id"
   end
 
   create_table "coffees", force: :cascade do |t|
@@ -82,10 +116,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_22_024340) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.check_constraint "role::text = ANY (ARRAY['user'::character varying, 'manager'::character varying, 'admin'::character varying]::text[])", name: "allowed_roles"
+    t.check_constraint "role::text = ANY (ARRAY['user'::character varying::text, 'manager'::character varying::text, 'admin'::character varying::text])", name: "allowed_roles"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "batch_data", "batches"
+  add_foreign_key "batches", "coffees"
   add_foreign_key "coffees", "farms"
 end

@@ -1,0 +1,70 @@
+<div class="bg-white min-h-screen px-6 md:px-10 lg:px-12 py-12 max-w-4xl mx-auto">
+  <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-8 leading-tight">
+    Consultar torra
+  </h1>
+
+  <%= form_with url: roasts_path, method: :get, class: "flex gap-3 mb-10" do %>
+    <input
+      type="text"
+      name="batch_number"
+      value="<%= params[:batch_number] %>"
+      placeholder="Número do batch"
+      required
+      class="flex-1 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700"
+    >
+    <button type="submit" class="bg-stone-900 text-white py-3 px-6 rounded-xl text-sm font-bold hover:bg-stone-800 transition-all active:scale-[0.98]">
+      Buscar
+    </button>
+  <% end %>
+
+  <% if @batch %>
+    <div class="mb-8 pb-8 border-b border-stone-100">
+      <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1 block">Café</span>
+      <%= link_to @batch.coffee.name, farm_coffee_path(@batch.coffee.farm, @batch.coffee), class: "block text-xl font-serif text-stone-900 mb-4" %>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Batch</span>
+          <span class="text-stone-800 font-medium text-sm"><%= @batch.batch_number %></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Tempo total</span>
+          <span class="text-stone-800 font-medium text-sm"><%= format_duration(@batch.total_time_in_seconds) %>s</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">1º Crack</span>
+          <span class="text-stone-800 font-medium text-sm"><%= format_duration(@batch.first_crack_time_in_seconds) %>s / <%= @batch.first_crack_celsius_temperature %>°C</span>
+        </div>
+        <% if @batch.color_in_agtron %>
+          <div class="flex flex-col">
+            <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Agtron</span>
+            <span class="text-stone-800 font-medium text-sm"><%= @batch.color_in_agtron %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @batch_data.present? %>
+      <div class="h-96">
+        <canvas
+          data-controller="roast-chart"
+          data-roast-chart-points-value="<%= @batch_data.map { |datum|
+            {
+              time_in_seconds: datum.time_in_milliseconds / 1000.0,
+              bean_temperature: datum.bean_temperature_in_celsius,
+              exhaust_temperature: datum.exaust_temperature_in_celsius,
+              ror: datum.ror
+            }
+          }.to_json %>"
+          data-roast-chart-milestones-value="<%= {
+            turningPoint: { time_in_seconds: @batch.turning_point_time_in_seconds, celsius_temperature: @batch.turning_point_celsius_temperature },
+            dryEnd: { time_in_seconds: @batch.turn_to_yellow_time_in_seconds, celsius_temperature: @batch.turn_to_yellow_celsius_temperature },
+            firstCrack: { time_in_seconds: @batch.first_crack_time_in_seconds, celsius_temperature: @batch.first_crack_celsius_temperature },
+            drop: { time_in_seconds: @batch.total_time_in_seconds, celsius_temperature: nil }
+          }.to_json %>"
+        ></canvas>
+      </div>
+    <% else %>
+      <p class="text-stone-500 text-sm">Nenhum dado de torra encontrado para este batch.</p>
+    <% end %>
+  <% end %>
+</div>

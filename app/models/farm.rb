@@ -3,7 +3,7 @@ class Farm < ApplicationRecord
   has_one_attached :photo
 
   validates :name, :city, presence: true
-  validates :state, length: {is: 2}, allow_blank: true
+  validates :state, length: { is: 2 }, allow_blank: true
   before_validation :set_slug, on: :create
 
   def to_param
