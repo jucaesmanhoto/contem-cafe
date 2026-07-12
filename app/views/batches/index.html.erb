@@ -2,13 +2,22 @@
   <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-8 leading-tight">
     Consultar torra
   </h1>
+  <h3 class="text-md md:text-md font-serif text-stone-500 mb-8 leading-tight">
+    Informe a data e o horário impressos na embalagem do seu café (ex.: 07.07 - 11:59)
+  </h3>
 
-  <%= form_with url: roasts_path, method: :get, class: "flex gap-3 mb-10" do %>
+  <%= form_with url: roasts_path, method: :get, class: "flex flex-col sm:flex-row gap-3 mb-10" do %>
     <input
-      type="text"
-      name="batch_number"
-      value="<%= params[:batch_number] %>"
-      placeholder="Número do batch"
+      type="date"
+      name="roast_date"
+      value="<%= params[:roast_date] %>"
+      required
+      class="flex-1 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700"
+    >
+    <input
+      type="time"
+      name="roast_time"
+      value="<%= params[:roast_time] %>"
       required
       class="flex-1 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700"
     >

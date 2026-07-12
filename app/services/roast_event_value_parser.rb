@@ -6,14 +6,14 @@ module RoastEventValueParser
   def cook_date(value)
     raise RoastFileParser::InvalidFileError, "CookDate não encontrado no arquivo" if value.blank?
 
-    DateTime.strptime(value, "%y-%m-%d %H:%M:%S")
+    DateTime.strptime(value, "%d-%m-%y %H:%M:%S")
   rescue ArgumentError
     raise RoastFileParser::InvalidFileError, "CookDate em formato inesperado: \"#{value}\""
   end
 
-  # "26-04-19 17:08:29" -> "264191708" (ano, mês sem zero à esquerda, dia, hora, minuto)
+  # "09-04-26 17:08:29" -> "2604091708" (ano, mês, dia, hora, minuto — todos com 2 dígitos)
   def batch_number(cook_date)
-    cook_date.strftime("%y%-m%d%H%M")
+    cook_date.strftime("%y%m%d%H%M")
   end
 
   # "150@03:28" -> [150, 208]
