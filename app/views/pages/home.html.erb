@@ -3,7 +3,11 @@
   <!-- Seção 1: Hero / Destaque -->
   <header class="hero-section">
     <div class="hero-text">
-      <h1>Contèm Cafés Especiais</h1>
+      <% if (DateTime.now.second % 2).odd? %>
+        <h1>Contèm Cafés Espaciais</h1>
+      <% else %>
+        <%= image_tag ["logo-gradient-red-background", "logo-bauhaus-gradient", "logo-gradient-brown-background"].sample , class: "mb-6 flex mx-auto" %>
+      <% end %>
       <p>Café de verdade, torrado sob demanda.</br>
       Nada aqui espera numa prateleira.</br>
       Cada torra é feita exclusivamente para você.</p>
