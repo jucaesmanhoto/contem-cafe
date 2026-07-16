@@ -43,7 +43,7 @@
         </div>
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Perda de massa</span>
-          <span class="text-stone-800 font-medium text-sm"><%= 100 * (1 - @batch.final_quantity_in_grams / @batch.initial_quantity_in_grams) %>%</span>
+          <span class="text-stone-800 font-medium text-sm"><%= number_with_precision(100 * (1 - @batch.final_quantity_in_grams / @batch.initial_quantity_in_grams), precision: 2, separator: ",") %>%</span>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
