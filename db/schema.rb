@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_12_044358) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_16_024201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,10 +61,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_12_044358) do
     t.bigint "coffee_id", null: false
     t.integer "color_in_agtron"
     t.datetime "created_at", null: false
-    t.integer "final_quantity_in_grams"
+    t.decimal "final_quantity_in_grams", precision: 8, scale: 1
     t.integer "first_crack_celsius_temperature"
     t.integer "first_crack_time_in_seconds"
-    t.integer "initial_quantity_in_grams"
+    t.decimal "initial_quantity_in_grams", precision: 8, scale: 1
     t.datetime "roast_end_time"
     t.integer "start_celsius_temperature"
     t.integer "total_time_in_seconds"

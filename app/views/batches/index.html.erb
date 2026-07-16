@@ -28,8 +28,24 @@
 
   <% if @batch %>
     <div class="mb-8 pb-8 border-b border-stone-100">
-      <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1 block">Café</span>
-      <%= link_to @batch.coffee.name, farm_coffee_path(@batch.coffee.farm, @batch.coffee), class: "block text-xl font-serif text-stone-900 mb-4" %>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1 block">Café</span>
+          <%= link_to @batch.coffee.name, farm_coffee_path(@batch.coffee.farm, @batch.coffee), class: "block text-xl font-serif text-stone-900 mb-4" %>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Peso inicial</span>
+          <span class="text-stone-800 font-medium text-sm"><%= @batch.initial_quantity_in_grams %>g</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Peso final</span>
+          <span class="text-stone-800 font-medium text-sm"><%= @batch.final_quantity_in_grams %>g</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Perda de massa</span>
+          <span class="text-stone-800 font-medium text-sm"><%= 100 * (1 - @batch.final_quantity_in_grams / @batch.initial_quantity_in_grams) %>%</span>
+        </div>
+      </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4">
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Batch</span>
