@@ -27,6 +27,8 @@ proxy:
     - www.contemcafes.com.br
     - lattinecafe.com.br
     - www.lattinecafe.com.br
+    - musacafes.com.br
+    - www.musacafes.com.br
 
 # Healthcheck/deploy timing for container boot and traffic draining (seconds)
 deploy_timeout: 120

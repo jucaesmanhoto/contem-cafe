@@ -1,254 +1,315 @@
-<div class="landing-container">
+<%#
+  Home pública da Musa — sem navbar.
+  Composição: um único objeto emoldurado (filete duplo) contendo um grid
+  unico. Hero assimétrico: emblema/lockup (musa.png) ancora o olhar à esquerda,
+  manifesto tipográfico à direita. Rótulos de seção alinhados num rail comum.
+  HTML+CSS inline por decisão do arquivo (não usa o design system compartilhado).
+%>
 
-  <!-- Seção 1: Hero / Destaque -->
-  <header class="hero-section">
-    <div class="hero-text">
-      <% if (DateTime.now.second % 2).odd? %>
-        <h1>Contèm Cafés Espaciais</h1>
-      <% else %>
-        <%= image_tag ["logo-gradient-red-background", "logo-bauhaus-gradient", "logo-gradient-brown-background"].sample , class: "mb-6 flex mx-auto" %>
-      <% end %>
-      <p>Café de verdade, torrado sob demanda.</br>
-      Nada aqui espera numa prateleira.</br>
-      Cada torra é feita exclusivamente para você.</p>
+<div class="musa-paper">
+  <div class="musa-wrap">
 
-      <%= render 'pages/farms', farms: Farm.all %>
-    </div>
-    <div class="hero-image-wrapper">
-      <%= image_tag "andre_coelho_red.png", class: "hero-img", alt: "Arte Contem Café" %>
-      <a href="https://www.instagram.com/coelhoazul/" target="_blank" rel="noopener noreferrer" class="btn-about-andre">Sobre André Coelho</a>
-    </div>
-  </header>
+    <%# ================= HERO ================= %>
+    <section class="musa-hero">
+      <div class="musa-lockup reveal d1">
+        <%= image_tag "musa.png", alt: "Musa — Cafés que inspiram", class: "musa-logo" %>
+      </div>
 
-<%# Ocultar Navbar nesta página específica %>
+      <div class="musa-manifesto reveal d2">
+        <p class="musa-eyebrow">Torra sob demanda</p>
+        <p class="musa-lead-text">
+          <span class="musa-lead">Café de verdade,</span> torrado sob demanda.
+          Nada aqui espera numa prateleira.
+        </p>
+        <p class="musa-sub">Cada torra é feita exclusivamente para você.</p>
+        <div class="musa-actions">
+          <%= link_to "Quero café", try_form_path, class: "musa-btn musa-btn-primary" %>
+          <a class="musa-link-down" href="#origem">Os cafés que nos inspiram<span aria-hidden="true">&darr;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="musa-divider">
+
+    <%# ================= ORIGEM / FAZENDAS ================= %>
+    <section class="musa-movement" id="origem">
+      <div class="musa-section-head reveal">
+        <p class="musa-rail-label">Origem</p>
+        <h2 class="musa-section-title">Onde cada torra começa</h2>
+        <p class="musa-section-intro">
+          Conheça as fazendas de onde vem cada grão que chega à sua torra fresca.
+        </p>
+      </div>
+
+      <div class="musa-farms">
+        <%= render "pages/farms", farms: Farm.all %>
+      </div>
+    </section>
+
+    <hr class="musa-divider">
+
+    <%# ================= COLABORAÇÃO / ARTE ================= %>
+    <section class="musa-movement">
+      <div class="musa-art-panel">
+        <div class="musa-art-copy">
+          <p class="musa-rail-label">Colaboração</p>
+          <h2 class="musa-section-title">A arte no rótulo</h2>
+          <figcaption class="musa-art-cap">
+            <span>Ilustração por André Coelho</span>
+            <a class="musa-art-link" href="https://www.instagram.com/coelhoazul/"
+               target="_blank" rel="noopener noreferrer">Sobre André Coelho →</a>
+          </figcaption>
+        </div>
+
+        <figure class="musa-art-plate">
+          <%= image_tag "andre_coelho_red.png", alt: "Arte Contém Café por André Coelho", class: "musa-art-img" %>
+        </figure>
+      </div>
+    </section>
+
+    <%# ================= FOOTER ================= %>
+    <footer class="musa-foot reveal">
+      <span class="musa-foot-mk">MUSA</span>
+      <span class="musa-foot-meta">Cafés que inspiram · &copy; <%= Time.current.year %></span>
+    </footer>
+
+  </div>
 </div>
 
 <style>
-  /* CSS Básico Inline para a Landing Page */
-  body {
-    background-color: #fdfaf6; /* Um tom de branco café, para aconchego */
-  }
-  .landing-container {
-    font-family: system-ui, -apple-system, sans-serif;
-    color: #4a4a4a;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  /* ============================================================
+     MUSA — home. Tokens (paleta amostrada da logo), escala de
+     espaço base-8, grid único e moldura de filete duplo.
+     Tema claro fixo (o app não tem dark mode).
+     ============================================================ */
+  :root {
+    --musa-cream:      #fdfaf6;
+    --musa-cream-deep: #f4ead9;
+    --musa-bronze:     #8c6038;  /* ACENTO único: rótulos, filetes, links */
+    --musa-bronze-soft:#b08d57;
+    --musa-brown:      #3b2a1e;  /* corpo */
+    --musa-espresso:   #281307;  /* display + painel escuro */
+
+    --musa-ink:        var(--musa-brown);
+    --musa-ink-strong: var(--musa-espresso);
+    --musa-accent:     var(--musa-bronze);
+    --musa-hair:       color-mix(in srgb, var(--musa-bronze) 40%, transparent);
+    --musa-on-dark:    #f3e7d3;
+    --musa-on-dark-soft:#c9a878;
+
+    --musa-serif: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, "Times New Roman", serif;
+    --musa-sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+    --musa-s1: 8px;  --musa-s2: 16px; --musa-s3: 24px; --musa-s4: 32px;
+    --musa-s5: 48px; --musa-s6: 64px; --musa-s7: 96px;
+    --musa-measure: 62ch;
+    --musa-container: 1120px;
   }
 
-  /* Ocultar a Navbar apenas nesta página */
+  body {
+    background:
+      radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--musa-bronze) 6%, transparent), transparent 60%),
+      var(--musa-cream);
+    margin: 0;
+    padding: clamp(12px, 3vw, 40px);
+  }
+  /* landing sem navbar */
   .navbar, nav { display: none !important; }
 
-  /* Hero Section */
-  .hero-section {
-    display: flex;
-    align-items: top;
-    gap: 40px;
-    padding: 4px 0 60px;
-    flex-wrap: wrap;
-    text-align: left;
-  }
-  .hero-text { flex: 1; min-width: 300px; }
-  .hero-text h1 { font-size: 3rem; margin-top: 20px; margin-bottom: 20px; color: #2c3e50; line-height: 1.2; }
-  .hero-text p { font-size: 1.2rem; margin-left: 4px; margin-bottom: 30px; }
-
-  .hero-image-wrapper { flex: 1; min-width: 300px; position: relative; }
-  .hero-img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); object-fit: cover; }
-
-  .btn-about-andre {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #2c3e50;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    text-decoration: none;
-  }
-
-  .hero-image-wrapper:hover .btn-about-andre {
-    opacity: 1;
-  }
-
-  .btn-about-andre:hover {
-    background-color: #d35400;
-    color: #fff;
-    transform: translateX(-50%) translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Flyer Section */
-  .flyer-section {
-    text-align: center;
-    padding: 80px 0;
-    border-top: 1px solid #eee;
-    margin-top: 20px;
-  }
-  .flyer-content h2 {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
-
-  .flyer-content p {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .flyer-image-wrapper {
-    margin: 40px 0;
-  }
-
-  .flyer-img {
-    max-width: 800px;
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    display: block;
+  /* moldura de filete duplo — contém TODA a composição como um só objeto */
+  .musa-paper {
+    position: relative;
+    max-width: var(--musa-container);
     margin: 0 auto;
+    color: var(--musa-ink);
+    font-family: var(--musa-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    border: 1px solid var(--musa-bronze);
+    background: transparent;
+  }
+  .musa-paper::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid var(--musa-hair);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .musa-wrap {
+    padding: clamp(20px, 4.5vw, var(--musa-s6)) clamp(18px, 4.5vw, var(--musa-s6));
   }
 
-  .payment-copy-box {
-    margin: 0 auto 8px;
-    max-width: 420px;
+  /* rail de rótulos — um único sistema de alinhamento/hierarquia */
+  .musa-rail-label {
+    font-family: var(--musa-sans);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .28em; text-transform: uppercase;
+    color: var(--musa-accent);
+    display: inline-flex; align-items: center; gap: var(--musa-s2);
+    margin: 0 0 var(--musa-s3);
+  }
+  .musa-rail-label::before {
+    content: ""; width: 34px; height: 1px; background: var(--musa-accent);
+  }
+  .musa-section-title {
+    font-family: var(--musa-serif); font-weight: 600;
+    font-size: clamp(26px, 4vw, 40px); line-height: 1.05;
+    letter-spacing: -.01em; color: var(--musa-ink-strong);
+    margin: 0 0 var(--musa-s2); text-wrap: balance;
+  }
+  .musa-section-intro {
+    max-width: var(--musa-measure);
+    margin: 0; color: var(--musa-ink);
   }
 
-  .btn-copy-payment {
-    display: inline-block;
-    width: 100%;
-    padding: 13px 18px;
-    background: #ffffff;
-    color: #8a1720;
-    border: 1px solid #8a1720;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .btn-copy-payment:hover {
-    background: #8a1720;
-    color: #ffffff;
-  }
-
-  .payment-copy-feedback {
-    display: none;
-    margin: 8px 0 0;
-    font-size: 0.95rem;
-    color: #5c5c5c;
-  }
-
-  .payment-copy-feedback.is-visible {
-    display: block;
-  }
-
-  .cta-row {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    width: 100%;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-row .btn-primary {
-    flex: 0 0 calc((100% - 12px) / 2);
-    box-sizing: border-box;
-    min-width: 0;
-    display: inline-flex;
+  /* ---------- HERO: split assimétrico ---------- */
+  .musa-hero {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.05fr) minmax(320px, 1.25fr);
+    gap: clamp(24px, 5vw, var(--musa-s7));
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 13px 18px;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.2;
+    padding-bottom: var(--musa-s6);
+  }
+  .musa-lockup {
+    position: relative;
+    display: flex; justify-content: center;
+  }
+  .musa-lockup::after { /* sombra de contato: o emblema pousa no papel */
+    content: "";
+    position: absolute;
+    bottom: -6px; left: 16%; right: 16%; height: 22px;
+    background: radial-gradient(60% 100% at 50% 0%, color-mix(in srgb, var(--musa-espresso) 20%, transparent), transparent 70%);
+    filter: blur(3px); z-index: -1;
+  }
+  .musa-logo {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
   }
 
-  .btn-primary {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #8a1720;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: background-color 0.3s;
+  .musa-eyebrow {
+    font-family: var(--musa-sans);
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--musa-accent); font-weight: 600; margin: 0 0 var(--musa-s3);
   }
-  .btn-primary:hover {
-    background-color: #d35400;
+  .musa-lead-text {
+    font-family: var(--musa-serif); font-weight: 500;
+    font-size: clamp(23px, 3.4vw, 34px); line-height: 1.32;
+    color: var(--musa-ink-strong); margin: 0; text-wrap: balance;
+  }
+  .musa-lead { color: var(--musa-accent); font-style: italic; }
+  .musa-sub {
+    font-family: var(--musa-sans);
+    font-size: 16px; line-height: 1.6; color: var(--musa-ink);
+    max-width: 46ch; margin: var(--musa-s4) 0 0;
+  }
+  /* CTAs: ação primária (botão) + navegação secundária (link de texto).
+     Pesos deliberadamente diferentes porque são tipos de ação diferentes —
+     não são um par de botões gêmeos. */
+  .musa-actions {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--musa-s3);
+    margin-top: var(--musa-s4);
+  }
+  .musa-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--musa-sans);
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+    text-decoration: none; padding: 14px 26px; border-radius: 2px;
+    transition: transform .2s, border-color .2s;
+  }
+  .musa-btn-primary { background: var(--musa-accent); color: var(--musa-cream); border: 1px solid var(--musa-accent); }
+  .musa-btn-primary:hover { transform: translateY(-2px); }
+  .musa-btn:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
+
+  /* link secundário: âncora para a seção Origem, com seta que reforça o "descer" */
+  .musa-link-down {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--musa-sans);
+    font-size: 14px; font-weight: 600; letter-spacing: .04em;
+    color: var(--musa-accent); text-decoration: none;
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: border-color .2s;
+  }
+  .musa-link-down span { transition: transform .2s; }
+  .musa-link-down:hover { border-color: var(--musa-accent); }
+  .musa-link-down:hover span { transform: translateY(2px); }
+  .musa-link-down:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
+
+  /* divisor estrutural entre movimentos */
+  .musa-divider { border: 0; border-top: 1px solid var(--musa-hair); margin: 0; }
+
+  /* ---------- movimentos ---------- */
+  .musa-movement { padding: var(--musa-s6) 0; }
+  .musa-section-head { max-width: var(--musa-measure); margin-bottom: var(--musa-s5); }
+  .musa-farms { margin-top: 0; }
+
+  /* ---------- COLABORAÇÃO: painel espresso ----------
+     O vermelho do Coelho briga com o creme; sobre fundo espresso vira
+     brasa intencional em vez de ruído. A arte carrega a marca antiga
+     "Contém Café" nos próprios pixels (autoria do artista, não editada). */
+  .musa-art-panel {
+    background: var(--musa-espresso);
+    color: var(--musa-on-dark);
+    border-radius: 4px;
+    padding: clamp(28px, 5vw, var(--musa-s6));
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(24px, 4vw, var(--musa-s6));
+    align-items: center;
+  }
+  .musa-art-panel .musa-rail-label { color: var(--musa-on-dark-soft); }
+  .musa-art-panel .musa-rail-label::before { background: var(--musa-on-dark-soft); }
+  .musa-art-panel .musa-section-title { color: var(--musa-on-dark); }
+  .musa-art-cap {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+    margin-top: var(--musa-s3); font-size: 13px; color: var(--musa-on-dark-soft);
+  }
+  .musa-art-link {
+    color: var(--musa-on-dark); text-decoration: none;
+    border-bottom: 1px solid var(--musa-on-dark-soft); padding-bottom: 2px; font-weight: 600;
+  }
+  .musa-art-link:hover { color: #fff; }
+  .musa-art-plate {
+    margin: 0;
+    border-radius: 3px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 22px 50px rgba(0,0,0,.45);
+  }
+  .musa-art-img { display: block; width: 100%; height: auto; }
+
+  /* ---------- footer: fecha a moldura ---------- */
+  .musa-foot {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    gap: var(--musa-s2);
+    padding-top: var(--musa-s5); margin-top: var(--musa-s6);
+    border-top: 1px solid var(--musa-hair);
+  }
+  .musa-foot-mk { font-family: var(--musa-serif); font-weight: 700; letter-spacing: .3em; color: var(--musa-ink-strong); font-size: 15px; }
+  .musa-foot-meta { font-size: 12px; letter-spacing: .06em; color: var(--musa-accent); text-transform: uppercase; }
+
+  /* ---------- animação de carga (respeita reduced-motion) ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px); animation: musaRise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .d1 { animation-delay: .05s; } .d2 { animation-delay: .2s; }
+    @keyframes musaRise { to { opacity: 1; transform: none; } }
+    .musa-paper { animation: musaFrame .9s ease forwards; }
+    @keyframes musaFrame { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
   }
 
-  @media (max-width: 640px) {
-    .cta-row .btn-primary {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .hero-section {
-      flex-direction: column;
-    }
-
-    .hero-image-wrapper {
-      order: -1;
-      width: 100%;
-      min-width: unset;
-    }
-
-    .hero-text {
-      width: 100%;
-      min-width: unset;
-    }
+  /* ---------- responsivo: uma coluna, mesmo grid/gutter ---------- */
+  @media (max-width: 860px) {
+    .musa-hero { grid-template-columns: 1fr; gap: var(--musa-s5); }
+    .musa-art-panel { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .musa-foot { flex-direction: column; align-items: flex-start; }
+    /* CTAs empilhados com respiro: primário em largura total, link discreto abaixo */
+    .musa-actions { flex-direction: column; align-items: stretch; gap: var(--musa-s3); }
+    .musa-btn-primary { width: 100%; }
+    .musa-link-down { align-self: flex-start; }
   }
 </style>
-
-<script>
-  document.addEventListener("turbo:load", function() {
-    var button = document.querySelector(".btn-copy-payment");
-    var feedback = document.querySelector(".payment-copy-feedback");
-    if (!button || !feedback) return;
-
-    var link = button.dataset.copyPaymentLink;
-
-    button.addEventListener("click", async function() {
-      if (!link) return;
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(link);
-        } else {
-          var helperInput = document.createElement("textarea");
-          helperInput.value = link;
-          helperInput.setAttribute("readonly", "");
-          helperInput.style.position = "absolute";
-          helperInput.style.left = "-9999px";
-          document.body.appendChild(helperInput);
-          helperInput.select();
-          document.execCommand("copy");
-          document.body.removeChild(helperInput);
-        }
-
-        feedback.textContent = "Link copiado. Agora é so colar no navegador ou no app do banco.";
-        feedback.classList.add("is-visible");
-      } catch (error) {
-        feedback.textContent = "Nao foi possivel copiar automaticamente. Pressione e segure para copiar manualmente.";
-        feedback.classList.add("is-visible");
-      }
-    });
-  });
-</script>
