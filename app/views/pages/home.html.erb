@@ -37,7 +37,7 @@
         <p class="musa-rail-label">Origem</p>
         <h2 class="musa-section-title">Onde cada torra começa</h2>
         <p class="musa-section-intro">
-          Conheça as fazendas de onde vem cada grão que chega à sua torra fresca.
+          Conheça as fazendas de onde vem cada grão. Escolha o seu para uma torra fresquinha.
         </p>
       </div>
 
@@ -247,6 +247,113 @@
   .musa-section-head { max-width: var(--musa-measure); margin-bottom: var(--musa-s5); }
   .musa-farms { margin-top: 0; }
 
+  /* ---------- FAZENDAS: índice de origens ---------- */
+  .musa-farms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--musa-s3);
+  }
+
+  .musa-farm-card {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    text-decoration: none;
+    color: inherit;
+    background: var(--musa-cream-deep);
+    border: 1px solid var(--musa-hair);
+    border-radius: 3px;
+    overflow: hidden;
+    min-height: 250px;
+    transition: transform .25s, border-color .25s, background-color .25s, box-shadow .25s;
+  }
+  .musa-farm-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--musa-bronze);
+    background: color-mix(in srgb, var(--musa-cream-deep) 92%, var(--musa-bronze));
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--musa-espresso) 12%, transparent);
+  }
+  .musa-farm-card:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
+
+  .musa-farm-photo {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-right: 1px solid var(--musa-hair);
+    background: var(--musa-cream);
+  }
+  .musa-farm-photo img {
+    display: block;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .3s;
+  }
+  .musa-farm-card:hover .musa-farm-photo img { transform: scale(1.03); }
+
+  .musa-farm-photo-empty { display: flex; align-items: center; justify-content: center; }
+  .musa-farm-empty-mark {
+    font-size: 10px; font-weight: 600; letter-spacing: .24em;
+    text-transform: uppercase; color: var(--musa-bronze-soft);
+  }
+
+  .musa-farm-entry {
+    display: flex; flex-direction: column; gap: 9px;
+    padding: var(--musa-s3);
+  }
+  .musa-farm-name {
+    font-family: var(--musa-serif); font-weight: 600;
+    font-size: clamp(19px, 2.1vw, 24px); line-height: 1.1;
+    letter-spacing: -.01em; color: var(--musa-ink-strong);
+    text-wrap: balance; margin-top: 2px;
+  }
+  .musa-farm-rule {
+    display: block; height: 1px;
+    background: var(--musa-hair);
+    margin: 3px 0 1px;
+  }
+  .musa-farm-meta { display: flex; align-items: baseline; gap: var(--musa-s2); font-size: 13px; }
+  .musa-farm-k {
+    flex: 0 0 66px;
+    font-size: 10px; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--musa-bronze-soft);
+  }
+  .musa-farm-v { color: var(--musa-ink); }
+  .musa-farm-go {
+    margin-top: auto; padding-top: var(--musa-s2);
+    font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--musa-accent);
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .musa-farm-arrow { display: inline-block; transition: transform .2s; }
+  .musa-farm-card:hover .musa-farm-arrow { transform: translateX(3px); }
+
+  /* estado esgotado */
+  .musa-farm-card.is-esgotado .musa-farm-photo img {
+    filter: grayscale(.7) sepia(.22) contrast(.95);
+  }
+  .musa-farm-card.is-esgotado .musa-farm-photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: color-mix(in srgb, var(--musa-cream) 40%, transparent);
+  }
+
+  /* chip de estado */
+  .musa-chip {
+    display: inline-flex; align-items: center;
+    font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--musa-accent);
+    border: 1px solid var(--musa-hair);
+    border-radius: 2px;
+    padding: 4px 9px;
+    white-space: nowrap;
+  }
+
+  /* modificador do rail label da home, em escala de card */
+  .musa-rail-sm {
+    font-size: 10px; letter-spacing: .24em;
+    gap: 10px; margin: 0;
+  }
+  .musa-rail-sm::before { width: 20px; }
+
   /* ---------- COLABORAÇÃO: painel espresso ----------
      O vermelho do Coelho briga com o creme; sobre fundo espresso vira
      brasa intencional em vez de ruído. A arte carrega a marca antiga
@@ -304,6 +411,13 @@
   @media (max-width: 860px) {
     .musa-hero { grid-template-columns: 1fr; gap: var(--musa-s5); }
     .musa-art-panel { grid-template-columns: 1fr; }
+    .musa-farms-grid { grid-template-columns: 1fr; }
+    .musa-farm-card { grid-template-columns: 1fr; min-height: 0; }
+    .musa-farm-photo {
+      aspect-ratio: 16 / 9;
+      border-right: 0;
+      border-bottom: 1px solid var(--musa-hair);
+    }
   }
   @media (max-width: 520px) {
     .musa-foot { flex-direction: column; align-items: flex-start; }
