@@ -64,6 +64,10 @@ env:
     REFERRAL_DISCOUNT_PERCENTAGE_PER_LEVEL: 2.5
     REFERRAL_MAX_DISCOUNT_PERCENTAGE: 20.0
 
+    # Depth assigned to a chain's root referral (no referrer) — lets the very
+    # first invite of a chain start above 0% discount if desired.
+    REFERRAL_ROOT_DEPTH: 2
+
     # Set number of processes dedicated to Solid Queue (default: 1)
     # JOB_CONCURRENCY: 3
 

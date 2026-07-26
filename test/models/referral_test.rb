@@ -70,4 +70,14 @@ class ReferralTest < ActiveSupport::TestCase
     referral = Referral.new(depth: 50)
     assert_equal 20.0, referral.discount_percentage
   end
+
+  test "root depth defaults to 0 but is configurable via ENV" do
+    original = ENV.fetch("REFERRAL_ROOT_DEPTH", nil)
+    ENV["REFERRAL_ROOT_DEPTH"] = "3"
+
+    root = Referral.create!(name: "Root", phone: "111")
+    assert_equal 3, root.depth
+  ensure
+    ENV["REFERRAL_ROOT_DEPTH"] = original
+  end
 end

@@ -41,6 +41,12 @@ class Referral < ApplicationRecord
     ENV.fetch("REFERRAL_MAX_DISCOUNT_PERCENTAGE", "20.0").to_f
   end
 
+  # Depth assigned to a chain's root (a referral with no referrer). Configurable
+  # so the very first invite of a chain doesn't have to start at 0% discount.
+  def self.root_depth
+    ENV.fetch("REFERRAL_ROOT_DEPTH", "0").to_i
+  end
+
   private
 
   def set_token
@@ -56,6 +62,6 @@ class Referral < ApplicationRecord
   end
 
   def set_depth
-    self.depth = referrer ? referrer.depth.to_i + 1 : 0
+    self.depth = referrer ? referrer.depth.to_i + 1 : self.class.root_depth
   end
 end
