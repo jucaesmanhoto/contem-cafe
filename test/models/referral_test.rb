@@ -80,4 +80,15 @@ class ReferralTest < ActiveSupport::TestCase
   ensure
     ENV["REFERRAL_ROOT_DEPTH"] = original
   end
+
+  test "an explicitly set depth on a root is not overridden by the automatic calculation" do
+    referral = Referral.create!(name: "Custom", phone: "111", depth: 7)
+    assert_equal 7, referral.depth
+  end
+
+  test "an explicitly set depth on a child is not overridden by the automatic calculation" do
+    root = Referral.create!(name: "Root", phone: "111")
+    child = Referral.create!(name: "Child", phone: "222", referrer: root, depth: 9)
+    assert_equal 9, child.depth
+  end
 end

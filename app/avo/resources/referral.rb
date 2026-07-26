@@ -4,7 +4,7 @@ class Avo::Resources::Referral < Avo::BaseResource
     field :name, as: :text
     field :phone, as: :text
     field :token, as: :text, readonly: true
-    field :depth, as: :number, readonly: true
+    field :depth, as: :number
     field :referrer, as: :belongs_to
     field :referred_referrals, as: :has_many
   end

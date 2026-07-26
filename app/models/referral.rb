@@ -62,6 +62,8 @@ class Referral < ApplicationRecord
   end
 
   def set_depth
+    return unless depth.nil?
+
     self.depth = referrer ? referrer.depth.to_i + 1 : self.class.root_depth
   end
 end
