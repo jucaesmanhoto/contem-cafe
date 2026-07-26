@@ -1,0 +1,64 @@
+<% content_for :title, "Seu link de indicação" %>
+
+<div class="bg-white min-h-screen px-6 md:px-10 lg:px-12 py-12 max-w-2xl mx-auto">
+  <div class="flex items-center justify-between w-full mb-4">
+    <%= image_tag "musa_emblem.png", alt: "", class: "h-14 w-auto" %>
+    <%= image_tag "musa_wordmark.png", alt: "Musa", class: "h-14 w-auto" %>
+  </div>
+  <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você entrou na corrente!</h1>
+  <p class="text-stone-500 mb-10">
+    Compartilhe seu link com amigos: quem entrar pelo seu convite ganha desconto, e você continua a corrente.
+  </p>
+
+  <section class="mb-10">
+    <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-3 block">A corrente até você</span>
+    <ol class="space-y-2">
+      <% @chain.each_with_index do |referral, index| %>
+        <li class="flex items-center gap-3 text-stone-700">
+          <span class="flex items-center justify-center w-7 h-7 rounded-full bg-stone-100 text-sm font-semibold text-stone-500 shrink-0"><%= index + 1 %></span>
+          <span><%= referral.name %></span>
+        </li>
+      <% end %>
+    </ol>
+  </section>
+
+  <section class="border border-stone-200 rounded-xl p-6 md:p-8 mb-6" data-controller="copy-to-clipboard">
+    <h2 class="text-xl font-serif text-stone-900 mb-4">Seu link de indicação e desconto</h2>
+
+    <div class="flex gap-2">
+      <input type="text" readonly value="<%= referral_url(@referral.token) %>" data-copy-to-clipboard-target="source" class="flex-1 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-600 bg-stone-50">
+      <button type="button" data-action="click->copy-to-clipboard#copy" class="musa-btn musa-btn-primary musa-btn-sm shrink-0">Copiar</button>
+    </div>
+    <p data-copy-to-clipboard-target="feedback" class="hidden mt-2 text-sm text-stone-600 [&.is-visible]:block"></p>
+
+    <%= link_to "Compartilhar no WhatsApp", whatsapp_share_url(@referral), target: "_blank", rel: "noopener",
+          class: "musa-btn musa-btn-secondary mt-4 w-full" %>
+  </section>
+
+  <%= link_to "Pedir pelo WhatsApp",
+        admin_whatsapp_url("Oi! Entrei na corrente de indicação da Musa Cafés e quero fazer um pedido com desconto. Meu link: #{referral_url(@referral.token)}"),
+        target: "_blank", rel: "noopener",
+        class: "musa-btn musa-btn-primary w-full" %>
+</div>
+
+<style>
+  :root {
+    --musa-cream:    #fdfaf6;
+    --musa-bronze:   #8c6038;
+    --musa-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .musa-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--musa-sans);
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+    text-decoration: none; padding: 14px 26px; border-radius: 2px;
+    transition: transform .2s, border-color .2s, background-color .2s, color .2s;
+  }
+  .musa-btn-primary { background: var(--musa-bronze); color: var(--musa-cream); border: 1px solid var(--musa-bronze); }
+  .musa-btn-primary:hover { transform: translateY(-2px); }
+  .musa-btn-secondary { background: transparent; color: var(--musa-bronze); border: 1px solid var(--musa-bronze); }
+  .musa-btn-secondary:hover { background: var(--musa-bronze); color: var(--musa-cream); }
+  .musa-btn-sm { padding: 10px 18px; }
+  .musa-btn:focus-visible { outline: 2px solid var(--musa-bronze); outline-offset: 3px; }
+</style>

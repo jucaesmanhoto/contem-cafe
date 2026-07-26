@@ -33,4 +33,11 @@ Rails.application.routes.draw do
 
   # Torras: consulta do gráfico de uma torra pelo número do batch
   get "torras", to: "batches#index", as: :roasts
+
+  # Corrente de indicação: acessada apenas via link/token de um membro existente
+  resources :referrals, only: %i[show create], param: :token do
+    member do
+      get :success
+    end
+  end
 end

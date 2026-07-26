@@ -28,5 +28,10 @@ module ContemCafe
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # User-facing copy is in Portuguese; validation/error messages should match.
+    # Fallback to :en covers keys we haven't translated yet (e.g. Devise's admin panel).
+    config.i18n.default_locale = :'pt-BR'
+    config.i18n.fallbacks = true
   end
 end

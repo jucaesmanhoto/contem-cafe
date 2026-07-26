@@ -5,6 +5,7 @@ class Coffee < ApplicationRecord
   validates :name, :variety, :processing, :altitude, presence: true
   before_validation :set_slug, :set_stock_status, on: :create
 
+  scope :availables, -> { where.not(stock_status: "Esgotado") }
   def to_param
     slug.presence || id.to_s
   end
