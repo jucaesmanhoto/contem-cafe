@@ -9,8 +9,18 @@ export default class extends Controller {
     if (form && !form.reportValidity()) return
 
     const checkedCoffee = this.coffeeTargets.find((radio) => radio.checked)
-    const coffeeName = checkedCoffee ? checkedCoffee.dataset.coffeeName : ""
-    const coffeePrice = checkedCoffee ? checkedCoffee.dataset.coffeeDiscountedPrice : ""
+    if (!checkedCoffee) {
+      const [firstRadio] = this.coffeeTargets
+      if (firstRadio) {
+        firstRadio.setCustomValidity("Escolha um café para pedir pelo WhatsApp.")
+        firstRadio.reportValidity()
+        firstRadio.setCustomValidity("")
+      }
+      return
+    }
+
+    const coffeeName = checkedCoffee.dataset.coffeeName
+    const coffeePrice = checkedCoffee.dataset.coffeeDiscountedPrice
 
     const lines = [
       `Oi! Aqui é ${this.nameTarget.value}. ${this.referrerNameValue} me deu um desconto de presente e quero pedir um pacotinho de Musa - ${coffeeName} por ${coffeePrice}.`,

@@ -56,39 +56,40 @@ class ReferralTest < ActiveSupport::TestCase
     assert_nil child.reload.referrer_id
   end
 
-  test "discount percentage grows 2.5 points per level of depth" do
-    root = Referral.create!(name: "Root", phone: "111")
-    child = Referral.create!(name: "Child", phone: "222", referrer: root)
-    grandchild = Referral.create!(name: "Grandchild", phone: "333", referrer: child)
+  test "a phone already used by the referrer cannot join under them" do
+    root = Referral.create!(name: "Root", phone: "11999999999")
+    dup = Referral.new(name: "Self invite", phone: "11999999999", referrer: root)
 
-    assert_equal 0.0, root.discount_percentage
-    assert_equal 2.5, child.discount_percentage
-    assert_equal 5.0, grandchild.discount_percentage
+    assert_not dup.valid?
+    assert_includes dup.errors[:base], "Você já faz parte desta indicação e não pode se indicar"
   end
 
-  test "discount percentage is capped at 20%" do
-    referral = Referral.new(depth: 50)
-    assert_equal 20.0, referral.discount_percentage
+  test "a phone already used further up the chain cannot join further down" do
+    root = Referral.create!(name: "Root", phone: "11999999999")
+    mid = Referral.create!(name: "Mid", phone: "11888888888", referrer: root)
+    dup = Referral.new(name: "Self invite", phone: "11999999999", referrer: mid)
+
+    assert_not dup.valid?
+    assert_includes dup.errors[:base], "Você já faz parte desta indicação e não pode se indicar"
   end
 
-  test "root depth defaults to 0 but is configurable via ENV" do
-    original = ENV.fetch("REFERRAL_ROOT_DEPTH", nil)
-    ENV["REFERRAL_ROOT_DEPTH"] = "3"
+  test "phone comparison ignores formatting when checking for self-invitation" do
+    root = Referral.create!(name: "Root", phone: "(11) 99999-9999")
+    dup = Referral.new(name: "Self invite", phone: "11999999999", referrer: root)
 
-    root = Referral.create!(name: "Root", phone: "111")
-    assert_equal 3, root.depth
-  ensure
-    ENV["REFERRAL_ROOT_DEPTH"] = original
+    assert_not dup.valid?
+    assert_includes dup.errors[:base], "Você já faz parte desta indicação e não pode se indicar"
   end
 
-  test "an explicitly set depth on a root is not overridden by the automatic calculation" do
-    referral = Referral.create!(name: "Custom", phone: "111", depth: 7)
-    assert_equal 7, referral.depth
+  test "a phone not present anywhere in the chain can join normally" do
+    root = Referral.create!(name: "Root", phone: "11999999999")
+    child = Referral.new(name: "Child", phone: "11888888888", referrer: root)
+
+    assert child.valid?
   end
 
-  test "an explicitly set depth on a child is not overridden by the automatic calculation" do
-    root = Referral.create!(name: "Root", phone: "111")
-    child = Referral.create!(name: "Child", phone: "222", referrer: root, depth: 9)
-    assert_equal 9, child.depth
+  test "a root does not need to check for self-invitation" do
+    referral = Referral.new(name: "Root", phone: "11999999999")
+    assert referral.valid?
   end
 end

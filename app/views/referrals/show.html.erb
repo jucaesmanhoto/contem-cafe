@@ -1,4 +1,4 @@
-<% content_for :title, "Corrente de indicação" %>
+<% content_for :title, "Indicação Musa" %>
 
 <div class="bg-white min-h-screen px-6 md:px-10 lg:px-12 py-12 max-w-5xl mx-auto">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
@@ -51,23 +51,50 @@
           <label class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">Escolha seu café</label>
           <div class="space-y-2">
             <% @coffees.availables.each do |coffee| %>
-              <label class="flex items-center justify-between gap-3 rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 cursor-pointer has-[:checked]:border-amber-700 has-[:checked]:bg-amber-50">
-                <span class="flex items-center gap-3">
-                  <%= radio_button_tag "coffee_id", coffee.id, false, required: true, class: "accent-amber-700",
-                        data: { whatsapp_order_target: "coffee", coffee_name: coffee.name,
-                                coffee_discounted_price: coffee_discounted_price_label(coffee, @referral.discount_percentage) } %>
-                  <%= coffee.name %>
-                </span>
-
-                <% if coffee_price_label(coffee) %>
-                  <span class="text-right leading-tight">
-                    <span class="block text-xs text-stone-400 line-through"><%= coffee_price_label(coffee) %></span>
-                    <span class="block text-amber-700 font-bold"><%= coffee_discounted_price_label(coffee, @referral.discount_percentage) %></span>
+              <div class="rounded-xl border border-stone-200 px-4 py-3 has-[:checked]:border-amber-700 has-[:checked]:bg-amber-50" data-controller="coffee-modal">
+                <label class="flex items-center justify-between gap-3 text-sm text-stone-800 cursor-pointer">
+                  <span class="flex items-center gap-3">
+                    <%= radio_button_tag "coffee_id", coffee.id, false, class: "accent-amber-700",
+                          data: { whatsapp_order_target: "coffee", coffee_name: coffee.name,
+                                  coffee_discounted_price: coffee_discounted_price_label(coffee, @referral.discount_percentage) } %>
+                    <span><%= coffee.name %></span>
+                    <button type="button" data-action="click->coffee-modal#open" class="text-xs text-stone-400 underline underline-offset-2 hover:text-amber-700">Ver café</button>
                   </span>
-                <% else %>
-                  <span class="text-xs text-stone-400 italic"><%= coffee.stock_status.presence || "Esgotado" %></span>
-                <% end %>
-              </label>
+
+                  <% if coffee_price_label(coffee) %>
+                    <span class="text-right leading-tight">
+                      <span class="block text-xs text-stone-400 line-through"><%= coffee_price_label(coffee) %></span>
+                      <span class="block text-amber-700 font-bold"><%= coffee_discounted_price_label(coffee, @referral.discount_percentage) %></span>
+                    </span>
+                  <% else %>
+                    <span class="text-xs text-stone-400 italic"><%= coffee.stock_status.presence || "Esgotado" %></span>
+                  <% end %>
+                </label>
+
+                <dialog data-coffee-modal-target="dialog" class="rounded-xl p-0 max-w-md w-[90vw] backdrop:bg-black/40">
+                  <div class="p-6">
+                    <% if coffee.photo.attached? %>
+                      <%= image_tag coffee.photo, class: "w-full h-48 object-cover rounded-lg mb-4" %>
+                    <% end %>
+                    <h3 class="text-xl font-serif text-stone-900 mb-1"><%= coffee.name %></h3>
+                    <p class="text-sm text-amber-700 font-medium mb-3"><%= coffee.variety %></p>
+                    <% if coffee.description.present? %>
+                      <p class="text-sm text-stone-600 mb-4"><%= coffee.description %></p>
+                    <% end %>
+                    <dl class="grid grid-cols-2 gap-3 text-xs text-stone-500 mb-6">
+                      <div>
+                        <dt class="uppercase tracking-widest font-bold mb-1">Processo</dt>
+                        <dd><%= coffee.processing %></dd>
+                      </div>
+                      <div>
+                        <dt class="uppercase tracking-widest font-bold mb-1">Altitude</dt>
+                        <dd><%= coffee.altitude %>m</dd>
+                      </div>
+                    </dl>
+                    <button type="button" data-action="click->coffee-modal#close" class="musa-btn musa-btn-secondary w-full">Fechar</button>
+                  </div>
+                </dialog>
+              </div>
             <% end %>
           </div>
         </div>
@@ -120,4 +147,7 @@
   .musa-btn-secondary { background: transparent; color: var(--musa-bronze); border: 1px solid var(--musa-bronze); }
   .musa-btn-secondary:hover { background: var(--musa-bronze); color: var(--musa-cream); }
   .musa-btn:focus-visible { outline: 2px solid var(--musa-bronze); outline-offset: 3px; }
+
+  dialog { border: none; box-shadow: 0 20px 50px rgba(0, 0, 0, .25); }
+  dialog::backdrop { background: rgba(0, 0, 0, .4); }
 </style>

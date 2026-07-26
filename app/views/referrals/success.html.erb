@@ -5,21 +5,21 @@
     <%= image_tag "musa_emblem.png", alt: "", class: "h-14 w-auto" %>
     <%= image_tag "musa_wordmark.png", alt: "Musa", class: "h-14 w-auto" %>
   </div>
-  <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você entrou na corrente!</h1>
+  <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Sua indicação está pronta!</h1>
   <p class="text-stone-500 mb-10">
-    Compartilhe seu link com amigos: quem entrar pelo seu convite ganha desconto, e você continua a corrente.
+    Compartilhe seu link com amigos: quem entrar pelo seu convite ganha desconto, e você segue propagando a indicação.
   </p>
 
   <section class="mb-10">
-    <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-3 block">A corrente até você</span>
-    <ol class="space-y-2">
-      <% @chain.each_with_index do |referral, index| %>
-        <li class="flex items-center gap-3 text-stone-700">
-          <span class="flex items-center justify-center w-7 h-7 rounded-full bg-stone-100 text-sm font-semibold text-stone-500 shrink-0"><%= index + 1 %></span>
-          <span><%= referral.name %></span>
-        </li>
-      <% end %>
-    </ol>
+    <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-3 block">De onde vem essa indicação</span>
+    <% if @referral.depth.zero? %>
+      <p class="text-stone-600 leading-relaxed">Você é o início dessa jornada — ninguém veio antes de você.</p>
+    <% else %>
+      <p class="text-stone-600 leading-relaxed">
+        Antes de você, essa indicação já passou por
+        <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
+      </p>
+    <% end %>
   </section>
 
   <section class="border border-stone-200 rounded-xl p-6 md:p-8 mb-6" data-controller="copy-to-clipboard">
@@ -36,7 +36,7 @@
   </section>
 
   <%= link_to "Pedir pelo WhatsApp",
-        admin_whatsapp_url("Oi! Entrei na corrente de indicação da Musa Cafés e quero fazer um pedido com desconto. Meu link: #{referral_url(@referral.token)}"),
+        admin_whatsapp_url("Oi! Recebi um convite de indicação da Musa Cafés e quero fazer um pedido com desconto. Meu link: #{referral_url(@referral.token)}"),
         target: "_blank", rel: "noopener",
         class: "musa-btn musa-btn-primary w-full" %>
 </div>

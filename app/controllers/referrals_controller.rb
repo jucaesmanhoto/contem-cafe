@@ -4,7 +4,6 @@ class ReferralsController < ApplicationController
 
   def show
     @referral = Referral.find_by!(token: params[:token])
-    @chain = @referral.chain
     @new_referral = Referral.new
     @coffees = Coffee.order(:name)
   end
@@ -25,14 +24,12 @@ class ReferralsController < ApplicationController
 
   def success
     @referral = Referral.find_by!(token: params[:token])
-    @chain = @referral.chain
   end
 
   private
 
   def load_show_locals(referral)
     @referral = referral
-    @chain = referral.chain
     @coffees = Coffee.order(:name)
   end
 

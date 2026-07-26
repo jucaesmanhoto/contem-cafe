@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_26_124956) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_26_140508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -108,6 +108,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_26_124956) do
   create_table "referrals", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "depth", null: false
+    t.decimal "discount_percentage_per_level", precision: 5, scale: 2, null: false
+    t.decimal "initial_discount_percentage", precision: 5, scale: 2, null: false
+    t.decimal "max_discount_percentage", precision: 5, scale: 2, null: false
     t.string "name", null: false
     t.string "phone", null: false
     t.bigint "referrer_id"
