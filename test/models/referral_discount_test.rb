@@ -70,4 +70,48 @@ class ReferralDiscountTest < ActiveSupport::TestCase
     assert_not referral.valid?
     assert_includes referral.errors[:initial_discount_percentage], "precisa ser maior ou igual a 0"
   end
+
+  test "next_discount_percentage previews the next level's discount" do
+    referral = Referral.new(depth: 1, initial_discount_percentage: 5.0, discount_percentage_per_level: 2.5,
+                            max_discount_percentage: 20.0)
+    assert_equal 7.5, referral.discount_percentage
+    assert_equal 10.0, referral.next_discount_percentage
+  end
+
+  test "next_discount_percentage is capped at max, even once the referral itself is already at the cap" do
+    referral = Referral.new(depth: 6, initial_discount_percentage: 5.0, discount_percentage_per_level: 2.5,
+                            max_discount_percentage: 20.0)
+    assert_equal 20.0, referral.discount_percentage
+    assert_equal 20.0, referral.next_discount_percentage
+  end
+
+  test "discount_capped? is false below the max and true once it reaches it" do
+    below_cap = Referral.new(depth: 1, initial_discount_percentage: 5.0, discount_percentage_per_level: 2.5,
+                             max_discount_percentage: 20.0)
+    at_cap = Referral.new(depth: 6, initial_discount_percentage: 5.0, discount_percentage_per_level: 2.5,
+                          max_discount_percentage: 20.0)
+
+    assert_not below_cap.discount_capped?
+    assert at_cap.discount_capped?
+  end
+
+  test "a referral cannot be created under a referrer that already hit the discount cap" do
+    root = Referral.create!(name: "Root", phone: "111", initial_discount_percentage: 20.0,
+                            discount_percentage_per_level: 2.5, max_discount_percentage: 20.0)
+    assert root.discount_capped?
+
+    blocked = Referral.new(name: "Blocked", phone: "222", referrer: root)
+    assert_not blocked.valid?
+    assert_includes blocked.errors[:base],
+                    "Esse link de indicação atingiu o desconto máximo e não pode mais ser propagado"
+  end
+
+  test "a referral can be created under a referrer that has not hit the discount cap yet" do
+    root = Referral.create!(name: "Root", phone: "111", initial_discount_percentage: 5.0,
+                            discount_percentage_per_level: 2.5, max_discount_percentage: 20.0)
+    assert_not root.discount_capped?
+
+    child = Referral.new(name: "Child", phone: "222", referrer: root)
+    assert child.valid?
+  end
 end

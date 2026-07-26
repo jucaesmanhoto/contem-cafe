@@ -9,7 +9,7 @@
       </div>
       <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você ganhou um desconto de <span class="text-amber-700 font-bold"><%= number_with_precision(@referral.discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span> de presente!</h1>
       <p class="text-stone-500 mb-8">
-        <strong class="text-stone-800"><%= @referral.name %></strong> abriu esse convite para você: uma chance de provar os cafés que vão te inspirar — e, se quiser, seguir compartilhando essa experiência com mais gente.
+        <strong class="text-stone-800"><%= @referral.name %></strong> presenteou você com uma chance de provar os cafés que vão te inspirar — e seguir compartilhando essa experiência com mais gente.
       </p>
       
       <p class="text-stone-500 mb-8">
@@ -19,15 +19,25 @@
 
       <section>
         <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-3 block">De onde vem esse convite</span>
-        <% if @referral.depth.zero? %>
+        <% if @referral.discount_capped? %>
+          <p class="text-stone-600 leading-relaxed">
+            <% if @referral.depth.zero? %>
+              <strong class="text-stone-800"><%= @referral.name %></strong> foi quem começou tudo — ninguém veio antes.
+            <% else %>
+              Antes de chegar até <strong class="text-stone-800"><%= @referral.name %></strong>, esse convite passou por
+              <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
+            <% end %>
+            Esse link já atingiu o desconto máximo. Se quiser enviar um novo descontro, entre em contato pelo whatApp.
+          </p>
+        <% elsif @referral.depth.zero? %>
           <p class="text-stone-600 leading-relaxed">
             <strong class="text-stone-800"><%= @referral.name %></strong> foi quem começou tudo — ninguém veio antes. Você está entrando bem no início dessa jornada Musa.
           </p>
         <% else %>
           <p class="text-stone-600 leading-relaxed">
             Antes de chegar até <strong class="text-stone-800"><%= @referral.name %></strong>, esse convite passou por
-            <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span> anteriormente.
-            Agora é a sua vez de propagar a inspiração.
+            <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
+            Agora é a sua vez de inspirar alguém com um desconto de <span class="text-amber-700 font-bold"><%= number_with_precision(@referral.next_discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span>.
           </p>
         <% end %>
       </section>
@@ -38,7 +48,13 @@
         data-whatsapp-order-number-value="<%= admin_whatsapp_number %>"
         data-whatsapp-order-referrer-name-value="<%= @referral.name %>">
       <h2 class="text-xl font-serif text-stone-900 mb-1">O que você quer fazer?</h2>
-      <p class="text-sm text-stone-500 mb-6">Escolha seu café e peça pelo WhatsApp, ou gere seu próprio link pra propagar o desconto.</p>
+      <p class="text-sm text-stone-500 mb-6">
+        <% if @referral.discount_capped? %>
+          Escolha seu café e peça pelo WhatsApp.
+        <% else %>
+          Escolha seu café e peça pelo WhatsApp, ou gere seu próprio link pra que alguém receba seu presente: um desconto <strong>ainda maior</strong>!
+        <% end %>
+      </p>
 
       <% if @new_referral.errors.any? %>
         <div class="mb-4 text-sm text-red-700"><%= @new_referral.errors.full_messages.to_sentence %>.</div>
@@ -121,7 +137,9 @@
 
         <div class="flex flex-col gap-3">
           <button type="button" data-action="click->whatsapp-order#send" class="musa-btn musa-btn-primary w-full">Pedir pelo WhatsApp</button>
-          <%= submit_tag "Propagar desconto", class: "musa-btn musa-btn-secondary cursor-pointer w-full" %>
+          <% unless @referral.discount_capped? %>
+            <%= submit_tag "Gerar desconto presente", class: "musa-btn musa-btn-secondary cursor-pointer w-full" %>
+          <% end %>
         </div>
       <% end %>
     </section>
