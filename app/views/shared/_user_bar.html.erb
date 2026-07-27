@@ -1,0 +1,94 @@
+<%#
+  Barra de sessão — só aparece para quem está logado. Fica fixa no canto
+  superior direito, discreta, para não competir com a composição das páginas
+  públicas. Usa um <div> (não <nav>) de propósito: a home esconde `nav` para
+  manter a landing limpa.
+  CSS inline e classes próprias porque cada página traz seu próprio estilo.
+%>
+
+<% if user_signed_in? %>
+  <div class="musa-userbar">
+    <span class="musa-userbar-who" title="<%= current_user.email %>"><%= current_user.email %></span>
+
+    <% if current_user.admin? %>
+      <%= link_to "Painel", avo.root_path, class: "musa-userbar-link" %>
+    <% end %>
+
+    <%= button_to "Sair", destroy_user_session_path,
+                  method: :delete,
+                  class: "musa-userbar-btn",
+                  form: { class: "musa-userbar-form" } %>
+  </div>
+
+  <style>
+    .musa-userbar {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 7px 10px 7px 14px;
+      border: 1px solid color-mix(in srgb, #8c6038 40%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, #fdfaf6 92%, transparent);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 18px color-mix(in srgb, #281307 10%, transparent);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .musa-userbar-who {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #b08d57;
+    }
+
+    .musa-userbar-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #8c6038;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: border-color .2s;
+    }
+    .musa-userbar-link:hover { border-color: #8c6038; }
+
+    .musa-userbar-form { margin: 0; }
+
+    .musa-userbar-btn {
+      display: inline-flex;
+      align-items: center;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #fdfaf6;
+      background: #8c6038;
+      border: 1px solid #8c6038;
+      border-radius: 999px;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background-color .2s, color .2s;
+    }
+    .musa-userbar-btn:hover { background: #281307; border-color: #281307; }
+
+    .musa-userbar-link:focus-visible,
+    .musa-userbar-btn:focus-visible { outline: 2px solid #8c6038; outline-offset: 3px; }
+
+    @media (max-width: 640px) {
+      .musa-userbar { gap: 10px; padding: 6px 8px 6px 10px; }
+      .musa-userbar-who { display: none; }
+    }
+  </style>
+<% end %>

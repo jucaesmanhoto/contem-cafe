@@ -2,6 +2,7 @@ require "csv"
 
 # Faz o parsing de um arquivo de leitura de torrador (formato KLDO):
 # separa a seção de metadados da torra da seção [{DATA}] com a série temporal.
+# rubocop:disable Metrics/ClassLength
 class RoastFileParser
   class InvalidFileError < StandardError; end
 
@@ -90,15 +91,35 @@ class RoastFileParser
     }
   end
 
+  # rubocop:disable Metrics/MethodLength
   def batch_attributes_from(metadata)
     {
       batch_number: batch_number_from(metadata),
       total_time_in_seconds: RoastEventValueParser.duration(metadata["TotalTime"]),
       start_celsius_temperature: metadata["PreTemp"]&.to_i
-    }.merge(event_attributes(:turning_point_celsius_temperature, :turning_point_time_in_seconds, metadata["TemperBack"]))
-      .merge(event_attributes(:turn_to_yellow_celsius_temperature, :turn_to_yellow_time_in_seconds, metadata["TurntoYellow"]))
-      .merge(event_attributes(:first_crack_celsius_temperature, :first_crack_time_in_seconds, metadata["1stBoomStart"]))
+    }.merge(
+      event_attributes(
+        :turning_point_celsius_temperature,
+        :turning_point_time_in_seconds,
+        metadata["TemperBack"]
+      )
+    )
+      .merge(
+        event_attributes(
+          :turn_to_yellow_celsius_temperature,
+          :turn_to_yellow_time_in_seconds,
+          metadata["TurntoYellow"]
+        )
+      )
+      .merge(
+        event_attributes(
+          :first_crack_celsius_temperature,
+          :first_crack_time_in_seconds,
+          metadata["1stBoomStart"]
+        )
+      )
   end
+  # rubocop:enable Metrics/MethodLength
 
   def event_attributes(temperature_key, time_key, value)
     temperature, time = RoastEventValueParser.event(value)
@@ -110,3 +131,4 @@ class RoastFileParser
     RoastEventValueParser.batch_number(cook_date)
   end
 end
+# rubocop:enable Metrics/ClassLength

@@ -5,5 +5,4 @@ class Batch < ApplicationRecord
   def to_param
     batch_number.presence || id.to_s
   end
-
 end

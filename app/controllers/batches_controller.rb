@@ -2,6 +2,7 @@ class BatchesController < ApplicationController
   # Allow public access to the roast lookup page
   skip_before_action :authenticate_user!, only: [:index]
 
+  # rubocop:disable Metrics/MethodLength
   def index
     return if params[:roast_date].blank? || params[:roast_time].blank?
 
@@ -17,9 +18,11 @@ class BatchesController < ApplicationController
     if @batch
       @batch_data = @batch.batch_data.order(:time_in_milliseconds)
     else
-      flash.now[:alert] = "Nenhuma torra encontrada para #{cook_date.strftime('%d.%m')} - #{cook_date.strftime('%H:%M')}."
+      flash.now[:alert] =
+        "Nenhuma torra encontrada para #{cook_date.strftime('%d.%m')} - #{cook_date.strftime('%H:%M')}."
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 

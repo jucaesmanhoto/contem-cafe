@@ -1,0 +1,78 @@
+# Traduções do Devise em pt-BR (locale padrão do app). Sem este arquivo as
+# mensagens de flash do Devise saem como "Translation missing: pt-BR....",
+# porque o fallback do app não cai automaticamente no :en.
+# Referência: https://github.com/tigrish/devise-i18n
+
+pt-BR:
+  devise:
+    confirmations:
+      confirmed: "Sua conta foi confirmada com sucesso."
+      send_instructions: "Dentro de alguns minutos, você receberá um e-mail com instruções de confirmação da sua conta."
+      send_paranoid_instructions: "Se o seu e-mail existir em nosso banco de dados, você receberá um e-mail com instruções de confirmação da sua conta."
+    failure:
+      already_authenticated: "Você já está autenticado."
+      inactive: "Sua conta ainda não foi ativada."
+      invalid: "%{authentication_keys} ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você tem mais uma tentativa antes da sua conta ser bloqueada."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      timeout: "Sua sessão expirou. Por favor, faça login novamente para continuar."
+      unauthenticated: "Para continuar, faça login ou registre-se."
+      unconfirmed: "Antes de continuar, confirme sua conta."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de confirmação"
+      reset_password_instructions:
+        subject: "Instruções de redefinição de senha"
+      unlock_instructions:
+        subject: "Instruções de desbloqueio"
+      email_changed:
+        subject: "E-mail alterado"
+      password_change:
+        subject: "Senha alterada"
+    omniauth_callbacks:
+      failure: "Não foi possível autenticar você em %{kind} porque \"%{reason}\"."
+      success: "Autenticado com sucesso em %{kind}."
+    passwords:
+      no_token: "Você não pode acessar essa página sem estar vindo de um e-mail de redefinição de senha. Se você está vindo de um e-mail desse tipo, certifique-se de usar a URL completa que enviamos."
+      send_instructions: "Dentro de alguns minutos, você receberá um e-mail com instruções de redefinição da sua senha."
+      send_paranoid_instructions: "Se o seu e-mail existir em nosso banco de dados, você receberá um link de recuperação de senha."
+      updated: "Sua senha foi alterada com sucesso. Você está autenticado."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+    registrations:
+      destroyed: "Adeus! Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve."
+      signed_up: "Bem-vindo! Você realizou seu registro com sucesso."
+      signed_up_but_inactive: "Você realizou seu registro com sucesso, mas não foi possível efetuar login porque sua conta ainda não foi ativada."
+      signed_up_but_locked: "Você realizou seu registro com sucesso, mas não foi possível efetuar login porque sua conta está bloqueada."
+      signed_up_but_unconfirmed: "Uma mensagem com um link de confirmação foi enviada para o seu e-mail. Acesse o link para confirmar sua conta."
+      update_needs_confirmation: "Sua conta foi atualizada com sucesso, mas precisamos verificar seu novo e-mail. Verifique sua caixa de entrada e acesse o link de confirmação."
+      updated: "Sua conta foi atualizada com sucesso."
+      updated_but_not_signed_in: "Sua conta foi atualizada com sucesso, mas como sua senha foi alterada, você precisa fazer login novamente."
+    sessions:
+      signed_in: "Login efetuado com sucesso."
+      signed_out: "Logout efetuado com sucesso."
+      already_signed_out: "Logout efetuado com sucesso."
+    unlocks:
+      send_instructions: "Dentro de alguns minutos, você receberá um e-mail com instruções de desbloqueio da sua conta."
+      send_paranoid_instructions: "Se sua conta existir, você receberá um e-mail com instruções de desbloqueio."
+      unlocked: "Sua conta foi desbloqueada com sucesso. Faça login para continuar."
+  errors:
+    messages:
+      already_confirmed: "já foi confirmado, tente fazer login"
+      confirmation_period_expired: "precisa ser confirmado em %{period}, solicite um novo"
+      expired: "expirou, solicite um novo"
+      not_found: "não encontrado"
+      not_locked: "não estava bloqueado"
+      not_saved:
+        one: "1 erro impediu que este %{resource} fosse salvo:"
+        other: "%{count} erros impediram que este %{resource} fosse salvo:"
+  activerecord:
+    models:
+      user: "Usuário"
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha atual"
+        remember_me: "Manter conectado"

@@ -31,7 +31,9 @@ module ContemCafe
 
     # User-facing copy is in Portuguese; validation/error messages should match.
     # Fallback to :en covers keys we haven't translated yet (e.g. Devise's admin panel).
+    # `fallbacks = true` cairia só em :pt (mesma língua), nunca em :en — por isso
+    # a cadeia é explícita: pt-BR → en.
     config.i18n.default_locale = :'pt-BR'
-    config.i18n.fallbacks = true
+    config.i18n.fallbacks = [:en]
   end
 end

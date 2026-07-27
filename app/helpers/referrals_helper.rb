@@ -1,6 +1,6 @@
 module ReferralsHelper
   def whatsapp_share_url(referral)
-    message = "Entra nessa indicação da Musa Cafés e ganhe desconto! #{referral_url(referral.token)}"
+    message = "Entre nessa indicação da Musa Cafés e ganhe desconto! #{referral_url(referral.token)}"
     "https://wa.me/?text=#{ERB::Util.url_encode(message)}"
   end
 
