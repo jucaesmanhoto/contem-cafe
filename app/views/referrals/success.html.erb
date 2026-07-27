@@ -7,7 +7,7 @@
   </div>
   <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Sua indicação está pronta!</h1>
   <p class="text-stone-500 mb-10">
-    Compartilhe seu link: quem entrar pelo seu convite ganha desconto, e você segue ajuda a Musa a inspirar mais gente com os seus cafés especiais.
+    Compartilhe seu link: quem entrar pelo seu convite ganha desconto, e você ajuda a Musa a inspirar mais gente com os seus cafés especiais.
   </p>
 
   <section class="mb-10">
@@ -37,9 +37,8 @@
           class: "musa-btn musa-btn-secondary mt-4 w-full" %>
   </section>
 
-  <%= link_to "Pedir pelo WhatsApp",
-        admin_whatsapp_url("Oi! Recebi um convite de indicação da Musa Cafés e quero fazer um pedido com desconto. Meu link: #{referral_url(@referral.token)}"),
-        target: "_blank", rel: "noopener",
+  <%= link_to "Esqueci de pedir café... volta",
+        :back,
         class: "musa-btn musa-btn-primary w-full" %>
 </div>
 
