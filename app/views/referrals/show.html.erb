@@ -4,9 +4,9 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
     <div>
       <%= link_to root_path do %>
-        <div class="flex items-center justify-between gap-4 mb-4 overflow-hidden max-w-95">
-          <%= image_tag "musa_emblem.png", alt: "Emblema Musa", class: "h-20 sm:h-20 md:h-28 w-auto shrink-0 object-contain" %>
-          <%= image_tag "musa_wordmark.png", alt: "Musa logotipo", class: "h-20 sm:h-20 md:h-28 w-auto max-w-[65%] object-contain" %>
+        <div class="musa-wordmark mb-4">
+          <span class="musa-wordmark-word">Musa</span>
+          <span class="musa-wordmark-tag">Cafés que inspiram</span>
         </div>
       <% end %>
       <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você ganhou um desconto de <span class="text-amber-700 font-bold"><%= number_with_precision(@referral.discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span> de presente!</h1>
@@ -149,10 +149,33 @@
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
+
   :root {
     --musa-cream:    #fdfaf6;
     --musa-bronze:   #8c6038;
+    --musa-espresso: #281307;
     --musa-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .musa-wordmark { display: flex; flex-direction: column; align-items: flex-start; }
+  .musa-wordmark-word {
+    font-family: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(26px, 6vw, 44px);
+    line-height: .95;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: var(--musa-espresso);
+  }
+  .musa-wordmark-tag {
+    margin-top: 4px;
+    font-family: var(--musa-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--musa-bronze);
   }
 
   .musa-btn {

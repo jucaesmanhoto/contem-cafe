@@ -11,7 +11,7 @@
     <meta property="og:title" content="<%= content_for(:title) || 'Musa - Cafés que inspiram' %>">
     <meta property="og:description" content="Cafés especiais, torrados sob demanda.">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= image_url('musa.png') %>">
+    <meta property="og:image" content="<%= image_url('logo-musa-brasileira.png') %>">
     <meta property="og:image:alt" content="Musa - Cafés que inspiram">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= content_for(:title) || 'Musa Cafés' %>">
@@ -25,8 +25,9 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <%= favicon_link_tag "musa.png", type: "image/png" %>
-    <%= favicon_link_tag "musa.png", rel: "apple-touch-icon" %>
+    <%= favicon_link_tag "favicon-m.svg", type: "image/svg+xml" %>
+    <%= favicon_link_tag "favicon-m-32.png", type: "image/png" %>
+    <%= favicon_link_tag "favicon-m-180.png", rel: "apple-touch-icon" %>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 

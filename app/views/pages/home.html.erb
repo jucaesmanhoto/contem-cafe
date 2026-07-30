@@ -12,7 +12,10 @@
     <%# ================= HERO ================= %>
     <section class="musa-hero">
       <div class="musa-lockup reveal d1">
-        <%= image_tag "musa.png", alt: "Musa — Cafés que inspiram", class: "musa-logo" %>
+        <p class="musa-logo-text">
+          <span class="musa-logo-word">Musa</span>
+          <span class="musa-logo-tag">Cafés que inspiram</span>
+        </p>
       </div>
 
       <div class="musa-manifesto reveal d2">
@@ -77,6 +80,8 @@
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
+
   /* ============================================================
      MUSA — home. Tokens (paleta amostrada da logo), escala de
      espaço base-8, grid único e moldura de filete duplo.
@@ -183,11 +188,29 @@
     background: radial-gradient(60% 100% at 50% 0%, color-mix(in srgb, var(--musa-espresso) 20%, transparent), transparent 70%);
     filter: blur(3px); z-index: -1;
   }
-  .musa-logo {
+  .musa-logo-text {
+    margin: 0;
+    text-align: center;
+  }
+  .musa-logo-word {
     display: block;
-    width: 100%;
-    max-width: 340px;
-    height: auto;
+    font-family: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(52px, 9vw, 88px);
+    line-height: .95;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: var(--musa-ink-strong);
+  }
+  .musa-logo-tag {
+    display: block;
+    margin-top: var(--musa-s2);
+    font-family: var(--musa-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--musa-accent);
   }
 
   .musa-eyebrow {
