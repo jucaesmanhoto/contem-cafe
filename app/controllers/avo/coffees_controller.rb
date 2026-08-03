@@ -3,8 +3,9 @@
 module Avo
   class CoffeesController < Avo::ResourcesController
     def create
-      permited_params[:farm_id] = Farm.find_by(slug: params[:farm_id])
-      @coffee = Coffee.new(permited_params)
+      coffee_params = permited_params
+      coffee_params[:farm_id] = Farm.find_by(slug: coffee_params[:farm_id])&.id
+      @coffee = Coffee.new(coffee_params)
       raise unless @coffee.save
 
       redirect_to :resources_coffee_path

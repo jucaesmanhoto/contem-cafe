@@ -20,7 +20,6 @@ module Avo
         field :variety, as: :text
         field :processing, as: :text
         field :altitude, as: :number
-        field :farm_id, as: :number
         field :species, as: :text
         field :price, as: :number
         field :slug, as: :text
