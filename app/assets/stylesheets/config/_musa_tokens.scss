@@ -1,0 +1,26 @@
+// Fonte única dos design tokens "Musa" — cores, escala de espaço e font stacks.
+// Usado por todas as páginas que compartilham a linguagem visual da home
+// (home, login, indicação, batches).
+:root {
+  --musa-cream:      #fdfaf6;
+  --musa-cream-deep: #f4ead9;
+  --musa-bronze:     #8c6038;  /* ACENTO único: rótulos, filetes, links */
+  --musa-bronze-soft:#b08d57;
+  --musa-brown:      #3b2a1e;  /* corpo */
+  --musa-espresso:   #281307;  /* display + painel escuro */
+
+  --musa-ink:        var(--musa-brown);
+  --musa-ink-strong: var(--musa-espresso);
+  --musa-accent:     var(--musa-bronze);
+  --musa-hair:       color-mix(in srgb, var(--musa-bronze) 40%, transparent);
+  --musa-on-dark:    #f3e7d3;
+  --musa-on-dark-soft:#c9a878;
+
+  --musa-serif: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, "Times New Roman", serif;
+  --musa-sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+  --musa-s1: 8px;  --musa-s2: 16px; --musa-s3: 24px; --musa-s4: 32px;
+  --musa-s5: 48px; --musa-s6: 64px; --musa-s7: 96px;
+  --musa-measure: 62ch;
+  --musa-container: 1120px;
+}

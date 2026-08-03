@@ -1,0 +1,93 @@
+// Specific CSS for the login page (devise/sessions/new).
+// Tokens, moldura (.musa-paper/.musa-wrap/.musa-rail-label/.musa-divider/
+// .musa-foot), botões e wordmark são compartilhados — ver config/_musa_tokens
+// e components/_musa_shell, _musa_buttons, _musa_wordmark.
+
+body:has(.musa-auth) {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* moldura de filete duplo — mesmo objeto da home, em largura de coluna única */
+.musa-auth {
+  width: 100%;
+  max-width: 520px;
+}
+
+.musa-auth .musa-wrap {
+  padding: clamp(24px, 6vw, var(--musa-s5));
+}
+
+/* ---------- cabeçalho ---------- */
+.musa-auth-head { padding-bottom: var(--musa-s4); }
+.musa-auth-lockup { display: block; margin-bottom: var(--musa-s4); }
+.musa-auth-lockup:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 4px; }
+
+.musa-auth-title {
+  font-family: var(--musa-serif); font-weight: 600;
+  font-size: clamp(30px, 6vw, 40px); line-height: 1.05;
+  letter-spacing: -.01em; color: var(--musa-ink-strong);
+  margin: 0 0 var(--musa-s1);
+}
+.musa-auth-intro { margin: 0; font-size: 15px; color: var(--musa-ink); }
+
+/* ---------- formulário ---------- */
+.musa-auth-body { padding-top: var(--musa-s4); }
+.musa-form { display: flex; flex-direction: column; gap: var(--musa-s3); }
+.musa-field { display: flex; flex-direction: column; gap: var(--musa-s1); }
+
+.musa-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--musa-bronze-soft);
+}
+.musa-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--musa-sans);
+  font-size: 16px;
+  color: var(--musa-ink-strong);
+  background: var(--musa-cream);
+  border: 1px solid var(--musa-hair);
+  border-radius: 2px;
+  padding: 13px 14px;
+  transition: border-color .2s, background-color .2s;
+}
+.musa-input::placeholder { color: color-mix(in srgb, var(--musa-bronze-soft) 70%, transparent); }
+.musa-input:hover { border-color: var(--musa-bronze-soft); }
+.musa-input:focus {
+  outline: none;
+  border-color: var(--musa-accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--musa-bronze) 14%, transparent);
+}
+
+.musa-check {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--musa-ink);
+  cursor: pointer;
+}
+.musa-check-box {
+  width: 16px; height: 16px;
+  accent-color: var(--musa-accent);
+  cursor: pointer;
+}
+
+/* ---------- links auxiliares do devise ---------- */
+.musa-auth-links {
+  margin-top: var(--musa-s4);
+  padding-top: var(--musa-s3);
+  border-top: 1px solid var(--musa-hair);
+  display: flex; flex-wrap: wrap; gap: var(--musa-s1) var(--musa-s3);
+}
+.musa-auth-links p { margin: 0; }
+.musa-auth-links a {
+  font-size: 14px; font-weight: 600; letter-spacing: .04em;
+  color: var(--musa-accent); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: border-color .2s;
+}
+.musa-auth-links a:hover { border-color: var(--musa-accent); }
+.musa-auth-links a:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }

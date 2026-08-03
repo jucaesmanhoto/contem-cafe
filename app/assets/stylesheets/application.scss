@@ -1,5 +1,5 @@
-@import "config/fonts";
-@import "config/colors";
+@use "config/fonts";
+@use "config/musa_tokens";
 
-@import "components/index";
-@import "pages/index";
+@use "components/index" as *;
+@use "pages/index" as *;

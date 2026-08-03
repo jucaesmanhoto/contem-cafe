@@ -1,7 +1,8 @@
 <%#
   Login — mesma linguagem visual da home: papel creme, moldura de filete
-  duplo, display serifado e acento bronze. HTML+CSS inline por decisão do
-  arquivo (não usa o design system compartilhado), igual a pages/home.
+  duplo, display serifado e acento bronze. Usa o design system compartilhado
+  em app/assets/stylesheets (tokens, moldura, botões e wordmark); o CSS aqui
+  é só o que é específico do login (pages/_auth.scss).
 %>
 
 <% content_for :title, "Entrar — Musa Cafés" %>
@@ -11,7 +12,10 @@
 
     <header class="musa-auth-head reveal d1">
       <%= link_to root_path, class: "musa-auth-lockup", aria: { label: "Ir para a página inicial" } do %>
-        <%= image_tag "musa_wordmark.png", alt: "Musa — Cafés que inspiram", class: "musa-auth-logo" %>
+        <p class="musa-wordmark">
+          <span class="musa-wordmark-word">Musa</span>
+          <span class="musa-wordmark-tag">Cafés que inspiram</span>
+        </p>
       <% end %>
       <p class="musa-rail-label">Acesso</p>
       <h1 class="musa-auth-title">Entrar</h1>
@@ -60,188 +64,3 @@
 
   </div>
 </div>
-
-<style>
-  /* ============================================================
-     MUSA — login. Mesmos tokens, escala e moldura da home; só o
-     miolo muda (formulário no lugar do hero).
-     ============================================================ */
-  :root {
-    --musa-cream:      #fdfaf6;
-    --musa-cream-deep: #f4ead9;
-    --musa-bronze:     #8c6038;
-    --musa-bronze-soft:#b08d57;
-    --musa-brown:      #3b2a1e;
-    --musa-espresso:   #281307;
-
-    --musa-ink:        var(--musa-brown);
-    --musa-ink-strong: var(--musa-espresso);
-    --musa-accent:     var(--musa-bronze);
-    --musa-hair:       color-mix(in srgb, var(--musa-bronze) 40%, transparent);
-
-    --musa-serif: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, "Times New Roman", serif;
-    --musa-sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-
-    --musa-s1: 8px;  --musa-s2: 16px; --musa-s3: 24px; --musa-s4: 32px;
-    --musa-s5: 48px; --musa-s6: 64px;
-  }
-
-  body {
-    background:
-      radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--musa-bronze) 6%, transparent), transparent 60%),
-      var(--musa-cream);
-    margin: 0;
-    padding: clamp(12px, 3vw, 40px);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .navbar, nav { display: none !important; }
-
-  /* moldura de filete duplo — mesmo objeto da home, em largura de coluna única */
-  .musa-paper {
-    position: relative;
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
-    color: var(--musa-ink);
-    font-family: var(--musa-sans);
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    border: 1px solid var(--musa-bronze);
-    background: transparent;
-  }
-  .musa-paper::before {
-    content: "";
-    position: absolute;
-    inset: 7px;
-    border: 1px solid var(--musa-hair);
-    pointer-events: none;
-    z-index: 3;
-  }
-  .musa-wrap { padding: clamp(24px, 6vw, var(--musa-s5)); }
-
-  /* ---------- cabeçalho ---------- */
-  .musa-auth-head { padding-bottom: var(--musa-s4); }
-  .musa-auth-lockup { display: block; margin-bottom: var(--musa-s4); }
-  .musa-auth-logo { display: block; width: 100%; max-width: 180px; height: auto; }
-  .musa-auth-lockup:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 4px; }
-
-  .musa-rail-label {
-    font-family: var(--musa-sans);
-    font-size: 12px; font-weight: 600;
-    letter-spacing: .28em; text-transform: uppercase;
-    color: var(--musa-accent);
-    display: inline-flex; align-items: center; gap: var(--musa-s2);
-    margin: 0 0 var(--musa-s2);
-  }
-  .musa-rail-label::before { content: ""; width: 34px; height: 1px; background: var(--musa-accent); }
-
-  .musa-auth-title {
-    font-family: var(--musa-serif); font-weight: 600;
-    font-size: clamp(30px, 6vw, 40px); line-height: 1.05;
-    letter-spacing: -.01em; color: var(--musa-ink-strong);
-    margin: 0 0 var(--musa-s1);
-  }
-  .musa-auth-intro { margin: 0; font-size: 15px; color: var(--musa-ink); }
-
-  .musa-divider { border: 0; border-top: 1px solid var(--musa-hair); margin: 0; }
-
-  /* ---------- formulário ---------- */
-  .musa-auth-body { padding-top: var(--musa-s4); }
-  .musa-form { display: flex; flex-direction: column; gap: var(--musa-s3); }
-  .musa-field { display: flex; flex-direction: column; gap: var(--musa-s1); }
-
-  .musa-label {
-    font-size: 10px; font-weight: 600;
-    letter-spacing: .24em; text-transform: uppercase;
-    color: var(--musa-bronze-soft);
-  }
-  .musa-input {
-    width: 100%;
-    box-sizing: border-box;
-    font-family: var(--musa-sans);
-    font-size: 16px;
-    color: var(--musa-ink-strong);
-    background: var(--musa-cream);
-    border: 1px solid var(--musa-hair);
-    border-radius: 2px;
-    padding: 13px 14px;
-    transition: border-color .2s, background-color .2s;
-  }
-  .musa-input::placeholder { color: color-mix(in srgb, var(--musa-bronze-soft) 70%, transparent); }
-  .musa-input:hover { border-color: var(--musa-bronze-soft); }
-  .musa-input:focus {
-    outline: none;
-    border-color: var(--musa-accent);
-    background: #fff;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--musa-bronze) 14%, transparent);
-  }
-
-  .musa-check {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 14px; color: var(--musa-ink);
-    cursor: pointer;
-  }
-  .musa-check-box {
-    width: 16px; height: 16px;
-    accent-color: var(--musa-accent);
-    cursor: pointer;
-  }
-
-  /* botão: mesma assinatura da home */
-  .musa-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: var(--musa-sans);
-    font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
-    text-decoration: none; padding: 14px 26px; border-radius: 2px;
-    cursor: pointer;
-    transition: transform .2s, border-color .2s, background-color .2s, color .2s;
-  }
-  .musa-btn-primary { background: var(--musa-accent); color: var(--musa-cream); border: 1px solid var(--musa-accent); }
-  .musa-btn-primary:hover { transform: translateY(-2px); }
-  .musa-btn:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
-  .musa-btn-block { width: 100%; margin-top: var(--musa-s1); }
-
-  /* ---------- links auxiliares do devise ---------- */
-  .musa-auth-links {
-    margin-top: var(--musa-s4);
-    padding-top: var(--musa-s3);
-    border-top: 1px solid var(--musa-hair);
-    display: flex; flex-wrap: wrap; gap: var(--musa-s1) var(--musa-s3);
-  }
-  .musa-auth-links p { margin: 0; }
-  .musa-auth-links a {
-    font-size: 14px; font-weight: 600; letter-spacing: .04em;
-    color: var(--musa-accent); text-decoration: none;
-    border-bottom: 1px solid transparent; padding-bottom: 2px;
-    transition: border-color .2s;
-  }
-  .musa-auth-links a:hover { border-color: var(--musa-accent); }
-  .musa-auth-links a:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
-
-  /* ---------- footer: fecha a moldura, igual à home ---------- */
-  .musa-foot {
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-    gap: var(--musa-s2);
-    padding-top: var(--musa-s3); margin-top: var(--musa-s5);
-    border-top: 1px solid var(--musa-hair);
-  }
-  .musa-foot-mk { font-family: var(--musa-serif); font-weight: 700; letter-spacing: .3em; color: var(--musa-ink-strong); font-size: 15px; }
-  .musa-foot-meta { font-size: 12px; letter-spacing: .06em; color: var(--musa-accent); text-transform: uppercase; }
-
-  /* ---------- animação de carga (respeita reduced-motion) ---------- */
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(14px); animation: musaRise .8s cubic-bezier(.2,.7,.2,1) forwards; }
-    .d1 { animation-delay: .05s; } .d2 { animation-delay: .2s; }
-    @keyframes musaRise { to { opacity: 1; transform: none; } }
-    .musa-paper { animation: musaFrame .9s ease forwards; }
-    @keyframes musaFrame { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
-  }
-
-  @media (max-width: 520px) {
-    .musa-foot { flex-direction: column; align-items: flex-start; }
-  }
-</style>

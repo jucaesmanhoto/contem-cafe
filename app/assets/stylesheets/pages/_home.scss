@@ -1,1 +1,424 @@
-// Specific CSS for your home-page
+// Specific CSS for your home-page.
+// Tokens, moldura (.musa-paper/.musa-wrap/.musa-rail-label/.musa-divider/
+// .musa-foot), botões e wordmark são compartilhados — ver config/_musa_tokens
+// e components/_musa_shell, _musa_buttons, _musa_wordmark.
+
+.musa-paper {
+  max-width: var(--musa-container);
+}
+
+.musa-wrap {
+  padding: clamp(20px, 4.5vw, var(--musa-s6)) clamp(18px, 4.5vw, var(--musa-s6));
+}
+
+.musa-section-title {
+  font-family: var(--musa-serif);
+  font-weight: 600;
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--musa-ink-strong);
+  margin: 0 0 var(--musa-s2);
+  text-wrap: balance;
+}
+
+.musa-section-intro {
+  max-width: var(--musa-measure);
+  margin: 0;
+  color: var(--musa-ink);
+}
+
+/* ---------- HERO: split assimétrico ---------- */
+.musa-hero {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.05fr) minmax(320px, 1.25fr);
+  gap: clamp(24px, 5vw, var(--musa-s7));
+  align-items: center;
+  padding-bottom: var(--musa-s6);
+}
+
+.musa-lockup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.musa-lockup::after {
+  /* sombra de contato: o emblema pousa no papel */
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 16%;
+  right: 16%;
+  height: 22px;
+  background: radial-gradient(60% 100% at 50% 0%, color-mix(in srgb, var(--musa-espresso) 20%, transparent), transparent 70%);
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.musa-eyebrow {
+  font-family: var(--musa-sans);
+  font-size: 12px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+  font-weight: 600;
+  margin: 0 0 var(--musa-s3);
+}
+
+.musa-lead-text {
+  font-family: var(--musa-serif);
+  font-weight: 500;
+  font-size: clamp(23px, 3.4vw, 34px);
+  line-height: 1.32;
+  color: var(--musa-ink-strong);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.musa-lead {
+  color: var(--musa-accent);
+  font-style: italic;
+}
+
+.musa-sub {
+  font-family: var(--musa-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--musa-ink);
+  max-width: 46ch;
+  margin: var(--musa-s4) 0 0;
+}
+
+/* CTAs: ação primária (botão) + navegação secundária (link de texto).
+       Pesos deliberadamente diferentes porque são tipos de ação diferentes —
+       não são um par de botões gêmeos. */
+.musa-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--musa-s3);
+  margin-top: var(--musa-s4);
+}
+
+/* link secundário: âncora para a seção Origem, com seta que reforça o "descer" */
+.musa-link-down {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--musa-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--musa-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color .2s;
+}
+
+.musa-link-down span {
+  transition: transform .2s;
+}
+
+.musa-link-down:hover {
+  border-color: var(--musa-accent);
+}
+
+.musa-link-down:hover span {
+  transform: translateY(2px);
+}
+
+.musa-link-down:focus-visible {
+  outline: 2px solid var(--musa-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- movimentos ---------- */
+.musa-movement {
+  padding: var(--musa-s6) 0;
+}
+
+.musa-section-head {
+  max-width: var(--musa-measure);
+  margin-bottom: var(--musa-s5);
+}
+
+.musa-farms {
+  margin-top: 0;
+}
+
+/* ---------- FAZENDAS: índice de origens ---------- */
+.musa-farms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--musa-s3);
+}
+
+.musa-farm-card {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  text-decoration: none;
+  color: inherit;
+  background: var(--musa-cream-deep);
+  border: 1px solid var(--musa-hair);
+  border-radius: 3px;
+  overflow: hidden;
+  min-height: 250px;
+  transition: transform .25s, border-color .25s, background-color .25s, box-shadow .25s;
+}
+
+.musa-farm-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--musa-bronze);
+  background: color-mix(in srgb, var(--musa-cream-deep) 92%, var(--musa-bronze));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--musa-espresso) 12%, transparent);
+}
+
+.musa-farm-card:focus-visible {
+  outline: 2px solid var(--musa-accent);
+  outline-offset: 3px;
+}
+
+.musa-farm-photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-right: 1px solid var(--musa-hair);
+  background: var(--musa-cream);
+}
+
+.musa-farm-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1), filter .3s;
+}
+
+.musa-farm-card:hover .musa-farm-photo img {
+  transform: scale(1.03);
+}
+
+.musa-farm-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.musa-farm-empty-mark {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--musa-bronze-soft);
+}
+
+.musa-farm-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: var(--musa-s3);
+}
+
+.musa-farm-name {
+  font-family: var(--musa-serif);
+  font-weight: 600;
+  font-size: clamp(19px, 2.1vw, 24px);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  color: var(--musa-ink-strong);
+  text-wrap: balance;
+  margin-top: 2px;
+}
+
+.musa-farm-rule {
+  display: block;
+  height: 1px;
+  background: var(--musa-hair);
+  margin: 3px 0 1px;
+}
+
+.musa-farm-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--musa-s2);
+  font-size: 13px;
+}
+
+.musa-farm-k {
+  flex: 0 0 66px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--musa-bronze-soft);
+}
+
+.musa-farm-v {
+  color: var(--musa-ink);
+}
+
+.musa-farm-go {
+  margin-top: auto;
+  padding-top: var(--musa-s2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.musa-farm-arrow {
+  display: inline-block;
+  transition: transform .2s;
+}
+
+.musa-farm-card:hover .musa-farm-arrow {
+  transform: translateX(3px);
+}
+
+/* estado esgotado */
+.musa-farm-card.is-esgotado .musa-farm-photo img {
+  filter: grayscale(.7) sepia(.22) contrast(.95);
+}
+
+.musa-farm-card.is-esgotado .musa-farm-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--musa-cream) 40%, transparent);
+}
+
+/* chip de estado */
+.musa-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+  border: 1px solid var(--musa-hair);
+  border-radius: 2px;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+
+/* modificador do rail label da home, em escala de card */
+.musa-rail-sm {
+  font-size: 10px;
+  letter-spacing: .24em;
+  gap: 10px;
+  margin: 0;
+}
+
+.musa-rail-sm::before {
+  width: 20px;
+}
+
+/* ---------- COLABORAÇÃO: painel espresso ----------
+       O vermelho do Coelho briga com o creme; sobre fundo espresso vira
+       brasa intencional em vez de ruído. A arte carrega a marca antiga
+       "Contém Café" nos próprios pixels (autoria do artista, não editada). */
+.musa-art-panel {
+  background: var(--musa-espresso);
+  color: var(--musa-on-dark);
+  border-radius: 4px;
+  padding: clamp(28px, 5vw, var(--musa-s6));
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(24px, 4vw, var(--musa-s6));
+  align-items: center;
+}
+
+.musa-art-panel .musa-rail-label {
+  color: var(--musa-on-dark-soft);
+}
+
+.musa-art-panel .musa-section-title {
+  color: var(--musa-on-dark);
+}
+
+.musa-art-cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--musa-s3);
+  font-size: 13px;
+  color: var(--musa-on-dark-soft);
+}
+
+.musa-art-link {
+  color: var(--musa-on-dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--musa-on-dark-soft);
+  padding-bottom: 2px;
+  font-weight: 600;
+}
+
+.musa-art-link:hover {
+  color: #fff;
+}
+
+.musa-art-plate {
+  margin: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, .45);
+}
+
+.musa-art-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- responsivo: uma coluna, mesmo grid/gutter ---------- */
+@media (max-width: 860px) {
+  .musa-hero {
+    grid-template-columns: 1fr;
+    gap: var(--musa-s5);
+  }
+
+  .musa-art-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .musa-farms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .musa-farm-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .musa-farm-photo {
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 1px solid var(--musa-hair);
+  }
+}
+
+@media (max-width: 520px) {
+  /* CTAs empilhados com respiro: primário em largura total, link discreto abaixo */
+  .musa-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--musa-s3);
+  }
+
+  .musa-btn-primary {
+    width: 100%;
+  }
+
+  .musa-link-down {
+    align-self: flex-start;
+  }
+}

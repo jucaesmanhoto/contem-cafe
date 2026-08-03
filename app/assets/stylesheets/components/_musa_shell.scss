@@ -1,0 +1,78 @@
+// Moldura de página compartilhada entre as páginas "Musa" (home e login):
+// papel com filete duplo, rótulos, divisor, rodapé e animação de entrada.
+body {
+  background:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--musa-bronze) 6%, transparent), transparent 60%),
+    var(--musa-cream);
+  margin: 0;
+  padding: clamp(12px, 3vw, 40px);
+}
+
+.navbar, nav { display: none !important; }
+
+.musa-paper {
+  position: relative;
+  margin: 0 auto;
+  color: var(--musa-ink);
+  font-family: var(--musa-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  border: 1px solid var(--musa-bronze);
+  background: transparent;
+}
+.musa-paper::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--musa-hair);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.musa-rail-label {
+  font-family: var(--musa-sans);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--musa-accent);
+  display: inline-flex; align-items: center; gap: var(--musa-s2);
+  margin: 0 0 var(--musa-s3);
+}
+.musa-rail-label::before {
+  content: ""; width: 34px; height: 1px; background: var(--musa-accent);
+}
+
+.musa-divider { border: 0; border-top: 1px solid var(--musa-hair); margin: 0; }
+
+.musa-foot {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: var(--musa-s2);
+  padding-top: var(--musa-s5); margin-top: var(--musa-s6);
+  border-top: 1px solid var(--musa-hair);
+}
+.musa-foot-mk { font-family: var(--musa-serif); font-weight: 700; letter-spacing: .3em; color: var(--musa-ink-strong); font-size: 15px; }
+.musa-foot-meta { font-size: 12px; letter-spacing: .06em; color: var(--musa-accent); text-transform: uppercase; }
+
+@media (max-width: 520px) {
+  .musa-foot { flex-direction: column; align-items: flex-start; }
+}
+
+/* animação de carga (respeita reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: musaRise .8s cubic-bezier(.2, .7, .2, 1) forwards;
+  }
+  .d1 { animation-delay: .05s; }
+  .d2 { animation-delay: .2s; }
+  @keyframes musaRise {
+    to { opacity: 1; transform: none; }
+  }
+
+  .musa-paper { animation: musaFrame .9s ease forwards; }
+  @keyframes musaFrame {
+    from { clip-path: inset(0 0 100% 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+}

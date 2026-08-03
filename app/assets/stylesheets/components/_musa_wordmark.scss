@@ -1,0 +1,42 @@
+// Wordmark "Musa" em texto (substitui a antiga imagem musa_wordmark.png).
+// Tamanho padrão: usado em contextos compactos (login, indicação).
+// Modificador --hero: usado na home, maior e centralizado.
+.musa-wordmark {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.musa-wordmark-word {
+  display: block;
+  font-family: var(--musa-serif);
+  font-weight: 900;
+  font-size: clamp(26px, 6vw, 44px);
+  line-height: .95;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--musa-ink-strong);
+}
+.musa-wordmark-tag {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--musa-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+}
+
+.musa-wordmark--hero {
+  align-items: center;
+  text-align: center;
+}
+.musa-wordmark--hero .musa-wordmark-word {
+  font-size: clamp(52px, 9vw, 88px);
+}
+.musa-wordmark--hero .musa-wordmark-tag {
+  margin-top: var(--musa-s2);
+  font-size: 13px;
+  letter-spacing: .32em;
+}
