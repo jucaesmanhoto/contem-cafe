@@ -8,7 +8,7 @@ module Avo
       @coffee = Coffee.new(coffee_params)
       raise unless @coffee.save
 
-      redirect_to :resources_coffees_path
+      redirect_to resources_coffees_path
     end
 
     private
