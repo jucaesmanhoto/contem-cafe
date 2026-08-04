@@ -4,10 +4,15 @@ class Farm < ApplicationRecord
 
   validates :name, :city, presence: true
   validates :state, length: { is: 2 }, allow_blank: true
+
   before_validation :set_slug, on: :create
 
   def to_param
     slug.presence || id.to_s
+  end
+
+  def available_coffees?
+    coffees.availables.any?
   end
 
   private

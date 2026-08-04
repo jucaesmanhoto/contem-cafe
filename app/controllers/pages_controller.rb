@@ -5,6 +5,9 @@ class PagesController < ApplicationController
 
   def home
     set_payment_link
+    @sorted_farms = Farm.includes(:coffees).sort_by do |f|
+      [f.available_coffees? ? 0 : 1, f.position, f.name]
+    end
   end
 
   def try_form

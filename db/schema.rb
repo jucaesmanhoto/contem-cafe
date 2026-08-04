@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_26_140508) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_04_123959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -98,6 +98,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_26_140508) do
     t.text "description"
     t.string "farmer"
     t.string "name", null: false
+    t.integer "position", default: 0
     t.string "region"
     t.string "slug"
     t.string "state"

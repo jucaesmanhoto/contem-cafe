@@ -1,6 +1,6 @@
 <div class="musa-farms-grid">
   <% farms.each do |farm| %>
-    <% esgotado = farm.coffees.none? { |coffee| coffee.price.present? } %>
+    <% esgotado = farm.coffees.availables.empty? %>
     <%= link_to farm_path(farm), class: "musa-farm-card#{' is-esgotado' if esgotado}" do %>
 
       <span class="musa-farm-photo<%= ' musa-farm-photo-empty' unless farm.photo.attached? %>">
