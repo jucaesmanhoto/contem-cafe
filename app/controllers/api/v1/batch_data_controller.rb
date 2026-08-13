@@ -28,50 +28,15 @@ module Api
       end
 
       def import_upload(upload)
-        file = upload[:file]
-        identifier = upload[:batch_number]
-        return { batch_number: identifier, error: "Arquivo não enviado" } if file.blank?
+        result = RoastBatchUpload.new(
+          file: upload[:file],
+          batch_number: upload[:batch_number],
+          coffee_id: upload[:coffee_id]
+        ).call
 
-        batch, coffee, error = resolve_target(identifier, upload[:coffee_id])
-        return { batch_number: identifier, error: error } if error
+        return { batch_number: upload[:batch_number], error: result.error } unless result.success?
 
-        result = RoastFileImporter.new(batch: batch, coffee: coffee, file: file).call
-        { batch_number: result.batch_number, status: "importado" }
-      rescue RoastFileParser::InvalidFileError => e
-        { batch_number: identifier, error: e.message }
-      end
-
-      # Modo estrito (batch_number/id de uma torra existente) ou auto-criação
-      # (coffee_id) — ver comentário de #create.
-      def resolve_target(identifier, coffee_id)
-        return resolve_by_identifier(identifier) if identifier.present?
-
-        resolve_by_coffee(coffee_id)
-      end
-
-      def resolve_by_identifier(identifier)
-        batch = find_batch(identifier)
-        return [nil, nil, "Torra não encontrada"] if batch.nil?
-
-        [batch, nil, nil]
-      end
-
-      def resolve_by_coffee(coffee_id)
-        no_target_msg = "Informe batch_number (torra existente) ou coffee_id (para criar uma nova)"
-        return [nil, nil, no_target_msg] if coffee_id.blank?
-
-        coffee = find_coffee(coffee_id)
-        return [nil, nil, "Café não encontrado"] if coffee.nil?
-
-        [nil, coffee, nil]
-      end
-
-      def find_batch(identifier)
-        Batch.find_by(batch_number: identifier) || Batch.find_by(id: identifier)
-      end
-
-      def find_coffee(identifier)
-        Coffee.find_by(slug: identifier) || Coffee.find_by(id: identifier)
+        { batch_number: result.batch.batch_number, status: "importado" }
       end
     end
   end

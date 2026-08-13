@@ -13,3 +13,11 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+# rubocop:disable Style/OneClassPerFile -- reabre ActionDispatch::IntegrationTest, padrão do Devise
+module ActionDispatch
+  class IntegrationTest
+    include Devise::Test::IntegrationHelpers
+  end
+end
+# rubocop:enable Style/OneClassPerFile

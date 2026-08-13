@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   # Torras: consulta do gráfico de uma torra pelo número do batch
   get "torras", to: "batches#index", as: :roasts
 
+  # Torras: upload manual de leituras do torrador (acesso restrito a admin)
+  resource :batch_upload, only: [:new, :create]
+
   # Indicação: acessada apenas via link/token de um membro existente
   resources :referrals, only: %i[show create], param: :token do
     member do

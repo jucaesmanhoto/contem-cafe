@@ -12,6 +12,7 @@
 
     <% if current_user.admin? %>
       <%= link_to "Painel", avo.root_path, class: "musa-userbar-link" %>
+      <%= link_to "Upload de torras", new_batch_upload_path, class: "musa-userbar-link" %>
     <% end %>
 
     <%= button_to "Sair", destroy_user_session_path,

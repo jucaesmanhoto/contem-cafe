@@ -1,0 +1,65 @@
+<div class="bg-white min-h-screen px-6 md:px-10 lg:px-12 py-12 max-w-4xl mx-auto">
+  <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-8 leading-tight">
+    Upload de leituras do torrador
+  </h1>
+  <h3 class="text-md md:text-md font-serif text-stone-500 mb-8 leading-tight">
+    Envie um ou mais arquivos do torrador (formato KLDO) para a coffee selecionada.
+    Cada arquivo cria ou atualiza automaticamente a torra correspondente, usando a
+    data/hora gravada no próprio arquivo.
+  </h3>
+
+  <%= form_with url: batch_upload_path, method: :post, multipart: true, class: "flex flex-col gap-4 mb-10" do %>
+    <div class="flex flex-col gap-2">
+      <label for="coffee_id" class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">
+        Café
+      </label>
+      <select
+        name="coffee_id"
+        id="coffee_id"
+        required
+        class="rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700"
+      >
+        <option value="">Selecione um café</option>
+        <% @coffees.each do |coffee| %>
+          <option value="<%= coffee.id %>"><%= coffee.name %> — <%= coffee.farm.name %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="files" class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">
+        Arquivos (.csv/.txt)
+      </label>
+      <input
+        type="file"
+        name="files[]"
+        id="files"
+        multiple
+        required
+        accept=".csv,.txt"
+        class="rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 file:mr-4 file:rounded-full file:border-0 file:bg-amber-700 file:px-4 file:py-2 file:text-xs file:font-semibold file:uppercase file:tracking-widest file:text-white"
+      >
+    </div>
+
+    <button type="submit" class="musa-btn musa-btn-primary self-start">
+      Importar
+    </button>
+  <% end %>
+
+  <% if @results.present? %>
+    <div class="border-t border-stone-100 pt-8">
+      <h2 class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-4">
+        Resultado da importação
+      </h2>
+      <ul class="flex flex-col gap-2">
+        <% @results.each do |entry| %>
+          <li class="flex items-center justify-between gap-4 rounded-xl border px-4 py-3 text-sm
+            <%= entry["success"] ? "border-emerald-200 bg-emerald-50 text-emerald-800" : "border-red-200 bg-red-50 text-red-800" %>">
+            <span class="font-medium truncate"><%= entry["filename"] %></span>
+            <span><%= entry["message"] %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
