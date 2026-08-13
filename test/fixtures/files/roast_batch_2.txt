@@ -1,0 +1,17 @@
+KLDO data file V101
+[{CookDate}]
+10-04-26 09:15:00
+[{TotalTime}]
+09:45
+[{PreTemp}]
+145
+[{TemperBack}]
+148@03:10
+[{TurntoYellow}]
+118@00:55
+[{1stBoomStart}]
+178@07:40
+[{DATA}]
+Time,BT,ET,RoR,HP,SM,RL
+0,145,155,0,48,10,5
+30,150,160,1,50,10,5

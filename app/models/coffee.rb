@@ -2,6 +2,8 @@ class Coffee < ApplicationRecord
   belongs_to :farm
   has_one_attached :photo
 
+  has_many :batches
+
   validates :name, :variety, :processing, :altitude, presence: true
   before_validation :set_slug, :set_stock_status, on: :create
 
