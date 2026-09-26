@@ -1,7 +1,7 @@
 // Specific CSS for the login page (devise/sessions/new).
 // Tokens, moldura (.musa-paper/.musa-wrap/.musa-rail-label/.musa-divider/
-// .musa-foot), botões e wordmark são compartilhados — ver config/_musa_tokens
-// e components/_musa_shell, _musa_buttons, _musa_wordmark.
+// .musa-foot), botões e logo são compartilhados — ver config/_musa_tokens
+// e components/_musa_shell, _musa_buttons, _musa_logo.
 
 body:has(.musa-auth) {
   min-height: 100vh;
@@ -41,7 +41,7 @@ body:has(.musa-auth) {
 .musa-label {
   font-size: 10px; font-weight: 600;
   letter-spacing: .24em; text-transform: uppercase;
-  color: var(--musa-bronze-soft);
+  color: var(--musa-label);
 }
 .musa-input {
   width: 100%;
@@ -55,13 +55,13 @@ body:has(.musa-auth) {
   padding: 13px 14px;
   transition: border-color .2s, background-color .2s;
 }
-.musa-input::placeholder { color: color-mix(in srgb, var(--musa-bronze-soft) 70%, transparent); }
-.musa-input:hover { border-color: var(--musa-bronze-soft); }
+.musa-input::placeholder { color: color-mix(in srgb, var(--musa-label) 70%, transparent); }
+.musa-input:hover { border-color: var(--musa-label); }
 .musa-input:focus {
   outline: none;
   border-color: var(--musa-accent);
   background: #fff;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--musa-bronze) 14%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--musa-rule) 14%, transparent);
 }
 
 .musa-check {

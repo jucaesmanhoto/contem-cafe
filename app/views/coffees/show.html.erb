@@ -22,8 +22,8 @@
     <div class="px-6 md:px-10 lg:px-12 py-4 flex flex-col justify-center">
       <nav class="mb-6">
         <%= link_to farm_path(@coffee.farm), class: "group inline-flex items-center transition-colors text-decoration-none" do %>
-          <i class="fa-solid fa-chevron-left text-xs text-amber-700 mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
-          <span class="text-xs font-semibold uppercase tracking-widest text-amber-700 hover:text-amber-900"><%= @coffee.farm.name %></span>
+          <i class="fa-solid fa-chevron-left text-xs text-musa-label mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+          <span class="text-xs font-semibold uppercase tracking-widest text-musa-label hover:text-musa-accent"><%= @coffee.farm.name %></span>
         <% end %>
       </nav>
 
@@ -42,7 +42,7 @@
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Variedade</span>
           <div class="flex items-center gap-2">
-            <i class="fas fa-leaf text-amber-700 text-sm"></i>
+            <i class="fas fa-leaf text-musa-label text-sm"></i>
             <span class="text-stone-800 font-medium text-sm"><%= @coffee.variety %></span>
           </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Processamento</span>
           <div class="flex items-center gap-2">
-            <i class="fas fa-flask text-amber-700 text-sm"></i>
+            <i class="fas fa-flask text-musa-label text-sm"></i>
             <span class="text-stone-800 font-medium text-sm"><%= @coffee.processing %></span>
           </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Altitude</span>
           <div class="flex items-center gap-2">
-            <i class="fas fa-mountain text-amber-700 text-sm"></i>
+            <i class="fas fa-mountain text-musa-label text-sm"></i>
             <span class="text-stone-800 font-medium text-sm"><%= @coffee.altitude %>m</span>
           </div>
         </div>
@@ -69,8 +69,8 @@
         <div class="flex flex-col">
           <span class="text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-1">Fazenda</span>
           <div class="flex items-center gap-2">
-            <i class="fas fa-map-marker-alt text-amber-700 text-sm"></i>
-            <%= link_to @coffee.farm.name, farm_path(@coffee.farm), class: "font-medium text-sm text-amber-700! hover:text-amber-900! text-decoration-none" %>
+            <i class="fas fa-map-marker-alt text-musa-label text-sm"></i>
+            <%= link_to @coffee.farm.name, farm_path(@coffee.farm), class: "font-medium text-sm text-musa-accent! hover:text-musa-accent-hover! text-decoration-none" %>
           </div>
         </div>
       </div>

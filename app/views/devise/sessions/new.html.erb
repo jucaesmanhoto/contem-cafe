@@ -1,7 +1,7 @@
 <%#
   Login — mesma linguagem visual da home: papel creme, moldura de filete
   duplo, display serifado e acento bronze. Usa o design system compartilhado
-  em app/assets/stylesheets (tokens, moldura, botões e wordmark); o CSS aqui
+  em app/assets/stylesheets (tokens, moldura, botões e logo); o CSS aqui
   é só o que é específico do login (pages/_auth.scss).
 %>
 
@@ -12,10 +12,7 @@
 
     <header class="musa-auth-head reveal d1">
       <%= link_to root_path, class: "musa-auth-lockup", aria: { label: "Ir para a página inicial" } do %>
-        <p class="musa-wordmark">
-          <span class="musa-wordmark-word">Musa</span>
-          <span class="musa-wordmark-tag">Cafés que inspiram</span>
-        </p>
+        <%= render "shared/musa_logo" %>
       <% end %>
       <p class="musa-rail-label">Acesso</p>
       <h1 class="musa-auth-title">Entrar</h1>

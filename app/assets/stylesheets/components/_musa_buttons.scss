@@ -10,7 +10,7 @@
   transition: transform .2s, border-color .2s, background-color .2s, color .2s;
 }
 .musa-btn-primary { background: var(--musa-accent); color: var(--musa-cream); border: 1px solid var(--musa-accent); }
-.musa-btn-primary:hover { transform: translateY(-2px); }
+.musa-btn-primary:hover { transform: translateY(-2px); background: var(--musa-accent-hover); border-color: var(--musa-accent-hover); }
 .musa-btn-secondary { background: transparent; color: var(--musa-accent); border: 1px solid var(--musa-accent); }
 .musa-btn-secondary:hover { background: var(--musa-accent); color: var(--musa-cream); }
 .musa-btn-sm { padding: 10px 18px; }

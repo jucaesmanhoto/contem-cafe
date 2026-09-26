@@ -6,7 +6,7 @@
 
     <header class="trial-header">
       <%= link_to root_path, class: "trial-logo-link", aria: { label: "Ir para a pagina inicial" } do %>
-        <%= image_tag "musa_wordmark.png", class: "trial-logo", alt: "Logo Musa Cafés" %>
+        <%= image_tag "musa-logo.png", class: "trial-logo", alt: "Logo Musa Cafés" %>
       <% end %>
     </header>
 
@@ -46,7 +46,7 @@
 <style>
   .trial-page {
     min-height: 100vh;
-    background: #fdfaf6;
+    background: var(--musa-cream);
     padding: 24px;
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@
     width: 100%;
     max-width: 980px;
     background: #ffffff;
-    border: 1px solid #eadfce;
+    border: 1px solid var(--musa-hair);
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
     padding: 24px;
@@ -76,19 +76,19 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    color: #7c7267;
+    color: var(--musa-label);
     text-decoration: none;
-    border: 1px solid #e5dccf;
-    background: #fffdf9;
+    border: 1px solid var(--musa-hair);
+    background: var(--musa-cream);
     border-radius: 999px;
     line-height: 1;
     transition: all 0.2s ease;
   }
 
   .trial-back-link:hover {
-    color: #4b433a;
-    border-color: #d7cab9;
-    background: #fbf5ec;
+    color: var(--musa-ink-strong);
+    border-color: var(--musa-hair);
+    background: var(--musa-cream-deep);
   }
 
   .trial-header {
@@ -122,11 +122,11 @@
   }
 
   .trial-missing-config {
-    border: 1px dashed #c9b8a1;
+    border: 1px dashed var(--musa-hair);
     border-radius: 10px;
     padding: 16px;
-    background: #fffaf2;
-    color: #4a4a4a;
+    background: var(--musa-cream);
+    color: var(--musa-ink);
   }
 
   .trial-missing-config p {

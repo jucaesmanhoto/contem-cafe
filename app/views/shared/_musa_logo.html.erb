@@ -1,0 +1,6 @@
+<%# Logo Musa em imagem. variant: :compact (login, indicação) ou :hero (home). %>
+<% variant = local_assigns.fetch(:variant, :compact) %>
+<%= image_tag "musa-logo.png",
+      width: 686, height: 364,
+      alt: "Musa, cafés que inspiram",
+      class: ["musa-logo", "musa-logo--#{variant}", local_assigns[:class]] %>

@@ -1,20 +1,38 @@
 // Fonte única dos design tokens "Musa" — cores, escala de espaço e font stacks.
 // Usado por todas as páginas que compartilham a linguagem visual da home
-// (home, login, indicação, batches).
+// (home, login, indicação, batches). Expostos ao Tailwind em
+// app/assets/tailwind/application.css (classes `*-musa-*`).
+//
+// Paleta derivada do logo musa-logo-transparent-bg: marrom café nas letras,
+// cereja no "S" e mel/dourado nos arcos do grão.
 :root {
-  --musa-cream:      #fdfaf6;
-  --musa-cream-deep: #f4ead9;
-  --musa-bronze:     #8c6038;  /* ACENTO único: rótulos, filetes, links */
-  --musa-bronze-soft:#b08d57;
-  --musa-brown:      #3b2a1e;  /* corpo */
-  --musa-espresso:   #281307;  /* display + painel escuro */
+  /* base */
+  --musa-cream:       #fdfaf3;
+  --musa-cream-deep:  #f6ecd2;
+  --musa-coffee:      #3f2a14;  /* letras do logo: display */
+  --musa-brown:       #5a4632;  /* corpo */
+  --musa-espresso:    #2a1c0e;  /* painel escuro */
 
-  --musa-ink:        var(--musa-brown);
-  --musa-ink-strong: var(--musa-espresso);
-  --musa-accent:     var(--musa-bronze);
-  --musa-hair:       color-mix(in srgb, var(--musa-bronze) 40%, transparent);
-  --musa-on-dark:    #f3e7d3;
-  --musa-on-dark-soft:#c9a878;
+  /* cereja: o "S" do logo, único acento de ação */
+  --musa-cherry:        #9e1b1f;  /* botões, links, foco (7.7:1 no creme) */
+  --musa-cherry-deep:   #7a1518;  /* hover/pressed */
+  --musa-cherry-on-dark:#d2433d;  /* cereja sobre --musa-espresso */
+
+  /* mel/dourado: os arcos do logo */
+  --musa-honey:       #d9a441;  /* filetes e bordas em fundo claro (não usar em texto) */
+  --musa-honey-ink:   #85601f;  /* versão legível para rótulos pequenos (5.5:1) */
+  --musa-gold:        #ffd777;  /* realces sobre fundo escuro */
+
+  /* papéis semânticos — prefira estes nas páginas */
+  --musa-ink:          var(--musa-brown);
+  --musa-ink-strong:   var(--musa-coffee);
+  --musa-accent:       var(--musa-cherry);
+  --musa-accent-hover: var(--musa-cherry-deep);
+  --musa-label:        var(--musa-honey-ink);  /* eyebrows, rótulos, metadados */
+  --musa-rule:         var(--musa-honey);      /* moldura, filetes sólidos */
+  --musa-hair:         color-mix(in srgb, var(--musa-honey) 55%, transparent);
+  --musa-on-dark:      var(--musa-cream-deep);
+  --musa-on-dark-soft: var(--musa-gold);
 
   --musa-serif: "Playfair Display", "Didot", "Bodoni 72", "Bodoni MT", "Hoefler Text", Georgia, "Times New Roman", serif;
   --musa-sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;

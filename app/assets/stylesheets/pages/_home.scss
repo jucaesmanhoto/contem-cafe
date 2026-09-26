@@ -1,7 +1,7 @@
 // Specific CSS for your home-page.
 // Tokens, moldura (.musa-paper/.musa-wrap/.musa-rail-label/.musa-divider/
-// .musa-foot), botões e wordmark são compartilhados — ver config/_musa_tokens
-// e components/_musa_shell, _musa_buttons, _musa_wordmark.
+// .musa-foot), botões e logo são compartilhados — ver config/_musa_tokens
+// e components/_musa_shell, _musa_buttons, _musa_logo.
 
 .musa-paper {
   max-width: var(--musa-container);
@@ -61,7 +61,7 @@
   font-size: 12px;
   letter-spacing: .28em;
   text-transform: uppercase;
-  color: var(--musa-accent);
+  color: var(--musa-label);
   font-weight: 600;
   margin: 0 0 var(--musa-s3);
 }
@@ -170,8 +170,8 @@
 
 .musa-farm-card:hover {
   transform: translateY(-2px);
-  border-color: var(--musa-bronze);
-  background: color-mix(in srgb, var(--musa-cream-deep) 92%, var(--musa-bronze));
+  border-color: var(--musa-rule);
+  background: color-mix(in srgb, var(--musa-cream-deep) 92%, var(--musa-rule));
   box-shadow: 0 10px 24px color-mix(in srgb, var(--musa-espresso) 12%, transparent);
 }
 
@@ -211,7 +211,7 @@
   font-weight: 600;
   letter-spacing: .24em;
   text-transform: uppercase;
-  color: var(--musa-bronze-soft);
+  color: var(--musa-label);
 }
 
 .musa-farm-entry {
@@ -252,7 +252,7 @@
   font-weight: 600;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--musa-bronze-soft);
+  color: var(--musa-label);
 }
 
 .musa-farm-v {
@@ -301,7 +301,7 @@
   font-weight: 600;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--musa-accent);
+  color: var(--musa-label);
   border: 1px solid var(--musa-hair);
   border-radius: 2px;
   padding: 4px 9px;

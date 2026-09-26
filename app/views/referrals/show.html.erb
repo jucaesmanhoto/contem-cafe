@@ -4,12 +4,9 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
     <div>
       <%= link_to root_path do %>
-        <div class="musa-wordmark mb-4">
-          <span class="musa-wordmark-word">Musa</span>
-          <span class="musa-wordmark-tag">Cafés que inspiram</span>
-        </div>
+        <%= render "shared/musa_logo", class: "mb-4" %>
       <% end %>
-      <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você ganhou um desconto de <span class="text-amber-700 font-bold"><%= number_with_precision(@referral.discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span> de presente!</h1>
+      <h1 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight">Você ganhou um desconto de <span class="text-musa-accent font-bold"><%= number_with_precision(@referral.discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span> de presente!</h1>
       <p class="text-stone-500 mb-8">
         <strong class="text-stone-800"><%= @referral.name %></strong> presenteou você com uma chance de provar os cafés que vão te inspirar — e seguir compartilhando essa experiência com mais gente.
       </p>
@@ -27,7 +24,7 @@
               <strong class="text-stone-800"><%= @referral.name %></strong> foi quem começou tudo — ninguém veio antes.
             <% else %>
               Antes de chegar até <strong class="text-stone-800"><%= @referral.name %></strong>, esse convite passou por
-              <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
+              <span class="text-musa-accent font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
             <% end %>
             Esse link já atingiu o desconto máximo. Se quiser enviar um novo descontro, entre em contato pelo whatApp.
           </p>
@@ -38,8 +35,8 @@
         <% else %>
           <p class="text-stone-600 leading-relaxed">
             Antes de chegar até <strong class="text-stone-800"><%= @referral.name %></strong>, esse convite passou por
-            <span class="text-amber-700 font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
-            Agora é a sua vez de inspirar alguém com um desconto de <span class="text-amber-700 font-bold"><%= number_with_precision(@referral.next_discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span>.
+            <span class="text-musa-accent font-bold"><%= @referral.depth %> <%= @referral.depth == 1 ? "pessoa" : "pessoas" %></span>.
+            Agora é a sua vez de inspirar alguém com um desconto de <span class="text-musa-accent font-bold"><%= number_with_precision(@referral.next_discount_percentage, precision: 1, strip_insignificant_zeros: true, separator: ",") %>%</span>.
           </p>
         <% end %>
       </section>
@@ -69,20 +66,20 @@
           <label class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">Escolha seu café</label>
           <div class="space-y-2">
             <% @coffees.availables.each do |coffee| %>
-              <div class="rounded-xl border border-stone-200 px-4 py-3 has-[:checked]:border-amber-700 has-[:checked]:bg-amber-50" data-controller="coffee-modal">
+              <div class="rounded-xl border border-stone-200 px-4 py-3 has-[:checked]:border-musa-accent has-[:checked]:bg-musa-cream-deep" data-controller="coffee-modal">
                 <label class="flex items-center justify-between gap-3 text-sm text-stone-800 cursor-pointer">
                   <span class="flex items-center gap-3">
-                    <%= radio_button_tag "coffee_id", coffee.id, false, class: "accent-amber-700",
+                    <%= radio_button_tag "coffee_id", coffee.id, false, class: "accent-musa-accent",
                           data: { whatsapp_order_target: "coffee", coffee_name: coffee.name,
                                   coffee_discounted_price: coffee_discounted_price_label(coffee, @referral.discount_percentage) } %>
                     <span><%= coffee.name %></span>
-                    <button type="button" data-action="click->coffee-modal#open" class="text-xs text-stone-400 underline underline-offset-2 hover:text-amber-700">Ver café</button>
+                    <button type="button" data-action="click->coffee-modal#open" class="text-xs text-stone-400 underline underline-offset-2 hover:text-musa-accent">Ver café</button>
                   </span>
 
                   <% if coffee_price_label(coffee) %>
                     <span class="text-right leading-tight">
                       <span class="block text-xs text-stone-400 line-through"><%= coffee_price_label(coffee) %></span>
-                      <span class="block text-amber-700 font-bold"><%= coffee_discounted_price_label(coffee, @referral.discount_percentage) %></span>
+                      <span class="block text-musa-accent font-bold"><%= coffee_discounted_price_label(coffee, @referral.discount_percentage) %></span>
                     </span>
                   <% else %>
                     <span class="text-xs text-stone-400 italic"><%= coffee.stock_status.presence || "Esgotado" %></span>
@@ -95,7 +92,7 @@
                       <%= image_tag coffee.photo, class: "w-full h-48 object-cover rounded-lg mb-4" %>
                     <% end %>
                     <h3 class="text-xl font-serif text-stone-900 mb-1"><%= coffee.name %></h3>
-                    <p class="text-sm text-amber-700 font-medium mb-3"><%= coffee.variety %></p>
+                    <p class="text-sm text-musa-label font-medium mb-3"><%= coffee.variety %></p>
                     <% if coffee.description.present? %>
                       <p class="text-sm text-stone-600 mb-4"><%= coffee.description %></p>
                     <% end %>
@@ -119,7 +116,7 @@
 
         <div class="mb-4">
           <label class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">Seu nome</label>
-          <%= text_field_tag :name, params[:name], required: true, data: { whatsapp_order_target: "name" }, class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700" %>
+          <%= text_field_tag :name, params[:name], required: true, data: { whatsapp_order_target: "name" }, class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-musa-accent" %>
         </div>
 
         <div class="mb-4">
@@ -129,12 +126,12 @@
                 inputmode: "numeric", placeholder: "(11) 91234-5678", maxlength: 15,
                 pattern: '\(\d{2}\) 9\d{4}-\d{4}',
                 title: "Informe um número de celular com DDD, assim: (11) 91234-5678",
-                class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700" %>
+                class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-musa-accent" %>
         </div>
 
         <div class="mb-6">
           <label class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">Observações (opcional)</label>
-          <%= text_area_tag :details, nil, rows: 3, data: { whatsapp_order_target: "details" }, class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-700" %>
+          <%= text_area_tag :details, nil, rows: 3, data: { whatsapp_order_target: "details" }, class: "w-full rounded-xl border border-stone-200 px-4 py-3 text-sm text-stone-800 focus:outline-none focus:ring-2 focus:ring-musa-accent" %>
         </div>
 
         <div class="flex flex-col gap-3">

@@ -11,7 +11,7 @@
     <div class="flex items-center gap-3">
       <% if user_signed_in? %>
         <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "h-10 w-10 rounded-full object-cover ring-2 ring-stone-200", alt: "Usuário logado" %>
-        <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, class: "inline-flex items-center rounded-full bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-900" %>
+        <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, class: "inline-flex items-center rounded-full bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-musa-accent-hover" %>
       <% else %>
         <%= link_to "Entrar", new_user_session_path, class: "inline-flex items-center rounded-full border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-stone-900 hover:text-stone-900" %>
       <% end %>

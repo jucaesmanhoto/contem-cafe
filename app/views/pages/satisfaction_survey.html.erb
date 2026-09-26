@@ -4,7 +4,7 @@
 
     <header class="survey-header">
       <%= link_to root_path, class: "survey-logo-link", aria: { label: "Ir para a página inicial" } do %>
-        <%= image_tag "musa_wordmark.png", class: "survey-logo", alt: "Logo Musa Cafés" %>
+        <%= image_tag "musa-logo.png", class: "survey-logo", alt: "Logo Musa Cafés" %>
       <% end %>
       <p class="survey-intro">
         Seu feedback ajuda a gente a melhorar cada detalhe da experiência com os cafés da Musa.
@@ -110,7 +110,7 @@
 
   .survey-page {
     min-height: calc(100vh - 80px);
-    background: #fdfaf6;
+    background: var(--musa-cream);
     padding: 24px;
     display: flex;
     justify-content: center;
@@ -121,7 +121,7 @@
     width: 100%;
     max-width: 980px;
     background: #ffffff;
-    border: 1px solid #eadfce;
+    border: 1px solid var(--musa-hair);
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(52, 35, 16, 0.08);
     padding: 24px;
@@ -139,10 +139,10 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    color: #7c7267;
+    color: var(--musa-label);
     text-decoration: none;
-    border: 1px solid #e5dccf;
-    background: #fffdf9;
+    border: 1px solid var(--musa-hair);
+    background: var(--musa-cream);
     border-radius: 999px;
     padding: 0;
     line-height: 1;
@@ -150,9 +150,9 @@
   }
 
   .survey-home-link:hover {
-    color: #4b433a;
-    border-color: #d7cab9;
-    background: #fbf5ec;
+    color: var(--musa-ink-strong);
+    border-color: var(--musa-hair);
+    background: var(--musa-cream-deep);
   }
 
   .survey-logo-link {
@@ -177,7 +177,7 @@
 
   .survey-intro {
     margin: 0;
-    color: #4a4a4a;
+    color: var(--musa-ink);
     max-width: 620px;
     font-size: 1.05rem;
     line-height: 1.65;
@@ -198,7 +198,7 @@
     padding: 13px 18px;
     border: 1px solid transparent;
     border-radius: 8px;
-    background: #8a1720;
+    background: var(--musa-accent);
     color: #ffffff;
     text-decoration: none;
     font-size: 1rem;
@@ -209,7 +209,7 @@
   }
 
   .survey-actions .btn-primary:hover {
-    background: #d35400;
+    background: var(--musa-accent-hover);
     color: #ffffff;
   }
 
@@ -254,19 +254,19 @@
     background: transparent;
     font-size: 1.8rem;
     line-height: 1;
-    color: #5f5f5f;
+    color: var(--musa-ink);
     cursor: pointer;
   }
 
   .survey-payment-dialog h2 {
     margin: 0 0 6px;
-    color: #2c3e50;
+    color: var(--musa-ink-strong);
     font-size: 1.35rem;
   }
 
   .survey-payment-dialog p {
     margin: 0 0 14px;
-    color: #4a4a4a;
+    color: var(--musa-ink);
   }
 
   .survey-payment-flyer {
@@ -281,24 +281,24 @@
   .survey-payment-copy-btn {
     width: 100%;
     padding: 12px 14px;
-    border: 1px solid #8a1720;
+    border: 1px solid var(--musa-accent);
     border-radius: 8px;
     background: #ffffff;
-    color: #8a1720;
+    color: var(--musa-accent);
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .survey-payment-copy-btn:hover {
-    background: #8a1720;
+    background: var(--musa-accent);
     color: #ffffff;
   }
 
   .survey-payment-feedback {
     display: none;
     margin: 16px 0 16px;
-    color: #555555;
+    color: var(--musa-ink);
     font-size: 0.95rem;
     text-align: center;
   }
@@ -325,11 +325,11 @@
   }
 
   .survey-missing-config {
-    border: 1px dashed #c9b8a1;
+    border: 1px dashed var(--musa-hair);
     border-radius: 10px;
     padding: 16px;
-    background: #fffaf2;
-    color: #4a4a4a;
+    background: var(--musa-cream);
+    color: var(--musa-ink);
   }
 
   .survey-missing-config p {

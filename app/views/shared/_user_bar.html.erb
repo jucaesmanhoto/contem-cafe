@@ -31,12 +31,12 @@
       align-items: center;
       gap: 14px;
       padding: 7px 10px 7px 14px;
-      border: 1px solid color-mix(in srgb, #8c6038 40%, transparent);
+      border: 1px solid var(--musa-hair);
       border-radius: 999px;
-      background: color-mix(in srgb, #fdfaf6 92%, transparent);
+      background: color-mix(in srgb, var(--musa-cream) 92%, transparent);
       backdrop-filter: blur(6px);
-      box-shadow: 0 6px 18px color-mix(in srgb, #281307 10%, transparent);
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      box-shadow: 0 6px 18px color-mix(in srgb, var(--musa-espresso) 10%, transparent);
+      font-family: var(--musa-sans);
     }
 
     .musa-userbar-who {
@@ -48,7 +48,7 @@
       font-weight: 600;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: #b08d57;
+      color: var(--musa-label);
     }
 
     .musa-userbar-link {
@@ -56,13 +56,13 @@
       font-weight: 600;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: #8c6038;
+      color: var(--musa-accent);
       text-decoration: none;
       border-bottom: 1px solid transparent;
       padding-bottom: 1px;
       transition: border-color .2s;
     }
-    .musa-userbar-link:hover { border-color: #8c6038; }
+    .musa-userbar-link:hover { border-color: var(--musa-accent); }
 
     .musa-userbar-form { margin: 0; }
 
@@ -74,18 +74,18 @@
       font-weight: 600;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: #fdfaf6;
-      background: #8c6038;
-      border: 1px solid #8c6038;
+      color: var(--musa-cream);
+      background: var(--musa-accent);
+      border: 1px solid var(--musa-accent);
       border-radius: 999px;
       padding: 7px 16px;
       cursor: pointer;
       transition: background-color .2s, color .2s;
     }
-    .musa-userbar-btn:hover { background: #281307; border-color: #281307; }
+    .musa-userbar-btn:hover { background: var(--musa-accent-hover); border-color: var(--musa-accent-hover); }
 
     .musa-userbar-link:focus-visible,
-    .musa-userbar-btn:focus-visible { outline: 2px solid #8c6038; outline-offset: 3px; }
+    .musa-userbar-btn:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 3px; }
 
     @media (max-width: 640px) {
       .musa-userbar { gap: 10px; padding: 6px 8px 6px 10px; }

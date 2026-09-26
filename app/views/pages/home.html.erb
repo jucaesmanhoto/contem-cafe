@@ -1,10 +1,10 @@
 <%#
   Home pública da Musa — sem navbar.
   Composição: um único objeto emoldurado (filete duplo) contendo um grid
-  unico. Hero assimétrico: wordmark ancora o olhar à esquerda, manifesto
+  unico. Hero assimétrico: logo ancora o olhar à esquerda, manifesto
   tipográfico à direita. Rótulos de seção alinhados num rail comum.
   Usa o design system compartilhado em app/assets/stylesheets (tokens,
-  moldura, botões e wordmark); o CSS aqui é só o que é específico da home.
+  moldura, botões e logo); o CSS aqui é só o que é específico da home.
 %>
 
 <div class="musa-paper">
@@ -13,10 +13,7 @@
     <%# ================= HERO ================= %>
     <section class="musa-hero">
       <div class="musa-lockup reveal d1">
-        <p class="musa-wordmark musa-wordmark--hero">
-          <span class="musa-wordmark-word">Musa</span>
-          <span class="musa-wordmark-tag">Cafés que inspiram</span>
-        </p>
+        <%= render "shared/musa_logo", variant: :hero %>
       </div>
 
       <div class="musa-manifesto reveal d2">

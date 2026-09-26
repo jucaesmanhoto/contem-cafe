@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* Cores "Musa" como utilitários Tailwind (text-musa-accent, bg-musa-cream…).
+   Os valores vêm dos tokens em app/assets/stylesheets/config/_musa_tokens.scss. */
+@theme inline {
+  --color-musa-cream: var(--musa-cream);
+  --color-musa-cream-deep: var(--musa-cream-deep);
+  --color-musa-ink: var(--musa-ink);
+  --color-musa-ink-strong: var(--musa-ink-strong);
+  --color-musa-espresso: var(--musa-espresso);
+  --color-musa-accent: var(--musa-accent);
+  --color-musa-accent-hover: var(--musa-accent-hover);
+  --color-musa-label: var(--musa-label);
+  --color-musa-rule: var(--musa-rule);
+  --color-musa-hair: var(--musa-hair);
+  --color-musa-gold: var(--musa-gold);
+}

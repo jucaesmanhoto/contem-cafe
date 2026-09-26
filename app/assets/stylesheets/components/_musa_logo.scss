@@ -1,0 +1,13 @@
+// Logo Musa em imagem (musa-logo.png, 686×364) — ver shared/_musa_logo.
+// Tamanho padrão: usado em contextos compactos (login, indicação).
+// Modificador --hero: usado na home, maior e centralizado.
+.musa-logo {
+  display: block;
+  width: clamp(140px, 38vw, 180px);
+  height: auto;
+}
+
+.musa-logo--hero {
+  width: clamp(220px, 60vw, 380px);
+  margin-inline: auto;
+}
