@@ -11,12 +11,15 @@
     <meta property="og:title" content="<%= content_for(:title) || 'Musa - Cafés que inspiram' %>">
     <meta property="og:description" content="Cafés especiais, torrados sob demanda.">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= image_url('favicon-m-180.png') %>">
+    <meta property="og:image" content="<%= image_url('og-musa.png') %>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Musa - Cafés que inspiram">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= content_for(:title) || 'Musa Cafés' %>">
     <meta name="twitter:description" content="Cafés especiais, torrados sob demanda.">
-    <meta name="twitter:image" content="<%= image_url('favicon-m-180.png') %>">
+    <meta name="twitter:image" content="<%= image_url('og-musa.png') %>">
+    <meta name="theme-color" content="#fdfaf3">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -25,9 +28,10 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <%= favicon_link_tag "favicon-m.svg", type: "image/svg+xml" %>
-    <%= favicon_link_tag "favicon-m-32.png", type: "image/png" %>
-    <%= favicon_link_tag "favicon-m-180.png", rel: "apple-touch-icon" %>
+    <%# Favicon: o grão do logo (S em pincelada + arcos) %>
+    <%= favicon_link_tag "favicon-grao.svg", type: "image/svg+xml" %>
+    <%= favicon_link_tag "favicon-grao-32.png", type: "image/png", sizes: "32x32" %>
+    <%= favicon_link_tag "favicon-grao-180.png", rel: "apple-touch-icon", type: "image/png" %>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 

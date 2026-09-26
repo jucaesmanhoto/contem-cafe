@@ -6,3 +6,9 @@ Rails.application.config.assets.version = "1.0"
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
 Rails.application.config.assets.precompile += %w(bootstrap.min.js popper.js)
+
+# Nome fixo para o manifesto do Sprockets. Com o nome aleatório padrão
+# (.sprockets-manifest-<hex>.json), o Kamal copia o manifesto do deploy anterior
+# para o volume de assets e o Sprockets pode ler o antigo — as páginas passam a
+# apontar para versões velhas das imagens.
+Rails.application.config.assets.manifest = Rails.root.join("public/assets/.sprockets-manifest.json")
