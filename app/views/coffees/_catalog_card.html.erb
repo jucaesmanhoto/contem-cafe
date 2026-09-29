@@ -1,0 +1,47 @@
+<%# Card de café do catálogo. O card inteiro é o link para a página do café. %>
+<% specs = {
+     "Variedade" => coffee.variety,
+     "Espécie" => coffee.species,
+     "Altitude" => (coffee.altitude.present? ? "#{number_with_delimiter(coffee.altitude, delimiter: '.')} m" : nil)
+   }.compact_blank %>
+
+<%= link_to farm_coffee_path(coffee.farm, coffee), class: "musa-coffee-card" do %>
+  <span class="musa-coffee-photo<%= ' musa-coffee-photo-empty' unless coffee.photo.attached? %>">
+    <% if coffee.photo.attached? %>
+      <%= image_tag coffee.photo, alt: coffee.name, loading: "lazy" %>
+    <% else %>
+      <%= image_tag "favicon-grao.svg", alt: "", class: "musa-coffee-mark" %>
+    <% end %>
+
+    <% if coffee.processing.present? %>
+      <span class="musa-coffee-badge"><%= coffee.processing %></span>
+    <% end %>
+  </span>
+
+  <span class="musa-coffee-entry">
+    <span class="musa-rail-label musa-rail-sm"><%= coffee.farm.name %></span>
+    <span class="musa-coffee-name"><%= coffee.name %></span>
+
+    <% if coffee.description.present? %>
+      <span class="musa-coffee-notes"><%= coffee.description %></span>
+    <% end %>
+
+    <% if specs.any? %>
+      <span class="musa-coffee-specs">
+        <% specs.each do |label, value| %>
+          <span class="musa-coffee-spec">
+            <span class="musa-coffee-k"><%= label %></span>
+            <span class="musa-coffee-v"><%= value %></span>
+          </span>
+        <% end %>
+      </span>
+    <% end %>
+
+    <span class="musa-coffee-foot">
+      <% if (price = coffee_price_label(coffee)) %>
+        <span class="musa-coffee-price"><%= price %> <span class="musa-coffee-weight">250 g</span></span>
+      <% end %>
+      <span class="musa-coffee-go">Ver café <span class="musa-coffee-arrow" aria-hidden="true">&rarr;</span></span>
+    </span>
+  </span>
+<% end %>

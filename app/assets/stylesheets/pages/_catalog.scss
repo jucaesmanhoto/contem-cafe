@@ -1,0 +1,215 @@
+// Catálogo público (coffees/index, rota /catalog).
+// Tokens, moldura (.musa-paper/.musa-wrap/.musa-rail-label/.musa-foot), botões e
+// logo são compartilhados — ver config/_musa_tokens e components/_musa_*.
+// Reaproveita da home: .musa-section-head/-title/-intro e .musa-rail-sm.
+
+.musa-catalog-head {
+  display: grid;
+  gap: var(--musa-s4);
+  padding-bottom: var(--musa-s5);
+}
+
+.musa-catalog-lockup { display: inline-block; justify-self: start; }
+.musa-catalog-lockup:focus-visible { outline: 2px solid var(--musa-accent); outline-offset: 4px; }
+
+.musa-catalog-head .musa-section-head { margin-bottom: 0; }
+
+/* ---------- grid: 1 coluna (mobile) → 2 → 3 ---------- */
+.musa-catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--musa-s3);
+}
+
+@media (min-width: 720px) {
+  .musa-catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1080px) {
+  .musa-catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.musa-catalog-empty { padding-block: var(--musa-s3) var(--musa-s5); }
+
+/* ---------- card ---------- */
+.musa-coffee-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--musa-cream-deep);
+  border: 1px solid var(--musa-hair);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: transform .25s, border-color .25s, background-color .25s, box-shadow .25s;
+}
+
+.musa-coffee-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--musa-rule);
+  background: color-mix(in srgb, var(--musa-cream-deep) 92%, var(--musa-rule));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--musa-espresso) 12%, transparent);
+}
+
+.musa-coffee-card:focus-visible {
+  outline: 2px solid var(--musa-accent);
+  outline-offset: 3px;
+}
+
+.musa-coffee-photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--musa-cream);
+  border-bottom: 1px solid var(--musa-hair);
+}
+
+.musa-coffee-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.musa-coffee-card:hover .musa-coffee-photo img { transform: scale(1.03); }
+
+/* sem foto: o grão do logo como marca d'água */
+.musa-coffee-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.musa-coffee-photo-empty .musa-coffee-mark {
+  width: 34%;
+  height: auto;
+  opacity: .55;
+}
+
+.musa-coffee-card:hover .musa-coffee-photo-empty .musa-coffee-mark { transform: none; }
+
+.musa-coffee-badge {
+  position: absolute;
+  left: var(--musa-s2);
+  top: var(--musa-s2);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--musa-ink-strong);
+  background: color-mix(in srgb, var(--musa-cream) 92%, transparent);
+  border: 1px solid var(--musa-hair);
+  border-radius: 2px;
+  padding: 5px 9px;
+}
+
+.musa-coffee-entry {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--musa-s3);
+}
+
+.musa-coffee-name {
+  font-family: var(--musa-serif);
+  font-weight: 600;
+  font-size: clamp(21px, 2.2vw, 25px);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  color: var(--musa-ink-strong);
+  text-wrap: balance;
+}
+
+.musa-coffee-notes {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--musa-ink);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+/* ficha técnica: rótulo sobre valor, colunas iguais */
+.musa-coffee-specs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--musa-s2);
+  padding-top: 12px;
+  border-top: 1px solid var(--musa-hair);
+}
+
+.musa-coffee-spec { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+.musa-coffee-k {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--musa-label);
+}
+
+.musa-coffee-v {
+  font-size: 14px;
+  color: var(--musa-ink-strong);
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.musa-coffee-foot {
+  margin-top: auto;
+  padding-top: var(--musa-s2);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--musa-s2);
+  flex-wrap: wrap;
+}
+
+.musa-coffee-price {
+  font-family: var(--musa-serif);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--musa-ink-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.musa-coffee-weight {
+  font-family: var(--musa-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--musa-label);
+}
+
+.musa-coffee-go {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.musa-coffee-arrow { display: inline-block; transition: transform .2s; }
+.musa-coffee-card:hover .musa-coffee-arrow { transform: translateX(3px); }
+
+/* ---------- mobile: card na largura da tela, só a margem da borda ---------- */
+@media (max-width: 520px) {
+  body:has(.musa-catalog) { padding: 8px; }
+
+  .musa-catalog .musa-wrap { padding: var(--musa-s4) 12px; }
+
+  .musa-catalog-grid { gap: var(--musa-s2); }
+
+  .musa-coffee-entry { padding: 18px; }
+}

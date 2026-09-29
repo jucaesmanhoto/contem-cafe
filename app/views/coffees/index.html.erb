@@ -1,0 +1,47 @@
+<%#
+  Catálogo público (/catalog): cafés disponíveis em cards.
+  Mobile: um card por linha, na largura da tela. Desktop: grid de 2–3 colunas.
+  Usa a moldura e os tokens Musa compartilhados; o CSS específico está em
+  app/assets/stylesheets/pages/_catalog.scss.
+%>
+<% content_for :title, "Catálogo · Musa Cafés" %>
+
+<div class="musa-paper musa-catalog">
+  <div class="musa-wrap">
+
+    <header class="musa-catalog-head reveal d1">
+      <%= link_to root_path, class: "musa-catalog-lockup", aria: { label: "Ir para a página inicial" } do %>
+        <%= render "shared/musa_logo" %>
+      <% end %>
+
+      <div class="musa-section-head">
+        <p class="musa-rail-label">Catálogo</p>
+        <h1 class="musa-section-title">Cafés disponíveis</h1>
+        <p class="musa-section-intro">
+          <% if @coffees.any? %>
+            <%= pluralize(@coffees.size, "café", plural: "cafés") %> para pedir agora. Cada um é torrado sob demanda,
+            só depois do seu pedido.
+          <% else %>
+            No momento todos os cafés estão esgotados. Novas colheitas chegam em breve.
+          <% end %>
+        </p>
+      </div>
+    </header>
+
+    <% if @coffees.any? %>
+      <div class="musa-catalog-grid reveal d2">
+        <%= render partial: "coffees/catalog_card", collection: @coffees, as: :coffee %>
+      </div>
+    <% else %>
+      <div class="musa-catalog-empty">
+        <%= link_to "Conhecer as fazendas", root_path(anchor: "origem"), class: "musa-btn musa-btn-secondary" %>
+      </div>
+    <% end %>
+
+    <footer class="musa-foot">
+      <span class="musa-foot-mk">MUSA</span>
+      <span class="musa-foot-meta">Cafés que inspiram · &copy; <%= Time.current.year %></span>
+    </footer>
+
+  </div>
+</div>
