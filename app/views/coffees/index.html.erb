@@ -6,14 +6,12 @@
 %>
 <% content_for :title, "Catálogo · Musa Cafés" %>
 
+<%= render "shared/musa_topbar", back_path: root_path %>
+
 <div class="musa-paper musa-catalog">
   <div class="musa-wrap">
 
     <header class="musa-catalog-head reveal d1">
-      <%= link_to root_path, class: "musa-catalog-lockup", aria: { label: "Ir para a página inicial" } do %>
-        <%= render "shared/musa_logo" %>
-      <% end %>
-
       <div class="musa-section-head">
         <p class="musa-rail-label">Catálogo</p>
         <h1 class="musa-section-title">Cafés disponíveis</h1>

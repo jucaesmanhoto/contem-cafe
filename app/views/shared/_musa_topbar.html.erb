@@ -1,0 +1,16 @@
+<%#
+  Barra de navegação das páginas internas: "Voltar" à esquerda (histórico do
+  navegador, ver history_back_controller.js) e o logo no centro (volta para a home).
+  O lado direito fica livre para a barra de sessão (shared/_user_bar), que é fixa.
+  back_path: destino do "Voltar" quando não há página anterior deste site.
+%>
+<nav class="musa-topbar" aria-label="Navegação">
+  <%= link_to back_path, class: "musa-topbar-back",
+        data: { controller: "history-back", action: "history-back#go" } do %>
+    <span class="musa-topbar-arrow" aria-hidden="true">&larr;</span> Voltar
+  <% end %>
+
+  <%= link_to root_path, class: "musa-topbar-home", aria: { label: "Musa: ir para a página inicial" } do %>
+    <%= image_tag "musa-logo.png", width: 686, height: 364, alt: "", class: "musa-topbar-logo" %>
+  <% end %>
+</nav>

@@ -8,7 +8,9 @@ body {
   padding: clamp(12px, 3vw, 40px);
 }
 
-.navbar, nav { display: none !important; }
+/* esconde a navbar antiga do template (shared/_navbar, fora de uso). Não esconder
+   `nav` em geral: a barra shared/_musa_topbar é um <nav>. */
+.navbar { display: none !important; }
 
 .musa-paper {
   position: relative;

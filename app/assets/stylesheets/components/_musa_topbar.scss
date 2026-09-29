@@ -1,0 +1,54 @@
+// Barra de navegação das páginas internas — ver shared/_musa_topbar.
+// Grid de 3 colunas: "Voltar" | logo centralizado | espaço livre (barra de sessão).
+.musa-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--musa-s2);
+  min-height: 60px;
+  padding: 8px var(--musa-s2);
+  background: color-mix(in srgb, var(--musa-cream) 94%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--musa-hair);
+  font-family: var(--musa-sans);
+}
+
+.musa-topbar-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--musa-accent);
+  text-decoration: none;
+}
+
+.musa-topbar-back:hover { color: var(--musa-accent-hover); }
+
+.musa-topbar-arrow { display: inline-block; transition: transform .2s; }
+.musa-topbar-back:hover .musa-topbar-arrow { transform: translateX(-3px); }
+
+.musa-topbar-home { display: block; line-height: 0; }
+
+.musa-topbar-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+.musa-topbar-back:focus-visible,
+.musa-topbar-home:focus-visible {
+  outline: 2px solid var(--musa-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* páginas com a moldura Musa (catálogo): respiro entre a barra e o filete */
+.musa-topbar + .musa-paper { margin-top: clamp(12px, 3vw, 32px); }
